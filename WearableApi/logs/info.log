@@ -1,0 +1,173 @@
+[2025-10-30 21:32:38] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-10-30 21:32:55] [INFO] [django.server:213] "GET /admin/ HTTP/1.1" 200 15506
+[2025-10-30 21:33:00] [INFO] [django.server:213] "GET /api HTTP/1.1" 301 0
+[2025-10-30 21:33:01] [INFO] [django.server:213] "GET /api/ HTTP/1.1" 200 13987
+[2025-10-30 21:33:01] [INFO] [django.server:213] "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121457
+[2025-10-30 21:33:01] [INFO] [django.server:213] "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1793
+[2025-10-30 21:33:01] [INFO] [django.server:213] "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3796
+[2025-10-30 21:33:01] [INFO] [django.server:213] "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3426
+[2025-10-30 21:33:01] [INFO] [django.server:213] "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+[2025-10-30 21:33:01] [INFO] [django.server:213] "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1152
+[2025-10-30 21:33:01] [INFO] [django.server:213] "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 39680
+[2025-10-30 21:33:01] [INFO] [django.server:213] "GET /static/rest_framework/js/load-ajax-form.js HTTP/1.1" 200 59
+[2025-10-30 21:33:01] [INFO] [django.server:213] "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+[2025-10-30 21:33:01] [INFO] [django.server:213] "GET /static/rest_framework/js/jquery-3.7.1.min.js HTTP/1.1" 200 87533
+[2025-10-30 21:33:01] [INFO] [django.server:213] "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+[2025-10-30 21:33:01] [INFO] [django.server:213] "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+[2025-10-30 21:33:16] [INFO] [django.server:213] "GET /api/docs/ HTTP/1.1" 200 4731
+[2025-10-30 21:33:17] [INFO] [api.views.AdministradorViewSet] 📥 GET /api/administradores/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.AdministradorViewSet] 📥 POST /api/administradores/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.AdministradorViewSet] 📥 GET /api/administradores/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.AdministradorViewSet] 📥 PUT /api/administradores/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.AdministradorViewSet] 📥 PATCH /api/administradores/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.AdministradorViewSet] 📥 DELETE /api/administradores/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.AnalisisViewSet] 📥 GET /api/analisis/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.AnalisisViewSet] 📥 POST /api/analisis/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.AnalisisViewSet] 📥 GET /api/analisis/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.AnalisisViewSet] 📥 PUT /api/analisis/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.AnalisisViewSet] 📥 PATCH /api/analisis/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.AnalisisViewSet] 📥 DELETE /api/analisis/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.ConsumidorViewSet] 📥 GET /api/consumidores/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.ConsumidorViewSet] 📥 POST /api/consumidores/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.ConsumidorViewSet] 📥 GET /api/consumidores/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.ConsumidorViewSet] 📥 PUT /api/consumidores/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.ConsumidorViewSet] 📥 PATCH /api/consumidores/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.ConsumidorViewSet] 📥 DELETE /api/consumidores/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwDailySummaryViewSet] 📥 POST /api/dashboard/daily-summary/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/{consumidor_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwDailySummaryViewSet] 📥 PUT /api/dashboard/daily-summary/{consumidor_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwDailySummaryViewSet] 📥 PATCH /api/dashboard/daily-summary/{consumidor_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwDailySummaryViewSet] 📥 DELETE /api/dashboard/daily-summary/{consumidor_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 POST /api/dashboard/desires/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresStatsViewSet] 📥 POST /api/dashboard/desires-stats/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/{deseo_tipo}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresStatsViewSet] 📥 PUT /api/dashboard/desires-stats/{deseo_tipo}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresStatsViewSet] 📥 PATCH /api/dashboard/desires-stats/{deseo_tipo}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresStatsViewSet] 📥 DELETE /api/dashboard/desires-stats/{deseo_tipo}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires/{deseo_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 PUT /api/dashboard/desires/{deseo_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 PATCH /api/dashboard/desires/{deseo_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 DELETE /api/dashboard/desires/{deseo_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitStatsViewSet] 📥 GET /api/dashboard/habit-stats/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitStatsViewSet] 📥 POST /api/dashboard/habit-stats/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitStatsViewSet] 📥 GET /api/dashboard/habit-stats/{consumidor_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitStatsViewSet] 📥 PUT /api/dashboard/habit-stats/{consumidor_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitStatsViewSet] 📥 PATCH /api/dashboard/habit-stats/{consumidor_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitStatsViewSet] 📥 DELETE /api/dashboard/habit-stats/{consumidor_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitTrackingViewSet] 📥 GET /api/dashboard/habit-tracking/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitTrackingViewSet] 📥 POST /api/dashboard/habit-tracking/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitTrackingViewSet] 📥 GET /api/dashboard/habit-tracking/{consumidor_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitTrackingViewSet] 📥 PUT /api/dashboard/habit-tracking/{consumidor_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitTrackingViewSet] 📥 PATCH /api/dashboard/habit-tracking/{consumidor_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitTrackingViewSet] 📥 DELETE /api/dashboard/habit-tracking/{consumidor_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 POST /api/dashboard/heart-rate/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 POST /api/dashboard/heart-rate-stats/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 PUT /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 PATCH /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 DELETE /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 PUT /api/dashboard/heart-rate/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 PATCH /api/dashboard/heart-rate/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 DELETE /api/dashboard/heart-rate/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionSummaryViewSet] 📥 GET /api/dashboard/prediction-summary/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionSummaryViewSet] 📥 POST /api/dashboard/prediction-summary/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionSummaryViewSet] 📥 GET /api/dashboard/prediction-summary/{consumidor_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionSummaryViewSet] 📥 PUT /api/dashboard/prediction-summary/{consumidor_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionSummaryViewSet] 📥 PATCH /api/dashboard/prediction-summary/{consumidor_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionSummaryViewSet] 📥 DELETE /api/dashboard/prediction-summary/{consumidor_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionTimelineViewSet] 📥 GET /api/dashboard/predictions/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionTimelineViewSet] 📥 POST /api/dashboard/predictions/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionTimelineViewSet] 📥 GET /api/dashboard/predictions/{analisis_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionTimelineViewSet] 📥 PUT /api/dashboard/predictions/{analisis_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionTimelineViewSet] 📥 PATCH /api/dashboard/predictions/{analisis_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionTimelineViewSet] 📥 DELETE /api/dashboard/predictions/{analisis_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwWeeklyComparisonViewSet] 📥 GET /api/dashboard/weekly-comparison/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwWeeklyComparisonViewSet] 📥 POST /api/dashboard/weekly-comparison/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwWeeklyComparisonViewSet] 📥 GET /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwWeeklyComparisonViewSet] 📥 PUT /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwWeeklyComparisonViewSet] 📥 PATCH /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwWeeklyComparisonViewSet] 📥 DELETE /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet] 📥 GET /api/deseos/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet] 📥 POST /api/deseos/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet] 📥 GET /api/deseos/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet] 📥 PUT /api/deseos/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet] 📥 PATCH /api/deseos/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet] 📥 DELETE /api/deseos/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet] 📥 POST /api/deseos/{id}/resolve/ | Action: resolve
+[2025-10-30 21:33:17] [INFO] [api.views.EmocionViewSet] 📥 GET /api/emociones/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.EmocionViewSet] 📥 POST /api/emociones/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.EmocionViewSet] 📥 GET /api/emociones/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.EmocionViewSet] 📥 PUT /api/emociones/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.EmocionViewSet] 📥 PATCH /api/emociones/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.EmocionViewSet] 📥 DELETE /api/emociones/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioViewSet] 📥 GET /api/formularios/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioViewSet] 📥 POST /api/formularios/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioTemporalViewSet] 📥 GET /api/formularios-temporales/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioTemporalViewSet] 📥 POST /api/formularios-temporales/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioTemporalViewSet] 📥 GET /api/formularios-temporales/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioTemporalViewSet] 📥 PUT /api/formularios-temporales/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioTemporalViewSet] 📥 PATCH /api/formularios-temporales/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioTemporalViewSet] 📥 DELETE /api/formularios-temporales/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioViewSet] 📥 GET /api/formularios/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioViewSet] 📥 PUT /api/formularios/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioViewSet] 📥 PATCH /api/formularios/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioViewSet] 📥 DELETE /api/formularios/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.HabitoViewSet] 📥 GET /api/habitos/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.HabitoViewSet] 📥 POST /api/habitos/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.HabitoViewSet] 📥 GET /api/habitos/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.HabitoViewSet] 📥 PUT /api/habitos/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.HabitoViewSet] 📥 PATCH /api/habitos/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.HabitoViewSet] 📥 DELETE /api/habitos/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.LecturaViewSet] 📥 GET /api/lecturas/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.LecturaViewSet] 📥 POST /api/lecturas/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.LecturaViewSet] 📥 GET /api/lecturas/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.LecturaViewSet] 📥 PUT /api/lecturas/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.LecturaViewSet] 📥 PATCH /api/lecturas/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.LecturaViewSet] 📥 DELETE /api/lecturas/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.MotivoViewSet] 📥 GET /api/motivos/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.MotivoViewSet] 📥 POST /api/motivos/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.MotivoViewSet] 📥 GET /api/motivos/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.MotivoViewSet] 📥 PUT /api/motivos/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.MotivoViewSet] 📥 PATCH /api/motivos/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.MotivoViewSet] 📥 DELETE /api/motivos/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet] 📥 GET /api/notificaciones/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet] 📥 POST /api/notificaciones/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet] 📥 GET /api/notificaciones/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet] 📥 PUT /api/notificaciones/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet] 📥 PATCH /api/notificaciones/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet] 📥 DELETE /api/notificaciones/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet] 📥 POST /api/notificaciones/{id}/mark_read/ | Action: mark_read
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet] 📥 POST /api/notificaciones/{id}/mark_unread/ | Action: mark_unread
+[2025-10-30 21:33:17] [INFO] [api.views.PermisoViewSet] 📥 GET /api/permisos/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.PermisoViewSet] 📥 POST /api/permisos/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.PermisoViewSet] 📥 GET /api/permisos/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.PermisoViewSet] 📥 PUT /api/permisos/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.PermisoViewSet] 📥 PATCH /api/permisos/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.PermisoViewSet] 📥 DELETE /api/permisos/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.SolucionViewSet] 📥 GET /api/soluciones/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.SolucionViewSet] 📥 POST /api/soluciones/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.SolucionViewSet] 📥 GET /api/soluciones/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.SolucionViewSet] 📥 PUT /api/soluciones/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.SolucionViewSet] 📥 PATCH /api/soluciones/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.SolucionViewSet] 📥 DELETE /api/soluciones/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet] 📥 GET /api/usuarios/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet] 📥 POST /api/usuarios/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet] 📥 GET /api/usuarios/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet] 📥 PUT /api/usuarios/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet] 📥 PATCH /api/usuarios/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet] 📥 DELETE /api/usuarios/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet] 📥 POST /api/usuarios/login/ | Action: login
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet] 📥 POST /api/usuarios/register/ | Action: register
+[2025-10-30 21:33:17] [INFO] [api.views.VentanaViewSet] 📥 GET /api/ventanas/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VentanaViewSet] 📥 POST /api/ventanas/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VentanaViewSet] 📥 GET /api/ventanas/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VentanaViewSet] 📥 PUT /api/ventanas/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VentanaViewSet] 📥 PATCH /api/ventanas/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VentanaViewSet] 📥 DELETE /api/ventanas/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [django.server:213] "GET /api/schema/ HTTP/1.1" 200 452321

@@ -1,0 +1,270 @@
+[2025-10-30 21:31:12] [DEBUG] [django.db.backends:151] (0.000) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-10-30 21:31:12] [DEBUG] [django.db.backends:151] (0.016) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'; args=('admin',); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'admin' AND "django_content_type"."model" IN ('logentry')); args=('admin', 'logentry'); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.016) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (1) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(1,); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'; args=('admin',); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'; args=('auth',); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'auth' AND "django_content_type"."model" IN ('group', 'user', 'permission')); args=('auth', 'group', 'user', 'permission'); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (2, 3, 4) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(2, 3, 4); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'; args=('auth',); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'; args=('contenttypes',); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'contenttypes' AND "django_content_type"."model" IN ('contenttype')); args=('contenttypes', 'contenttype'); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (5) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(5,); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'; args=('contenttypes',); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'; args=('sessions',); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'sessions' AND "django_content_type"."model" IN ('session')); args=('sessions', 'session'); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (6) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(6,); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'; args=('sessions',); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'api'; args=('api',); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:181] (0.000) BEGIN; args=None; alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) INSERT INTO "django_content_type" ("app_label", "model") SELECT * FROM UNNEST(('{api,api,api,api,api,api,api,api,api,api,api,api,api,api,api,api,api,api,api,api,api,api,api,api,api}')::varchar(100)[], ('{vwdailysummary,vwdesiresstats,vwdesirestracking,vwhabitstats,vwhabittracking,vwheartratestats,vwheartratetimeline,vwpredictionsummary,vwpredictiontimeline,vwweeklycomparison,emocion,habito,motivo,permiso,solucion,usuario,consumidor,administrador,ventana,lectura,deseo,analisis,formulariotemporal,formulario,notificacion}')::varchar(100)[]) RETURNING "django_content_type"."id"; args=(['api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api', 'api'], ['vwdailysummary', 'vwdesiresstats', 'vwdesirestracking', 'vwhabitstats', 'vwhabittracking', 'vwheartratestats', 'vwheartratetimeline', 'vwpredictionsummary', 'vwpredictiontimeline', 'vwweeklycomparison', 'emocion', 'habito', 'motivo', 'permiso', 'solucion', 'usuario', 'consumidor', 'administrador', 'ventana', 'lectura', 'deseo', 'analisis', 'formulariotemporal', 'formulario', 'notificacion']); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:181] (0.000) COMMIT; args=None; alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.016) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."app_label" = 'api' AND "django_content_type"."model" IN ('vwheartratestats', 'administrador', 'vwhabitstats', 'vwdesiresstats', 'formulario', 'vwhabittracking', 'deseo', 'vwdailysummary', 'vwheartratetimeline', 'motivo', 'ventana', 'consumidor', 'vwweeklycomparison', 'vwpredictionsummary', 'notificacion', 'formulariotemporal', 'usuario', 'habito', 'vwdesirestracking', 'analisis', 'solucion', 'lectura', 'vwpredictiontimeline', 'emocion', 'permiso')); args=('api', 'vwheartratestats', 'administrador', 'vwhabitstats', 'vwdesiresstats', 'formulario', 'vwhabittracking', 'deseo', 'vwdailysummary', 'vwheartratetimeline', 'motivo', 'ventana', 'consumidor', 'vwweeklycomparison', 'vwpredictionsummary', 'notificacion', 'formulariotemporal', 'usuario', 'habito', 'vwdesirestracking', 'analisis', 'solucion', 'lectura', 'vwpredictiontimeline', 'emocion', 'permiso'); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_permission"."content_type_id" AS "content_type", "auth_permission"."codename" AS "codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, 2 ASC; args=(8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:181] (0.000) BEGIN; args=None; alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) INSERT INTO "auth_permission" ("name", "content_type_id", "codename") SELECT * FROM UNNEST(('{"Can add Daily Summary","Can change Daily Summary","Can delete Daily Summary","Can view Daily Summary","Can add Desires Statistics","Can change Desires Statistics","Can delete Desires Statistics","Can view Desires Statistics","Can add Desires Tracking","Can change Desires Tracking","Can delete Desires Tracking","Can view Desires Tracking","Can add Habit Statistics","Can change Habit Statistics","Can delete Habit Statistics","Can view Habit Statistics","Can add Habit Tracking","Can change Habit Tracking","Can delete Habit Tracking","Can view Habit Tracking","Can add Heart Rate Statistics","Can change Heart Rate Statistics","Can delete Heart Rate Statistics","Can view Heart Rate Statistics","Can add Heart Rate Timeline","Can change Heart Rate Timeline","Can delete Heart Rate Timeline","Can view Heart Rate Timeline","Can add Prediction Summary","Can change Prediction Summary","Can delete Prediction Summary","Can view Prediction Summary","Can add Prediction Timeline","Can change Prediction Timeline","Can delete Prediction Timeline","Can view Prediction Timeline","Can add Weekly Comparison","Can change Weekly Comparison","Can delete Weekly Comparison","Can view Weekly Comparison","Can add Emoci�n","Can change Emoci�n","Can delete Emoci�n","Can view Emoci�n","Can add H�bito","Can change H�bito","Can delete H�bito","Can view H�bito","Can add Motivo","Can change Motivo","Can delete Motivo","Can view Motivo","Can add Permiso","Can change Permiso","Can delete Permiso","Can view Permiso","Can add Soluci�n","Can change Soluci�n","Can delete Soluci�n","Can view Soluci�n","Can add Usuario","Can change Usuario","Can delete Usuario","Can view Usuario","Can add Consumidor","Can change Consumidor","Can delete Consumidor","Can view Consumidor","Can add Administrador","Can change Administrador","Can delete Administrador","Can view Administrador","Can add Ventana","Can change Ventana","Can delete Ventana","Can view Ventana","Can add Lectura","Can change Lectura","Can delete Lectura","Can view Lectura","Can add Deseo","Can change Deseo","Can delete Deseo","Can view Deseo","Can add An�lisis","Can change An�lisis","Can delete An�lisis","Can view An�lisis","Can add Formulario Temporal","Can change Formulario Temporal","Can delete Formulario Temporal","Can view Formulario Temporal","Can add Formulario","Can change Formulario","Can delete Formulario","Can view Formulario","Can add Notificaci�n","Can change Notificaci�n","Can delete Notificaci�n","Can view Notificaci�n"}')::varchar(255)[], ('{8,8,8,8,9,9,9,9,10,10,10,10,11,11,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,15,16,16,16,16,17,17,17,17,18,18,18,18,19,19,19,19,20,20,20,20,21,21,21,21,22,22,22,22,23,23,23,23,24,24,24,24,25,25,25,25,26,26,26,26,27,27,27,27,28,28,28,28,29,29,29,29,30,30,30,30,31,31,31,31,32,32,32,32}'::int2[])::integer[], ('{add_vwdailysummary,change_vwdailysummary,delete_vwdailysummary,view_vwdailysummary,add_vwdesiresstats,change_vwdesiresstats,delete_vwdesiresstats,view_vwdesiresstats,add_vwdesirestracking,change_vwdesirestracking,delete_vwdesirestracking,view_vwdesirestracking,add_vwhabitstats,change_vwhabitstats,delete_vwhabitstats,view_vwhabitstats,add_vwhabittracking,change_vwhabittracking,delete_vwhabittracking,view_vwhabittracking,add_vwheartratestats,change_vwheartratestats,delete_vwheartratestats,view_vwheartratestats,add_vwheartratetimeline,change_vwheartratetimeline,delete_vwheartratetimeline,view_vwheartratetimeline,add_vwpredictionsummary,change_vwpredictionsummary,delete_vwpredictionsummary,view_vwpredictionsummary,add_vwpredictiontimeline,change_vwpredictiontimeline,delete_vwpredictiontimeline,view_vwpredictiontimeline,add_vwweeklycomparison,change_vwweeklycomparison,delete_vwweeklycomparison,view_vwweeklycomparison,add_emocion,change_emocion,delete_emocion,view_emocion,add_habito,change_habito,delete_habito,view_habito,add_motivo,change_motivo,delete_motivo,view_motivo,add_permiso,change_permiso,delete_permiso,view_permiso,add_solucion,change_solucion,delete_solucion,view_solucion,add_usuario,change_usuario,delete_usuario,view_usuario,add_consumidor,change_consumidor,delete_consumidor,view_consumidor,add_administrador,change_administrador,delete_administrador,view_administrador,add_ventana,change_ventana,delete_ventana,view_ventana,add_lectura,change_lectura,delete_lectura,view_lectura,add_deseo,change_deseo,delete_deseo,view_deseo,add_analisis,change_analisis,delete_analisis,view_analisis,add_formulariotemporal,change_formulariotemporal,delete_formulariotemporal,view_formulariotemporal,add_formulario,change_formulario,delete_formulario,view_formulario,add_notificacion,change_notificacion,delete_notificacion,view_notificacion}')::varchar(100)[]) RETURNING "auth_permission"."id"; args=(['Can add Daily Summary', 'Can change Daily Summary', 'Can delete Daily Summary', 'Can view Daily Summary', 'Can add Desires Statistics', 'Can change Desires Statistics', 'Can delete Desires Statistics', 'Can view Desires Statistics', 'Can add Desires Tracking', 'Can change Desires Tracking', 'Can delete Desires Tracking', 'Can view Desires Tracking', 'Can add Habit Statistics', 'Can change Habit Statistics', 'Can delete Habit Statistics', 'Can view Habit Statistics', 'Can add Habit Tracking', 'Can change Habit Tracking', 'Can delete Habit Tracking', 'Can view Habit Tracking', 'Can add Heart Rate Statistics', 'Can change Heart Rate Statistics', 'Can delete Heart Rate Statistics', 'Can view Heart Rate Statistics', 'Can add Heart Rate Timeline', 'Can change Heart Rate Timeline', 'Can delete Heart Rate Timeline', 'Can view Heart Rate Timeline', 'Can add Prediction Summary', 'Can change Prediction Summary', 'Can delete Prediction Summary', 'Can view Prediction Summary', 'Can add Prediction Timeline', 'Can change Prediction Timeline', 'Can delete Prediction Timeline', 'Can view Prediction Timeline', 'Can add Weekly Comparison', 'Can change Weekly Comparison', 'Can delete Weekly Comparison', 'Can view Weekly Comparison', 'Can add Emoci�n', 'Can change Emoci�n', 'Can delete Emoci�n', 'Can view Emoci�n', 'Can add H�bito', 'Can change H�bito', 'Can delete H�bito', 'Can view H�bito', 'Can add Motivo', 'Can change Motivo', 'Can delete Motivo', 'Can view Motivo', 'Can add Permiso', 'Can change Permiso', 'Can delete Permiso', 'Can view Permiso', 'Can add Soluci�n', 'Can change Soluci�n', 'Can delete Soluci�n', 'Can view Soluci�n', 'Can add Usuario', 'Can change Usuario', 'Can delete Usuario', 'Can view Usuario', 'Can add Consumidor', 'Can change Consumidor', 'Can delete Consumidor', 'Can view Consumidor', 'Can add Administrador', 'Can change Administrador', 'Can delete Administrador', 'Can view Administrador', 'Can add Ventana', 'Can change Ventana', 'Can delete Ventana', 'Can view Ventana', 'Can add Lectura', 'Can change Lectura', 'Can delete Lectura', 'Can view Lectura', 'Can add Deseo', 'Can change Deseo', 'Can delete Deseo', 'Can view Deseo', 'Can add An�lisis', 'Can change An�lisis', 'Can delete An�lisis', 'Can view An�lisis', 'Can add Formulario Temporal', 'Can change Formulario Temporal', 'Can delete Formulario Temporal', 'Can view Formulario Temporal', 'Can add Formulario', 'Can change Formulario', 'Can delete Formulario', 'Can view Formulario', 'Can add Notificaci�n', 'Can change Notificaci�n', 'Can delete Notificaci�n', 'Can view Notificaci�n'], [8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 17, 17, 17, 17, 18, 18, 18, 18, 19, 19, 19, 19, 20, 20, 20, 20, 21, 21, 21, 21, 22, 22, 22, 22, 23, 23, 23, 23, 24, 24, 24, 24, 25, 25, 25, 25, 26, 26, 26, 26, 27, 27, 27, 27, 28, 28, 28, 28, 29, 29, 29, 29, 30, 30, 30, 30, 31, 31, 31, 31, 32, 32, 32, 32], ['add_vwdailysummary', 'change_vwdailysummary', 'delete_vwdailysummary', 'view_vwdailysummary', 'add_vwdesiresstats', 'change_vwdesiresstats', 'delete_vwdesiresstats', 'view_vwdesiresstats', 'add_vwdesirestracking', 'change_vwdesirestracking', 'delete_vwdesirestracking', 'view_vwdesirestracking', 'add_vwhabitstats', 'change_vwhabitstats', 'delete_vwhabitstats', 'view_vwhabitstats', 'add_vwhabittracking', 'change_vwhabittracking', 'delete_vwhabittracking', 'view_vwhabittracking', 'add_vwheartratestats', 'change_vwheartratestats', 'delete_vwheartratestats', 'view_vwheartratestats', 'add_vwheartratetimeline', 'change_vwheartratetimeline', 'delete_vwheartratetimeline', 'view_vwheartratetimeline', 'add_vwpredictionsummary', 'change_vwpredictionsummary', 'delete_vwpredictionsummary', 'view_vwpredictionsummary', 'add_vwpredictiontimeline', 'change_vwpredictiontimeline', 'delete_vwpredictiontimeline', 'view_vwpredictiontimeline', 'add_vwweeklycomparison', 'change_vwweeklycomparison', 'delete_vwweeklycomparison', 'view_vwweeklycomparison', 'add_emocion', 'change_emocion', 'delete_emocion', 'view_emocion', 'add_habito', 'change_habito', 'delete_habito', 'view_habito', 'add_motivo', 'change_motivo', 'delete_motivo', 'view_motivo', 'add_permiso', 'change_permiso', 'delete_permiso', 'view_permiso', 'add_solucion', 'change_solucion', 'delete_solucion', 'view_solucion', 'add_usuario', 'change_usuario', 'delete_usuario', 'view_usuario', 'add_consumidor', 'change_consumidor', 'delete_consumidor', 'view_consumidor', 'add_administrador', 'change_administrador', 'delete_administrador', 'view_administrador', 'add_ventana', 'change_ventana', 'delete_ventana', 'view_ventana', 'add_lectura', 'change_lectura', 'delete_lectura', 'view_lectura', 'add_deseo', 'change_deseo', 'delete_deseo', 'view_deseo', 'add_analisis', 'change_analisis', 'delete_analisis', 'view_analisis', 'add_formulariotemporal', 'change_formulariotemporal', 'delete_formulariotemporal', 'view_formulariotemporal', 'add_formulario', 'change_formulario', 'delete_formulario', 'view_formulario', 'add_notificacion', 'change_notificacion', 'delete_notificacion', 'view_notificacion']); alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:181] (0.000) COMMIT; args=None; alias=default
+[2025-10-30 21:31:26] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'api'; args=('api',); alias=default
+[2025-10-30 21:32:38] [DEBUG] [django.db.backends:151] (0.000) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-10-30 21:32:38] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-10-30 21:32:55] [DEBUG] [django.db.backends:151] (0.016) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-10-31 04:32:55.053714+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 10, 31, 4, 32, 55, 53714, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-10-30 21:32:55] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-10-30 21:32:55] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_admin_log"."id", "django_admin_log"."action_time", "django_admin_log"."user_id", "django_admin_log"."content_type_id", "django_admin_log"."object_id", "django_admin_log"."object_repr", "django_admin_log"."action_flag", "django_admin_log"."change_message", "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined", "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_admin_log" INNER JOIN "auth_user" ON ("django_admin_log"."user_id" = "auth_user"."id") LEFT OUTER JOIN "django_content_type" ON ("django_admin_log"."content_type_id" = "django_content_type"."id") WHERE "django_admin_log"."user_id" = 1 ORDER BY "django_admin_log"."action_time" DESC LIMIT 10; args=(1,); alias=default
+[2025-10-30 21:33:01] [DEBUG] [django.db.backends:151] (0.015) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-10-31 04:33:00.948812+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 10, 31, 4, 33, 0, 948812, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-10-30 21:33:01] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-10-30 21:33:16] [DEBUG] [django.db.backends:151] (0.015) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-10-31 04:33:16.457934+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 10, 31, 4, 33, 16, 457934, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-10-30 21:33:16] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-10-30 21:33:17] [DEBUG] [django.db.backends:151] (0.016) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-10-31 04:33:17.050931+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 10, 31, 4, 33, 17, 50931, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-10-30 21:33:17] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-10-30 21:33:17] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 GET /api/administradores/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 POST /api/administradores/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 GET /api/administradores/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 PUT /api/administradores/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 PATCH /api/administradores/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 DELETE /api/administradores/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 GET /api/analisis/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 POST /api/analisis/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 GET /api/analisis/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 PUT /api/analisis/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 PATCH /api/analisis/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 DELETE /api/analisis/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 GET /api/consumidores/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 POST /api/consumidores/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 GET /api/consumidores/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 PUT /api/consumidores/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 PATCH /api/consumidores/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 DELETE /api/consumidores/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 POST /api/dashboard/daily-summary/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/daily-summary/{consumidor_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 PUT /api/dashboard/daily-summary/{consumidor_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/daily-summary/{consumidor_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/daily-summary/{consumidor_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 POST /api/dashboard/desires/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 POST /api/dashboard/desires-stats/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires-stats/{deseo_tipo}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 PUT /api/dashboard/desires-stats/{deseo_tipo}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/desires-stats/{deseo_tipo}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/desires-stats/{deseo_tipo}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires/{deseo_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 PUT /api/dashboard/desires/{deseo_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/desires/{deseo_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/desires/{deseo_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-stats/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 POST /api/dashboard/habit-stats/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-stats/{consumidor_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 PUT /api/dashboard/habit-stats/{consumidor_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/habit-stats/{consumidor_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/habit-stats/{consumidor_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-tracking/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 POST /api/dashboard/habit-tracking/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-tracking/{consumidor_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 PUT /api/dashboard/habit-tracking/{consumidor_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/habit-tracking/{consumidor_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/habit-tracking/{consumidor_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 POST /api/dashboard/heart-rate/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 POST /api/dashboard/heart-rate-stats/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 PUT /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 PUT /api/dashboard/heart-rate/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/heart-rate/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/heart-rate/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/prediction-summary/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 POST /api/dashboard/prediction-summary/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/prediction-summary/{consumidor_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 PUT /api/dashboard/prediction-summary/{consumidor_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/prediction-summary/{consumidor_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/prediction-summary/{consumidor_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/predictions/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 POST /api/dashboard/predictions/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/predictions/{analisis_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 PUT /api/dashboard/predictions/{analisis_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/predictions/{analisis_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/predictions/{analisis_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 GET /api/dashboard/weekly-comparison/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 POST /api/dashboard/weekly-comparison/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 GET /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 PUT /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 GET /api/deseos/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 POST /api/deseos/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 GET /api/deseos/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 PUT /api/deseos/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 PATCH /api/deseos/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 DELETE /api/deseos/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 POST /api/deseos/{id}/resolve/ | Action: resolve
+[2025-10-30 21:33:17] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 GET /api/emociones/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 POST /api/emociones/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 GET /api/emociones/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 PUT /api/emociones/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 PATCH /api/emociones/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 DELETE /api/emociones/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 GET /api/formularios/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 POST /api/formularios/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 GET /api/formularios-temporales/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 POST /api/formularios-temporales/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 GET /api/formularios-temporales/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 PUT /api/formularios-temporales/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 PATCH /api/formularios-temporales/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 DELETE /api/formularios-temporales/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 GET /api/formularios/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 PUT /api/formularios/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 PATCH /api/formularios/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 DELETE /api/formularios/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 GET /api/habitos/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 POST /api/habitos/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 GET /api/habitos/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 PUT /api/habitos/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 PATCH /api/habitos/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 DELETE /api/habitos/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 GET /api/lecturas/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 POST /api/lecturas/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 GET /api/lecturas/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 PUT /api/lecturas/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 PATCH /api/lecturas/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 DELETE /api/lecturas/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 GET /api/motivos/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 POST /api/motivos/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 GET /api/motivos/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 PUT /api/motivos/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 PATCH /api/motivos/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 DELETE /api/motivos/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 GET /api/notificaciones/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 POST /api/notificaciones/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 GET /api/notificaciones/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 PUT /api/notificaciones/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 PATCH /api/notificaciones/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 DELETE /api/notificaciones/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 POST /api/notificaciones/{id}/mark_read/ | Action: mark_read
+[2025-10-30 21:33:17] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 POST /api/notificaciones/{id}/mark_unread/ | Action: mark_unread
+[2025-10-30 21:33:17] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 GET /api/permisos/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 POST /api/permisos/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 GET /api/permisos/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 PUT /api/permisos/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 PATCH /api/permisos/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 DELETE /api/permisos/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 GET /api/soluciones/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 POST /api/soluciones/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 GET /api/soluciones/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 PUT /api/soluciones/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 PATCH /api/soluciones/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 DELETE /api/soluciones/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 GET /api/usuarios/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 GET /api/usuarios/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 PUT /api/usuarios/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 PATCH /api/usuarios/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 DELETE /api/usuarios/{id}/ | Action: destroy
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/login/ | Action: login
+[2025-10-30 21:33:17] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-10-30 21:33:17] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 GET /api/ventanas/ | Action: list
+[2025-10-30 21:33:17] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 POST /api/ventanas/ | Action: create
+[2025-10-30 21:33:17] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 GET /api/ventanas/{id}/ | Action: retrieve
+[2025-10-30 21:33:17] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 PUT /api/ventanas/{id}/ | Action: update
+[2025-10-30 21:33:17] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 PATCH /api/ventanas/{id}/ | Action: partial_update
+[2025-10-30 21:33:17] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 DELETE /api/ventanas/{id}/ | Action: destroy

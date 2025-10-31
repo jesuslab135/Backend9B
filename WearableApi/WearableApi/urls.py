@@ -1,22 +1,82 @@
 """
-URL configuration for WearableApi project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+Main URL Configuration
+======================
+Root URL configuration including admin, API, and Swagger documentation.
 """
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+    SpectacularRedocView,
+)
 
 urlpatterns = [
+    # Admin interface
     path('admin/', admin.site.urls),
+    
+    # API endpoints
+    path('api/', include('api.urls')),
+    
+    # ============================================
+    # API DOCUMENTATION (Swagger/OpenAPI)
+    # ============================================
+    
+    # OpenAPI schema
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    
+    # Swagger UI (interactive documentation)
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    
+    # ReDoc (alternative documentation UI)
+    path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]
+
+"""
+AVAILABLE URLS
+==============
+
+ADMIN PANEL
+-----------
+http://localhost:8000/admin/
+
+API ROOT
+--------
+http://localhost:8000/api/
+
+API DOCUMENTATION
+-----------------
+Swagger UI (Interactive):  http://localhost:8000/api/docs/
+ReDoc (Alternative):       http://localhost:8000/api/redoc/
+OpenAPI Schema (JSON):     http://localhost:8000/api/schema/
+
+MAIN ENDPOINTS
+--------------
+Users:           http://localhost:8000/api/usuarios/
+Register:        http://localhost:8000/api/usuarios/register/
+Login:           http://localhost:8000/api/usuarios/login/
+Consumers:       http://localhost:8000/api/consumidores/
+Admins:          http://localhost:8000/api/administradores/
+
+Lookup Tables:   http://localhost:8000/api/emociones/
+                 http://localhost:8000/api/motivos/
+                 http://localhost:8000/api/soluciones/
+                 http://localhost:8000/api/habitos/
+
+Forms:           http://localhost:8000/api/formularios/
+                 http://localhost:8000/api/formularios-temporales/
+
+Sensor Data:     http://localhost:8000/api/ventanas/
+                 http://localhost:8000/api/lecturas/
+
+Analysis:        http://localhost:8000/api/analisis/
+                 http://localhost:8000/api/deseos/
+                 http://localhost:8000/api/notificaciones/
+
+Dashboard:       http://localhost:8000/api/dashboard/daily-summary/
+                 http://localhost:8000/api/dashboard/habit-tracking/
+                 http://localhost:8000/api/dashboard/heart-rate/
+                 http://localhost:8000/api/dashboard/predictions/
+                 http://localhost:8000/api/dashboard/desires/
+"""
