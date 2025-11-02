@@ -5366,3 +5366,623 @@
 [2025-11-01 23:53:44] [DEBUG] [django.db.backends:151] (0.000) SELECT "analisis"."id", "analisis"."created_at", "analisis"."updated_at", "analisis"."ventana_id", "analisis"."modelo_usado", "analisis"."probabilidad_modelo", "analisis"."urge_label", "analisis"."recall", "analisis"."f1_score", "analisis"."accuracy", "analisis"."roc_auc", "analisis"."comentario_modelo", "analisis"."feature_importance" FROM "analisis" ORDER BY "analisis"."created_at" DESC LIMIT 1; args=(); alias=default
 [2025-11-01 23:53:44] [DEBUG] [django.db.backends:151] (0.000) SELECT AVG("analisis"."probabilidad_modelo") AS "avg_probability", AVG("analisis"."accuracy") AS "avg_accuracy", AVG("analisis"."f1_score") AS "avg_f1" FROM "analisis"; args=(); alias=default
 [2025-11-01 23:53:44] [DEBUG] [django.db.backends:151] (0.000) SELECT COUNT(*) FROM (SELECT DISTINCT "ventanas"."consumidor_id" AS "consumidor" FROM "ventanas" WHERE "ventanas"."created_at" >= '2025-11-02 05:53:43.944508+00:00'::timestamptz) subquery; args=(datetime.datetime(2025, 11, 2, 5, 53, 43, 944508, tzinfo=datetime.timezone.utc),); alias=default
+[2025-11-02 00:51:22] [DEBUG] [django.db.backends:151] (0.016) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 00:51:22] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 00:51:33] [DEBUG] [django.db.backends:151] (0.000) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 00:51:33] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 00:52:06] [DEBUG] [django.db.backends:151] (0.000) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 00:52:06] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 00:54:43] [DEBUG] [django.db.backends:151] (0.000) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 00:54:43] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 01:00:11] [DEBUG] [django.db.backends:151] (0.000) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 01:00:11] [DEBUG] [django.db.backends:151] (0.016) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 01:00:34] [DEBUG] [django.db.backends:151] (0.015) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 08:00:34.639557+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 8, 0, 34, 639557, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 01:00:34] [DEBUG] [django.db.backends:151] (0.016) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 01:00:35] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 08:00:35.172011+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 8, 0, 35, 172011, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 01:00:35] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 01:00:35] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 GET /api/administradores/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 POST /api/administradores/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 GET /api/administradores/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 PUT /api/administradores/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 PATCH /api/administradores/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 DELETE /api/administradores/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 GET /api/analisis/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 POST /api/analisis/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 GET /api/analisis/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 PUT /api/analisis/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 PATCH /api/analisis/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 DELETE /api/analisis/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 GET /api/consumidores/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 POST /api/consumidores/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 GET /api/consumidores/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 PUT /api/consumidores/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 PATCH /api/consumidores/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 DELETE /api/consumidores/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 POST /api/dashboard/daily-summary/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/daily-summary/{consumidor_id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 PUT /api/dashboard/daily-summary/{consumidor_id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/daily-summary/{consumidor_id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/daily-summary/{consumidor_id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 POST /api/dashboard/desires/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 POST /api/dashboard/desires-stats/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires-stats/{deseo_tipo}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 PUT /api/dashboard/desires-stats/{deseo_tipo}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/desires-stats/{deseo_tipo}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/desires-stats/{deseo_tipo}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires/{deseo_id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 PUT /api/dashboard/desires/{deseo_id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/desires/{deseo_id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/desires/{deseo_id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-stats/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 POST /api/dashboard/habit-stats/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-stats/{consumidor_id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 PUT /api/dashboard/habit-stats/{consumidor_id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/habit-stats/{consumidor_id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/habit-stats/{consumidor_id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-tracking/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 POST /api/dashboard/habit-tracking/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-tracking/{consumidor_id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 PUT /api/dashboard/habit-tracking/{consumidor_id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/habit-tracking/{consumidor_id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/habit-tracking/{consumidor_id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 POST /api/dashboard/heart-rate/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 POST /api/dashboard/heart-rate-stats/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 PUT /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 PUT /api/dashboard/heart-rate/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/heart-rate/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/heart-rate/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/prediction-summary/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 POST /api/dashboard/prediction-summary/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/prediction-summary/{consumidor_id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 PUT /api/dashboard/prediction-summary/{consumidor_id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/prediction-summary/{consumidor_id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/prediction-summary/{consumidor_id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/predictions/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 POST /api/dashboard/predictions/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/predictions/{analisis_id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 PUT /api/dashboard/predictions/{analisis_id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/predictions/{analisis_id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/predictions/{analisis_id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 GET /api/dashboard/weekly-comparison/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 POST /api/dashboard/weekly-comparison/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 GET /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 PUT /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 GET /api/deseos/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 POST /api/deseos/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 GET /api/deseos/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 PUT /api/deseos/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 PATCH /api/deseos/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 DELETE /api/deseos/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 POST /api/deseos/{id}/resolve/ | Action: resolve
+[2025-11-02 01:00:35] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 GET /api/emociones/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 POST /api/emociones/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 GET /api/emociones/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 PUT /api/emociones/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 PATCH /api/emociones/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 DELETE /api/emociones/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 GET /api/formularios/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 POST /api/formularios/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 GET /api/formularios-temporales/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 POST /api/formularios-temporales/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 GET /api/formularios-temporales/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 PUT /api/formularios-temporales/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 PATCH /api/formularios-temporales/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 DELETE /api/formularios-temporales/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 GET /api/formularios/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 PUT /api/formularios/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 PATCH /api/formularios/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 DELETE /api/formularios/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 GET /api/habitos/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 POST /api/habitos/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 GET /api/habitos/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 PUT /api/habitos/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 PATCH /api/habitos/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 DELETE /api/habitos/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 GET /api/lecturas/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 POST /api/lecturas/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 GET /api/lecturas/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 PUT /api/lecturas/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 PATCH /api/lecturas/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 DELETE /api/lecturas/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 GET /api/motivos/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 POST /api/motivos/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 GET /api/motivos/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 PUT /api/motivos/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 PATCH /api/motivos/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 DELETE /api/motivos/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 GET /api/notificaciones/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 POST /api/notificaciones/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 GET /api/notificaciones/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 PUT /api/notificaciones/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 PATCH /api/notificaciones/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 DELETE /api/notificaciones/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 POST /api/notificaciones/{id}/mark_read/ | Action: mark_read
+[2025-11-02 01:00:35] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 POST /api/notificaciones/{id}/mark_unread/ | Action: mark_unread
+[2025-11-02 01:00:35] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 GET /api/permisos/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 POST /api/permisos/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 GET /api/permisos/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 PUT /api/permisos/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 PATCH /api/permisos/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 DELETE /api/permisos/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 GET /api/soluciones/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 POST /api/soluciones/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 GET /api/soluciones/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 PUT /api/soluciones/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 PATCH /api/soluciones/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 DELETE /api/soluciones/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 GET /api/usuarios/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 GET /api/usuarios/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 PUT /api/usuarios/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 PATCH /api/usuarios/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 DELETE /api/usuarios/{id}/ | Action: destroy
+[2025-11-02 01:00:35] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 PATCH /api/usuarios/{id}/profile/ | Action: profile
+[2025-11-02 01:00:35] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-02 01:00:35] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:00:35] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 GET /api/ventanas/ | Action: list
+[2025-11-02 01:00:35] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 POST /api/ventanas/ | Action: create
+[2025-11-02 01:00:35] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 GET /api/ventanas/{id}/ | Action: retrieve
+[2025-11-02 01:00:35] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 PUT /api/ventanas/{id}/ | Action: update
+[2025-11-02 01:00:35] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 PATCH /api/ventanas/{id}/ | Action: partial_update
+[2025-11-02 01:00:35] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 DELETE /api/ventanas/{id}/ | Action: destroy
+[2025-11-02 01:01:52] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 08:01:52.174105+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 8, 1, 52, 174105, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 01:01:52] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 01:01:52] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 08:01:52.741770+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 8, 1, 52, 741770, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 01:01:52] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 01:01:52] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 GET /api/administradores/ | Action: list
+[2025-11-02 01:01:52] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 POST /api/administradores/ | Action: create
+[2025-11-02 01:01:52] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 GET /api/administradores/{id}/ | Action: retrieve
+[2025-11-02 01:01:52] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 PUT /api/administradores/{id}/ | Action: update
+[2025-11-02 01:01:52] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 PATCH /api/administradores/{id}/ | Action: partial_update
+[2025-11-02 01:01:52] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 DELETE /api/administradores/{id}/ | Action: destroy
+[2025-11-02 01:01:52] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 GET /api/analisis/ | Action: list
+[2025-11-02 01:01:52] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 POST /api/analisis/ | Action: create
+[2025-11-02 01:01:52] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 GET /api/analisis/{id}/ | Action: retrieve
+[2025-11-02 01:01:52] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 PUT /api/analisis/{id}/ | Action: update
+[2025-11-02 01:01:52] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 PATCH /api/analisis/{id}/ | Action: partial_update
+[2025-11-02 01:01:52] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 DELETE /api/analisis/{id}/ | Action: destroy
+[2025-11-02 01:01:52] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 GET /api/consumidores/ | Action: list
+[2025-11-02 01:01:52] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 POST /api/consumidores/ | Action: create
+[2025-11-02 01:01:52] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 GET /api/consumidores/{id}/ | Action: retrieve
+[2025-11-02 01:01:52] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 PUT /api/consumidores/{id}/ | Action: update
+[2025-11-02 01:01:52] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 PATCH /api/consumidores/{id}/ | Action: partial_update
+[2025-11-02 01:01:52] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 DELETE /api/consumidores/{id}/ | Action: destroy
+[2025-11-02 01:01:52] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-02 01:01:52] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 POST /api/dashboard/daily-summary/ | Action: create
+[2025-11-02 01:01:52] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/daily-summary/{consumidor_id}/ | Action: retrieve
+[2025-11-02 01:01:52] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 PUT /api/dashboard/daily-summary/{consumidor_id}/ | Action: update
+[2025-11-02 01:01:52] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/daily-summary/{consumidor_id}/ | Action: partial_update
+[2025-11-02 01:01:52] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/daily-summary/{consumidor_id}/ | Action: destroy
+[2025-11-02 01:01:52] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires/ | Action: list
+[2025-11-02 01:01:52] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 POST /api/dashboard/desires/ | Action: create
+[2025-11-02 01:01:52] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-02 01:01:52] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 POST /api/dashboard/desires-stats/ | Action: create
+[2025-11-02 01:01:52] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires-stats/{deseo_tipo}/ | Action: retrieve
+[2025-11-02 01:01:52] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 PUT /api/dashboard/desires-stats/{deseo_tipo}/ | Action: update
+[2025-11-02 01:01:52] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/desires-stats/{deseo_tipo}/ | Action: partial_update
+[2025-11-02 01:01:52] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/desires-stats/{deseo_tipo}/ | Action: destroy
+[2025-11-02 01:01:52] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires/{deseo_id}/ | Action: retrieve
+[2025-11-02 01:01:52] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 PUT /api/dashboard/desires/{deseo_id}/ | Action: update
+[2025-11-02 01:01:52] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/desires/{deseo_id}/ | Action: partial_update
+[2025-11-02 01:01:52] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/desires/{deseo_id}/ | Action: destroy
+[2025-11-02 01:01:52] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-stats/ | Action: list
+[2025-11-02 01:01:52] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 POST /api/dashboard/habit-stats/ | Action: create
+[2025-11-02 01:01:52] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-stats/{consumidor_id}/ | Action: retrieve
+[2025-11-02 01:01:52] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 PUT /api/dashboard/habit-stats/{consumidor_id}/ | Action: update
+[2025-11-02 01:01:52] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/habit-stats/{consumidor_id}/ | Action: partial_update
+[2025-11-02 01:01:52] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/habit-stats/{consumidor_id}/ | Action: destroy
+[2025-11-02 01:01:52] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-tracking/ | Action: list
+[2025-11-02 01:01:52] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 POST /api/dashboard/habit-tracking/ | Action: create
+[2025-11-02 01:01:52] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-tracking/{consumidor_id}/ | Action: retrieve
+[2025-11-02 01:01:52] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 PUT /api/dashboard/habit-tracking/{consumidor_id}/ | Action: update
+[2025-11-02 01:01:52] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/habit-tracking/{consumidor_id}/ | Action: partial_update
+[2025-11-02 01:01:52] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/habit-tracking/{consumidor_id}/ | Action: destroy
+[2025-11-02 01:01:52] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-02 01:01:52] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 POST /api/dashboard/heart-rate/ | Action: create
+[2025-11-02 01:01:52] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-02 01:01:52] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 POST /api/dashboard/heart-rate-stats/ | Action: create
+[2025-11-02 01:01:52] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: retrieve
+[2025-11-02 01:01:52] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 PUT /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: update
+[2025-11-02 01:01:52] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: partial_update
+[2025-11-02 01:01:52] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: destroy
+[2025-11-02 01:01:52] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate/{id}/ | Action: retrieve
+[2025-11-02 01:01:52] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 PUT /api/dashboard/heart-rate/{id}/ | Action: update
+[2025-11-02 01:01:52] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/heart-rate/{id}/ | Action: partial_update
+[2025-11-02 01:01:52] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/heart-rate/{id}/ | Action: destroy
+[2025-11-02 01:01:52] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/prediction-summary/ | Action: list
+[2025-11-02 01:01:52] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 POST /api/dashboard/prediction-summary/ | Action: create
+[2025-11-02 01:01:52] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/prediction-summary/{consumidor_id}/ | Action: retrieve
+[2025-11-02 01:01:52] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 PUT /api/dashboard/prediction-summary/{consumidor_id}/ | Action: update
+[2025-11-02 01:01:52] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/prediction-summary/{consumidor_id}/ | Action: partial_update
+[2025-11-02 01:01:52] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/prediction-summary/{consumidor_id}/ | Action: destroy
+[2025-11-02 01:01:52] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/predictions/ | Action: list
+[2025-11-02 01:01:52] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 POST /api/dashboard/predictions/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/predictions/{analisis_id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 PUT /api/dashboard/predictions/{analisis_id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/predictions/{analisis_id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/predictions/{analisis_id}/ | Action: destroy
+[2025-11-02 01:01:53] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 GET /api/dashboard/weekly-comparison/ | Action: list
+[2025-11-02 01:01:53] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 POST /api/dashboard/weekly-comparison/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 GET /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 PUT /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: destroy
+[2025-11-02 01:01:53] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 GET /api/deseos/ | Action: list
+[2025-11-02 01:01:53] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 POST /api/deseos/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 GET /api/deseos/{id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 PUT /api/deseos/{id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 PATCH /api/deseos/{id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 DELETE /api/deseos/{id}/ | Action: destroy
+[2025-11-02 01:01:53] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 POST /api/deseos/{id}/resolve/ | Action: resolve
+[2025-11-02 01:01:53] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 GET /api/emociones/ | Action: list
+[2025-11-02 01:01:53] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 POST /api/emociones/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 GET /api/emociones/{id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 PUT /api/emociones/{id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 PATCH /api/emociones/{id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 DELETE /api/emociones/{id}/ | Action: destroy
+[2025-11-02 01:01:53] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 GET /api/formularios/ | Action: list
+[2025-11-02 01:01:53] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 POST /api/formularios/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 GET /api/formularios-temporales/ | Action: list
+[2025-11-02 01:01:53] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 POST /api/formularios-temporales/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 GET /api/formularios-temporales/{id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 PUT /api/formularios-temporales/{id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 PATCH /api/formularios-temporales/{id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 DELETE /api/formularios-temporales/{id}/ | Action: destroy
+[2025-11-02 01:01:53] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 GET /api/formularios/{id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 PUT /api/formularios/{id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 PATCH /api/formularios/{id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 DELETE /api/formularios/{id}/ | Action: destroy
+[2025-11-02 01:01:53] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 GET /api/habitos/ | Action: list
+[2025-11-02 01:01:53] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 POST /api/habitos/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 GET /api/habitos/{id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 PUT /api/habitos/{id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 PATCH /api/habitos/{id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 DELETE /api/habitos/{id}/ | Action: destroy
+[2025-11-02 01:01:53] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 GET /api/lecturas/ | Action: list
+[2025-11-02 01:01:53] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 POST /api/lecturas/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 GET /api/lecturas/{id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 PUT /api/lecturas/{id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 PATCH /api/lecturas/{id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 DELETE /api/lecturas/{id}/ | Action: destroy
+[2025-11-02 01:01:53] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 GET /api/motivos/ | Action: list
+[2025-11-02 01:01:53] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 POST /api/motivos/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 GET /api/motivos/{id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 PUT /api/motivos/{id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 PATCH /api/motivos/{id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 DELETE /api/motivos/{id}/ | Action: destroy
+[2025-11-02 01:01:53] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 GET /api/notificaciones/ | Action: list
+[2025-11-02 01:01:53] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 POST /api/notificaciones/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 GET /api/notificaciones/{id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 PUT /api/notificaciones/{id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 PATCH /api/notificaciones/{id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 DELETE /api/notificaciones/{id}/ | Action: destroy
+[2025-11-02 01:01:53] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 POST /api/notificaciones/{id}/mark_read/ | Action: mark_read
+[2025-11-02 01:01:53] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 POST /api/notificaciones/{id}/mark_unread/ | Action: mark_unread
+[2025-11-02 01:01:53] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 GET /api/permisos/ | Action: list
+[2025-11-02 01:01:53] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 POST /api/permisos/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 GET /api/permisos/{id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 PUT /api/permisos/{id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 PATCH /api/permisos/{id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 DELETE /api/permisos/{id}/ | Action: destroy
+[2025-11-02 01:01:53] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 GET /api/soluciones/ | Action: list
+[2025-11-02 01:01:53] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 POST /api/soluciones/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 GET /api/soluciones/{id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 PUT /api/soluciones/{id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 PATCH /api/soluciones/{id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 DELETE /api/soluciones/{id}/ | Action: destroy
+[2025-11-02 01:01:53] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 GET /api/usuarios/ | Action: list
+[2025-11-02 01:01:53] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 GET /api/usuarios/{id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 PUT /api/usuarios/{id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 PATCH /api/usuarios/{id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 DELETE /api/usuarios/{id}/ | Action: destroy
+[2025-11-02 01:01:53] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 PATCH /api/usuarios/{id}/profile/ | Action: profile
+[2025-11-02 01:01:53] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-02 01:01:53] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:01:53] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 GET /api/ventanas/ | Action: list
+[2025-11-02 01:01:53] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 POST /api/ventanas/ | Action: create
+[2025-11-02 01:01:53] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 GET /api/ventanas/{id}/ | Action: retrieve
+[2025-11-02 01:01:53] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 PUT /api/ventanas/{id}/ | Action: update
+[2025-11-02 01:01:53] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 PATCH /api/ventanas/{id}/ | Action: partial_update
+[2025-11-02 01:01:53] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 DELETE /api/ventanas/{id}/ | Action: destroy
+[2025-11-02 01:05:00] [DEBUG] [django.db.backends:151] (0.016) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 01:05:00] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 01:05:14] [DEBUG] [django.db.backends:151] (0.016) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 01:05:14] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 01:07:03] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:07:03] [DEBUG] [django.db.backends:151] (0.000) SELECT 1 AS "a" FROM "usuarios" WHERE "usuarios"."email" = 'consumer@test.com' LIMIT 1; args=(Int4(1), 'consumer@test.com'); alias=default
+[2025-11-02 01:07:03] [DEBUG] [django.db.backends:181] (0.000) BEGIN; args=None; alias=default
+[2025-11-02 01:07:04] [DEBUG] [django.db.backends:151] (0.000) INSERT INTO "usuarios" ("created_at", "updated_at", "nombre", "telefono", "email", "password_hash", "rol") VALUES ('2025-11-02 08:07:04.030080+00:00'::timestamptz, '2025-11-02 08:07:04.030080+00:00'::timestamptz, 'Test Consumer', '1234567890', 'consumer@test.com', 'pbkdf2_sha256$1000000$zw6eP4bX3w1ytlI64imimZ$fpF0tVtr6U6iWr9C2aicT3fJWXcKU+hkkDqskz1+4lc=', 'consumidor') RETURNING "usuarios"."id"; args=(datetime.datetime(2025, 11, 2, 8, 7, 4, 30080, tzinfo=datetime.timezone.utc), datetime.datetime(2025, 11, 2, 8, 7, 4, 30080, tzinfo=datetime.timezone.utc), 'Test Consumer', '1234567890', 'consumer@test.com', 'pbkdf2_sha256$1000000$zw6eP4bX3w1ytlI64imimZ$fpF0tVtr6U6iWr9C2aicT3fJWXcKU+hkkDqskz1+4lc=', 'consumidor'); alias=default
+[2025-11-02 01:07:04] [DEBUG] [django.db.backends:151] (0.000) INSERT INTO "consumidores" ("created_at", "updated_at", "usuario_id", "edad", "peso", "altura", "bmi", "genero") VALUES ('2025-11-02 08:07:04.033077+00:00'::timestamptz, '2025-11-02 08:07:04.033077+00:00'::timestamptz, 8, 30, 70.5, 175.0, NULL, 'masculino') RETURNING "consumidores"."id"; args=(datetime.datetime(2025, 11, 2, 8, 7, 4, 33077, tzinfo=datetime.timezone.utc), datetime.datetime(2025, 11, 2, 8, 7, 4, 33077, tzinfo=datetime.timezone.utc), 8, Int4(30), 70.5, 175.0, None, 'masculino'); alias=default
+[2025-11-02 01:07:04] [ERROR] [api.services.user_factory:85] Failed to create user: cannot insert a non-DEFAULT value into column "bmi"
+DETAIL:  Column "bmi" is a generated column.
+[2025-11-02 01:07:04] [DEBUG] [django.db.backends:181] (0.000) ROLLBACK; args=None; alias=default
+[2025-11-02 01:07:04] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 400 | Action: register
+[2025-11-02 01:07:06] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:07:06] [DEBUG] [django.db.backends:151] (0.000) SELECT 1 AS "a" FROM "usuarios" WHERE "usuarios"."email" = 'admin@test.com' LIMIT 1; args=(Int4(1), 'admin@test.com'); alias=default
+[2025-11-02 01:07:06] [DEBUG] [django.db.backends:181] (0.000) BEGIN; args=None; alias=default
+[2025-11-02 01:07:06] [DEBUG] [django.db.backends:151] (0.000) INSERT INTO "usuarios" ("created_at", "updated_at", "nombre", "telefono", "email", "password_hash", "rol") VALUES ('2025-11-02 08:07:06.735101+00:00'::timestamptz, '2025-11-02 08:07:06.735101+00:00'::timestamptz, 'Test Admin', '0987654321', 'admin@test.com', 'pbkdf2_sha256$1000000$Gn8a807XK9narQeuZNaQ3u$pHplFskdzTYE+ZPrLA4LhFXMm95ZgaaFT092qMo2SiM=', 'administrador') RETURNING "usuarios"."id"; args=(datetime.datetime(2025, 11, 2, 8, 7, 6, 735101, tzinfo=datetime.timezone.utc), datetime.datetime(2025, 11, 2, 8, 7, 6, 735101, tzinfo=datetime.timezone.utc), 'Test Admin', '0987654321', 'admin@test.com', 'pbkdf2_sha256$1000000$Gn8a807XK9narQeuZNaQ3u$pHplFskdzTYE+ZPrLA4LhFXMm95ZgaaFT092qMo2SiM=', 'administrador'); alias=default
+[2025-11-02 01:07:06] [DEBUG] [django.db.backends:151] (0.016) INSERT INTO "administradores" ("created_at", "updated_at", "usuario_id", "area_responsable") VALUES ('2025-11-02 08:07:06.738083+00:00'::timestamptz, '2025-11-02 08:07:06.738083+00:00'::timestamptz, 9, 'IT Department') RETURNING "administradores"."id"; args=(datetime.datetime(2025, 11, 2, 8, 7, 6, 738083, tzinfo=datetime.timezone.utc), datetime.datetime(2025, 11, 2, 8, 7, 6, 738083, tzinfo=datetime.timezone.utc), 9, 'IT Department'); alias=default
+[2025-11-02 01:07:06] [INFO] [api.services.user_factory:80] Created Administrador: admin@test.com (ID: 9, Profile ID: 2)
+[2025-11-02 01:07:06] [DEBUG] [django.db.backends:181] (0.000) COMMIT; args=None; alias=default
+[2025-11-02 01:07:06] [INFO] [api.views.UsuarioViewSet:112] [register] New user registered: admin@test.com (rol: administrador)
+[2025-11-02 01:07:06] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✓ Response: 201 | Action: register
+[2025-11-02 01:07:08] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:07:08] [DEBUG] [django.db.backends:151] (0.000) SELECT 1 AS "a" FROM "usuarios" WHERE "usuarios"."email" = 'consumer@test.com' LIMIT 1; args=(Int4(1), 'consumer@test.com'); alias=default
+[2025-11-02 01:07:08] [DEBUG] [django.db.backends:181] (0.000) BEGIN; args=None; alias=default
+[2025-11-02 01:07:09] [DEBUG] [django.db.backends:151] (0.000) INSERT INTO "usuarios" ("created_at", "updated_at", "nombre", "telefono", "email", "password_hash", "rol") VALUES ('2025-11-02 08:07:09.548454+00:00'::timestamptz, '2025-11-02 08:07:09.548454+00:00'::timestamptz, 'Duplicate User', '', 'consumer@test.com', 'pbkdf2_sha256$1000000$B4dlk6cZ8bGb9nToaz35FD$rBecE2sJGgOq7tHjJJeeVbyvfA9plhPa0DEEJyJ42Lc=', 'consumidor') RETURNING "usuarios"."id"; args=(datetime.datetime(2025, 11, 2, 8, 7, 9, 548454, tzinfo=datetime.timezone.utc), datetime.datetime(2025, 11, 2, 8, 7, 9, 548454, tzinfo=datetime.timezone.utc), 'Duplicate User', '', 'consumer@test.com', 'pbkdf2_sha256$1000000$B4dlk6cZ8bGb9nToaz35FD$rBecE2sJGgOq7tHjJJeeVbyvfA9plhPa0DEEJyJ42Lc=', 'consumidor'); alias=default
+[2025-11-02 01:07:09] [DEBUG] [django.db.backends:151] (0.000) INSERT INTO "consumidores" ("created_at", "updated_at", "usuario_id", "edad", "peso", "altura", "bmi", "genero") VALUES ('2025-11-02 08:07:09.550456+00:00'::timestamptz, '2025-11-02 08:07:09.550456+00:00'::timestamptz, 10, 25, NULL, NULL, NULL, 'femenino') RETURNING "consumidores"."id"; args=(datetime.datetime(2025, 11, 2, 8, 7, 9, 550456, tzinfo=datetime.timezone.utc), datetime.datetime(2025, 11, 2, 8, 7, 9, 550456, tzinfo=datetime.timezone.utc), 10, Int4(25), None, None, None, 'femenino'); alias=default
+[2025-11-02 01:07:09] [ERROR] [api.services.user_factory:85] Failed to create user: cannot insert a non-DEFAULT value into column "bmi"
+DETAIL:  Column "bmi" is a generated column.
+[2025-11-02 01:07:09] [DEBUG] [django.db.backends:181] (0.000) ROLLBACK; args=None; alias=default
+[2025-11-02 01:07:09] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 400 | Action: register
+[2025-11-02 01:07:11] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:07:11] [DEBUG] [django.db.backends:151] (0.000) SELECT 1 AS "a" FROM "usuarios" WHERE "usuarios"."email" = 'invalid@test.com' LIMIT 1; args=(Int4(1), 'invalid@test.com'); alias=default
+[2025-11-02 01:07:11] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')], 'edad': [ErrorDetail(string='Age cannot exceed 120', code='max_value')]} | Context: action=register, view=UsuarioViewSet
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 101, in register
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')], 'edad': [ErrorDetail(string='Age cannot exceed 120', code='max_value')]}
+[2025-11-02 01:07:11] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 400 | Action: register
+[2025-11-02 01:07:13] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-02 01:07:13] [DEBUG] [django.db.backends:151] (0.000) SELECT "usuarios"."id", "usuarios"."created_at", "usuarios"."updated_at", "usuarios"."nombre", "usuarios"."telefono", "usuarios"."email", "usuarios"."password_hash", "usuarios"."rol" FROM "usuarios" WHERE "usuarios"."email" = 'consumer@test.com' LIMIT 21; args=('consumer@test.com',); alias=default
+[2025-11-02 01:07:13] [WARNING] [api.services.auth_service:90] Failed login: consumer@test.com (user not found)
+[2025-11-02 01:07:13] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 401 | Action: login
+[2025-11-02 01:07:15] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-02 01:07:15] [DEBUG] [django.db.backends:151] (0.000) SELECT "usuarios"."id", "usuarios"."created_at", "usuarios"."updated_at", "usuarios"."nombre", "usuarios"."telefono", "usuarios"."email", "usuarios"."password_hash", "usuarios"."rol" FROM "usuarios" WHERE "usuarios"."email" = 'consumer@test.com' LIMIT 21; args=('consumer@test.com',); alias=default
+[2025-11-02 01:07:15] [WARNING] [api.services.auth_service:90] Failed login: consumer@test.com (user not found)
+[2025-11-02 01:07:15] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 401 | Action: login
+[2025-11-02 01:07:18] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-02 01:07:18] [DEBUG] [django.db.backends:151] (0.015) SELECT "usuarios"."id", "usuarios"."created_at", "usuarios"."updated_at", "usuarios"."nombre", "usuarios"."telefono", "usuarios"."email", "usuarios"."password_hash", "usuarios"."rol" FROM "usuarios" WHERE "usuarios"."email" = 'nonexistent@test.com' LIMIT 21; args=('nonexistent@test.com',); alias=default
+[2025-11-02 01:07:18] [WARNING] [api.services.auth_service:90] Failed login: nonexistent@test.com (user not found)
+[2025-11-02 01:07:18] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 401 | Action: login
+[2025-11-02 01:10:26] [DEBUG] [django.db.backends:151] (0.016) SELECT column_name, is_generated, generation_expression FROM information_schema.columns WHERE table_name = consumidores AND column_name = bmi;; args=None; alias=default
+[2025-11-02 01:10:38] [DEBUG] [django.db.backends:151] (0.000) SELECT column_name, is_generated, generation_expression FROM information_schema.columns WHERE table_name = api_consumidor AND column_name = bmi;; args=None; alias=default
+[2025-11-02 01:17:08] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:17:08] [DEBUG] [django.db.backends:151] (0.000) SELECT 1 AS "a" FROM "usuarios" WHERE "usuarios"."email" = 'consumer@test.com' LIMIT 1; args=(Int4(1), 'consumer@test.com'); alias=default
+[2025-11-02 01:17:08] [DEBUG] [django.db.backends:181] (0.000) BEGIN; args=None; alias=default
+[2025-11-02 01:17:09] [DEBUG] [django.db.backends:151] (0.000) INSERT INTO "usuarios" ("created_at", "updated_at", "nombre", "telefono", "email", "password_hash", "rol") VALUES ('2025-11-02 08:17:09.280237+00:00'::timestamptz, '2025-11-02 08:17:09.280237+00:00'::timestamptz, 'Test Consumer', '1234567890', 'consumer@test.com', 'pbkdf2_sha256$1000000$k5gLD1TCzhIpDwiSljREPV$3NES2QzYGo2vzaeHRPjb5nOXNgBhJRtdT1RvPXjBqio=', 'consumidor') RETURNING "usuarios"."id"; args=(datetime.datetime(2025, 11, 2, 8, 17, 9, 280237, tzinfo=datetime.timezone.utc), datetime.datetime(2025, 11, 2, 8, 17, 9, 280237, tzinfo=datetime.timezone.utc), 'Test Consumer', '1234567890', 'consumer@test.com', 'pbkdf2_sha256$1000000$k5gLD1TCzhIpDwiSljREPV$3NES2QzYGo2vzaeHRPjb5nOXNgBhJRtdT1RvPXjBqio=', 'consumidor'); alias=default
+[2025-11-02 01:17:09] [DEBUG] [django.db.backends:151] (0.016) INSERT INTO "consumidores" ("created_at", "updated_at", "usuario_id", "edad", "peso", "altura", "bmi", "genero") VALUES ('2025-11-02 08:17:09.283236+00:00'::timestamptz, '2025-11-02 08:17:09.283236+00:00'::timestamptz, 11, 30, 70.5, 175.0, NULL, 'masculino') RETURNING "consumidores"."id"; args=(datetime.datetime(2025, 11, 2, 8, 17, 9, 283236, tzinfo=datetime.timezone.utc), datetime.datetime(2025, 11, 2, 8, 17, 9, 283236, tzinfo=datetime.timezone.utc), 11, Int4(30), 70.5, 175.0, None, 'masculino'); alias=default
+[2025-11-02 01:17:09] [INFO] [api.services.user_factory:76] Created Consumidor: consumer@test.com (ID: 11, Profile ID: 5)
+[2025-11-02 01:17:09] [DEBUG] [django.db.backends:181] (0.000) COMMIT; args=None; alias=default
+[2025-11-02 01:17:09] [INFO] [api.views.UsuarioViewSet:112] [register] New user registered: consumer@test.com (rol: consumidor)
+[2025-11-02 01:17:09] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✓ Response: 201 | Action: register
+[2025-11-02 01:17:11] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:17:11] [DEBUG] [django.db.backends:151] (0.016) SELECT 1 AS "a" FROM "usuarios" WHERE "usuarios"."email" = 'admin@test.com' LIMIT 1; args=(Int4(1), 'admin@test.com'); alias=default
+[2025-11-02 01:17:11] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]} | Context: action=register, view=UsuarioViewSet
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 101, in register
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]}
+[2025-11-02 01:17:11] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 400 | Action: register
+[2025-11-02 01:17:13] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:17:13] [DEBUG] [django.db.backends:151] (0.000) SELECT 1 AS "a" FROM "usuarios" WHERE "usuarios"."email" = 'consumer@test.com' LIMIT 1; args=(Int4(1), 'consumer@test.com'); alias=default
+[2025-11-02 01:17:13] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]} | Context: action=register, view=UsuarioViewSet
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 101, in register
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]}
+[2025-11-02 01:17:13] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 400 | Action: register
+[2025-11-02 01:17:15] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:17:15] [DEBUG] [django.db.backends:151] (0.000) SELECT 1 AS "a" FROM "usuarios" WHERE "usuarios"."email" = 'invalid@test.com' LIMIT 1; args=(Int4(1), 'invalid@test.com'); alias=default
+[2025-11-02 01:17:15] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')], 'edad': [ErrorDetail(string='Age cannot exceed 120', code='max_value')]} | Context: action=register, view=UsuarioViewSet
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 101, in register
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')], 'edad': [ErrorDetail(string='Age cannot exceed 120', code='max_value')]}
+[2025-11-02 01:17:15] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 400 | Action: register
+[2025-11-02 01:17:17] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-02 01:17:17] [DEBUG] [django.db.backends:151] (0.000) SELECT "usuarios"."id", "usuarios"."created_at", "usuarios"."updated_at", "usuarios"."nombre", "usuarios"."telefono", "usuarios"."email", "usuarios"."password_hash", "usuarios"."rol" FROM "usuarios" WHERE "usuarios"."email" = 'consumer@test.com' LIMIT 21; args=('consumer@test.com',); alias=default
+[2025-11-02 01:17:18] [DEBUG] [django.db.backends:151] (0.000) SELECT "consumidores"."id", "consumidores"."created_at", "consumidores"."updated_at", "consumidores"."usuario_id", "consumidores"."edad", "consumidores"."peso", "consumidores"."altura", "consumidores"."bmi", "consumidores"."genero" FROM "consumidores" WHERE "consumidores"."usuario_id" = 11 LIMIT 21; args=(11,); alias=default
+[2025-11-02 01:17:18] [INFO] [api.services.auth_service:86] Successful login: consumer@test.com (rol: consumidor)
+[2025-11-02 01:17:18] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✓ Response: 200 | Action: login
+[2025-11-02 01:17:20] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-02 01:17:20] [DEBUG] [django.db.backends:151] (0.015) SELECT "usuarios"."id", "usuarios"."created_at", "usuarios"."updated_at", "usuarios"."nombre", "usuarios"."telefono", "usuarios"."email", "usuarios"."password_hash", "usuarios"."rol" FROM "usuarios" WHERE "usuarios"."email" = 'consumer@test.com' LIMIT 21; args=('consumer@test.com',); alias=default
+[2025-11-02 01:17:21] [WARNING] [api.services.auth_service:52] Failed login: consumer@test.com (invalid password)
+[2025-11-02 01:17:21] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 401 | Action: login
+[2025-11-02 01:17:23] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-02 01:17:23] [DEBUG] [django.db.backends:151] (0.000) SELECT "usuarios"."id", "usuarios"."created_at", "usuarios"."updated_at", "usuarios"."nombre", "usuarios"."telefono", "usuarios"."email", "usuarios"."password_hash", "usuarios"."rol" FROM "usuarios" WHERE "usuarios"."email" = 'nonexistent@test.com' LIMIT 21; args=('nonexistent@test.com',); alias=default
+[2025-11-02 01:17:23] [WARNING] [api.services.auth_service:90] Failed login: nonexistent@test.com (user not found)
+[2025-11-02 01:17:23] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 401 | Action: login
+[2025-11-02 01:36:52] [DEBUG] [django.db.backends:151] (0.015) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 01:36:52] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 01:36:56] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:36:56] [DEBUG] [django.db.backends:151] (0.000) SELECT 1 AS "a" FROM "usuarios" WHERE "usuarios"."email" = 'consumer123@test.com' LIMIT 1; args=(Int4(1), 'consumer123@test.com'); alias=default
+[2025-11-02 01:36:56] [DEBUG] [django.db.backends:181] (0.000) BEGIN; args=None; alias=default
+[2025-11-02 01:36:57] [DEBUG] [django.db.backends:151] (0.000) INSERT INTO "usuarios" ("created_at", "updated_at", "nombre", "telefono", "email", "password_hash", "rol") VALUES ('2025-11-02 08:36:57.538642+00:00'::timestamptz, '2025-11-02 08:36:57.538642+00:00'::timestamptz, 'Test Consumer', '1234567890', 'consumer123@test.com', 'pbkdf2_sha256$1000000$heQ5uK8GsyztEmT7A5ei6U$jKSAekDHU0D/oSxbPwJ/URVkZTTQLz4Ldcmi/ZYkJQE=', 'consumidor') RETURNING "usuarios"."id"; args=(datetime.datetime(2025, 11, 2, 8, 36, 57, 538642, tzinfo=datetime.timezone.utc), datetime.datetime(2025, 11, 2, 8, 36, 57, 538642, tzinfo=datetime.timezone.utc), 'Test Consumer', '1234567890', 'consumer123@test.com', 'pbkdf2_sha256$1000000$heQ5uK8GsyztEmT7A5ei6U$jKSAekDHU0D/oSxbPwJ/URVkZTTQLz4Ldcmi/ZYkJQE=', 'consumidor'); alias=default
+[2025-11-02 01:36:57] [DEBUG] [django.db.backends:151] (0.016) INSERT INTO "consumidores" ("created_at", "updated_at", "usuario_id", "edad", "peso", "altura", "bmi", "genero") VALUES ('2025-11-02 08:36:57.541681+00:00'::timestamptz, '2025-11-02 08:36:57.541681+00:00'::timestamptz, 12, NULL, NULL, NULL, NULL, 'masculino') RETURNING "consumidores"."id"; args=(datetime.datetime(2025, 11, 2, 8, 36, 57, 541681, tzinfo=datetime.timezone.utc), datetime.datetime(2025, 11, 2, 8, 36, 57, 541681, tzinfo=datetime.timezone.utc), 12, None, None, None, None, GeneroChoices.MASCULINO); alias=default
+[2025-11-02 01:36:57] [INFO] [api.services.user_factory:76] Created Consumidor: consumer123@test.com (ID: 12, Profile ID: 6)
+[2025-11-02 01:36:57] [DEBUG] [django.db.backends:181] (0.000) COMMIT; args=None; alias=default
+[2025-11-02 01:36:57] [INFO] [api.views.UsuarioViewSet:108] [register] New user registered: consumer123@test.com (rol: consumidor)
+[2025-11-02 01:36:57] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✓ Response: 201 | Action: register
+[2025-11-02 01:36:59] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:36:59] [DEBUG] [django.db.backends:151] (0.000) SELECT 1 AS "a" FROM "usuarios" WHERE "usuarios"."email" = 'admin321@test.com' LIMIT 1; args=(Int4(1), 'admin321@test.com'); alias=default
+[2025-11-02 01:36:59] [DEBUG] [django.db.backends:181] (0.000) BEGIN; args=None; alias=default
+[2025-11-02 01:37:00] [DEBUG] [django.db.backends:151] (0.000) INSERT INTO "usuarios" ("created_at", "updated_at", "nombre", "telefono", "email", "password_hash", "rol") VALUES ('2025-11-02 08:37:00.241028+00:00'::timestamptz, '2025-11-02 08:37:00.241028+00:00'::timestamptz, 'Test Admin', '0987654321', 'admin321@test.com', 'pbkdf2_sha256$1000000$F6kvdZC71pyupsmjyqkUZt$T7IwvHZ824Df/+RhoytT6DWnWYpXxqij0kgpBj/Ubt8=', 'administrador') RETURNING "usuarios"."id"; args=(datetime.datetime(2025, 11, 2, 8, 37, 0, 241028, tzinfo=datetime.timezone.utc), datetime.datetime(2025, 11, 2, 8, 37, 0, 241028, tzinfo=datetime.timezone.utc), 'Test Admin', '0987654321', 'admin321@test.com', 'pbkdf2_sha256$1000000$F6kvdZC71pyupsmjyqkUZt$T7IwvHZ824Df/+RhoytT6DWnWYpXxqij0kgpBj/Ubt8=', 'administrador'); alias=default
+[2025-11-02 01:37:00] [DEBUG] [django.db.backends:151] (0.016) INSERT INTO "administradores" ("created_at", "updated_at", "usuario_id", "area_responsable") VALUES ('2025-11-02 08:37:00.243029+00:00'::timestamptz, '2025-11-02 08:37:00.243029+00:00'::timestamptz, 13, NULL) RETURNING "administradores"."id"; args=(datetime.datetime(2025, 11, 2, 8, 37, 0, 243029, tzinfo=datetime.timezone.utc), datetime.datetime(2025, 11, 2, 8, 37, 0, 243029, tzinfo=datetime.timezone.utc), 13, None); alias=default
+[2025-11-02 01:37:00] [INFO] [api.services.user_factory:80] Created Administrador: admin321@test.com (ID: 13, Profile ID: 3)
+[2025-11-02 01:37:00] [DEBUG] [django.db.backends:181] (0.000) COMMIT; args=None; alias=default
+[2025-11-02 01:37:00] [INFO] [api.views.UsuarioViewSet:108] [register] New user registered: admin321@test.com (rol: administrador)
+[2025-11-02 01:37:00] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✓ Response: 201 | Action: register
+[2025-11-02 01:37:02] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:37:02] [DEBUG] [django.db.backends:151] (0.000) SELECT 1 AS "a" FROM "usuarios" WHERE "usuarios"."email" = 'consumer123@test.com' LIMIT 1; args=(Int4(1), 'consumer123@test.com'); alias=default
+[2025-11-02 01:37:02] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]} | Context: action=register, view=UsuarioViewSet
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 97, in register
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]}
+[2025-11-02 01:37:02] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 400 | Action: register
+[2025-11-02 01:37:04] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 01:37:04] [DEBUG] [django.db.backends:151] (0.016) SELECT 1 AS "a" FROM "usuarios" WHERE "usuarios"."email" = 'invalid@test.com' LIMIT 1; args=(Int4(1), 'invalid@test.com'); alias=default
+[2025-11-02 01:37:04] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')]} | Context: action=register, view=UsuarioViewSet
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 97, in register
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')]}
+[2025-11-02 01:37:04] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 400 | Action: register
+[2025-11-02 01:37:06] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-02 01:37:06] [DEBUG] [django.db.backends:151] (0.015) SELECT "usuarios"."id", "usuarios"."created_at", "usuarios"."updated_at", "usuarios"."nombre", "usuarios"."telefono", "usuarios"."email", "usuarios"."password_hash", "usuarios"."rol" FROM "usuarios" WHERE "usuarios"."email" = 'consumer@test.com' LIMIT 21; args=('consumer@test.com',); alias=default
+[2025-11-02 01:37:07] [DEBUG] [django.db.backends:151] (0.000) SELECT "consumidores"."id", "consumidores"."created_at", "consumidores"."updated_at", "consumidores"."usuario_id", "consumidores"."edad", "consumidores"."peso", "consumidores"."altura", "consumidores"."bmi", "consumidores"."genero" FROM "consumidores" WHERE "consumidores"."usuario_id" = 11 LIMIT 21; args=(11,); alias=default
+[2025-11-02 01:37:07] [INFO] [api.services.auth_service:86] Successful login: consumer@test.com (rol: consumidor)
+[2025-11-02 01:37:07] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✓ Response: 200 | Action: login
+[2025-11-02 01:37:09] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-02 01:37:09] [DEBUG] [django.db.backends:151] (0.000) SELECT "usuarios"."id", "usuarios"."created_at", "usuarios"."updated_at", "usuarios"."nombre", "usuarios"."telefono", "usuarios"."email", "usuarios"."password_hash", "usuarios"."rol" FROM "usuarios" WHERE "usuarios"."email" = 'consumer@test.com' LIMIT 21; args=('consumer@test.com',); alias=default
+[2025-11-02 01:37:09] [WARNING] [api.services.auth_service:52] Failed login: consumer@test.com (invalid password)
+[2025-11-02 01:37:09] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 401 | Action: login
+[2025-11-02 01:37:11] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-02 01:37:11] [DEBUG] [django.db.backends:151] (0.000) SELECT "usuarios"."id", "usuarios"."created_at", "usuarios"."updated_at", "usuarios"."nombre", "usuarios"."telefono", "usuarios"."email", "usuarios"."password_hash", "usuarios"."rol" FROM "usuarios" WHERE "usuarios"."email" = 'nonexistent@test.com' LIMIT 21; args=('nonexistent@test.com',); alias=default
+[2025-11-02 01:37:11] [WARNING] [api.services.auth_service:90] Failed login: nonexistent@test.com (user not found)
+[2025-11-02 01:37:11] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 401 | Action: login

@@ -166,9 +166,7 @@ CREATE TABLE consumidores (
     edad INT,
     peso FLOAT,
 	altura FLOAT,
-	bmi FLOAT GENERATED ALWAYS AS (
-	    CASE WHEN altura > 0 THEN peso / ((altura/100) * (altura/100)) ELSE NULL END
-	) STORED,
+	bmi FLOAT,  -- Regular column, will be auto-calculated by trigger
 	genero VARCHAR(30) NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
@@ -176,6 +174,26 @@ CREATE TABLE consumidores (
 
 CREATE INDEX idx_consumidores_usuario_id
     ON consumidores(usuario_id);
+
+-- Function to auto-calculate BMI (Django ORM compatible)
+CREATE OR REPLACE FUNCTION calculate_bmi()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.peso IS NOT NULL AND NEW.altura IS NOT NULL AND NEW.altura > 0 THEN
+        NEW.bmi := ROUND((NEW.peso / POWER(NEW.altura / 100, 2))::numeric, 2);
+    ELSE
+        NEW.bmi := NULL;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger to calculate BMI before insert/update
+CREATE TRIGGER trigger_calculate_bmi
+    BEFORE INSERT OR UPDATE OF peso, altura
+    ON consumidores
+    FOR EACH ROW
+    EXECUTE FUNCTION calculate_bmi();
 
 CREATE TRIGGER trg_consumidores_update_timestamp
 BEFORE UPDATE ON consumidores
@@ -461,3 +479,31 @@ CREATE INDEX idx_usuarios_email ON usuarios(email);
 CREATE INDEX idx_usuarios_rol ON usuarios(rol);
 CREATE INDEX idx_formularios_fecha_envio ON formularios(fecha_envio);
 CREATE INDEX idx_notificaciones_leida ON notificaciones(leida) WHERE leida = FALSE;
+
+-- Step 1: Drop the generated column
+ALTER TABLE consumidores DROP COLUMN bmi;
+
+-- Step 2: Add it back as a regular nullable column
+ALTER TABLE consumidores ADD COLUMN bmi FLOAT;
+
+-- Step 3: Create a function to calculate BMI
+CREATE OR REPLACE FUNCTION calculate_bmi()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.peso IS NOT NULL AND NEW.altura IS NOT NULL AND NEW.altura > 0 THEN
+        NEW.bmi := ROUND((NEW.peso / POWER(NEW.altura / 100, 2))::numeric, 2);
+    ELSE
+        NEW.bmi := NULL;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Step 4: Create trigger to auto-calculate BMI on INSERT/UPDATE
+DROP TRIGGER IF EXISTS trigger_calculate_bmi ON consumidores;
+
+CREATE TRIGGER trigger_calculate_bmi
+    BEFORE INSERT OR UPDATE OF peso, altura
+    ON consumidores
+    FOR EACH ROW
+    EXECUTE FUNCTION calculate_bmi();

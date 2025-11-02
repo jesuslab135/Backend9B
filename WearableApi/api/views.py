@@ -5,17 +5,21 @@ ViewSets for all models with automatic CRUD operations and logging.
 
 Design Pattern: ViewSet Pattern (Django REST Framework)
 Each ViewSet handles CRUD operations for a model.
+
+Service Layer Integration:
+Views delegate business logic to service classes.
 """
 
 from rest_framework import viewsets, status
 from rest_framework.decorators import action, api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from django.contrib.auth.hashers import check_password
 
 
 from api.models import *
 from api.serializers import *
+from api.services import AuthenticationService, UserFactory
 from utils.mixins import LoggingMixin, ConsumerFilterMixin, ReadOnlyMixin
 from utils.decorators import log_endpoint
 from .tasks import predict_smoking_craving
@@ -33,56 +37,75 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
     """
     ViewSet for Usuario CRUD operations.
     
+    Design Pattern: Delegation to Service Layer
+    Business logic delegated to AuthenticationService and UserFactory.
+    
     Endpoints:
-        GET    /api/usuarios/          - List all users
-        POST   /api/usuarios/          - Create user
-        GET    /api/usuarios/{id}/     - Get user detail
-        PUT    /api/usuarios/{id}/     - Update user
-        DELETE /api/usuarios/{id}/     - Delete user
+        POST   /api/usuarios/register/       - Register new user
+        POST   /api/usuarios/login/          - Login user
+        GET    /api/usuarios/                - List all users
+        POST   /api/usuarios/                - Create user
+        GET    /api/usuarios/{id}/           - Get user detail
+        PUT    /api/usuarios/{id}/           - Update user
+        PATCH  /api/usuarios/{id}/profile/   - Update profile
+        DELETE /api/usuarios/{id}/           - Delete user
     """
     
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
     
-    @action(detail=False, methods=['post'])
+    def get_permissions(self):
+        """
+        Allow unauthenticated access to register and login.
+        
+        Design Pattern: Strategy Pattern for permissions
+        """
+        if self.action in ['register', 'login']:
+            return [AllowAny()]
+        return [permission() for permission in self.permission_classes]
+    
+    @action(detail=False, methods=['post'], permission_classes=[AllowAny])
     def register(self, request):
         """
         Register a new user (consumidor or administrador).
         
         POST /api/usuarios/register/
+        
+        Body:
+            {
+                "nombre": "John Doe",
+                "email": "john@example.com",
+                "password": "secure123",
+                "telefono": "1234567890",  // optional
+                "rol": "consumidor"  // or "administrador", default: "consumidor"
+            }
+        
+        Note: 
+        - For Consumidor: Health fields (edad, peso, altura, genero) should be 
+          filled later via PATCH /api/usuarios/{id}/profile/
+        - For Administrador: No additional fields required
+        
+        Response:
+            {
+                "message": "User registered successfully",
+                "user_id": 1,
+                "email": "john@example.com",
+                "rol": "consumidor"
+            }
         """
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         
-        data = serializer.validated_data
-        rol = data.pop('rol', 'consumidor')
+        # Use UserFactory to create user (Service Layer Pattern)
+        usuario, success, message = UserFactory.create_user(serializer.validated_data)
         
-        # Create Usuario
-        usuario = Usuario(
-            nombre=data['nombre'],
-            email=data['email'],
-            telefono=data.get('telefono', ''),
-            rol=rol
-        )
-        usuario.set_password(data['password'])
-        usuario.save()
-        
-        # Create role-specific record
-        if rol == 'consumidor':
-            Consumidor.objects.create(
-                usuario=usuario,
-                edad=data.get('edad'),
-                peso=data.get('peso'),
-                altura=data.get('altura'),
-                genero=data.get('genero', 'masculino')
-            )
-        elif rol == 'administrador':
-            Administrador.objects.create(
-                usuario=usuario,
-                area_responsable=data.get('area_responsable', '')
+        if not success:
+            return Response(
+                {'error': message},
+                status=status.HTTP_400_BAD_REQUEST
             )
         
-        self.logger.info(f"New user registered: {usuario.email} ({rol})")
+        self.logger.info(f"New user registered: {usuario.email} (rol: {usuario.rol})")
         
         return Response({
             'message': 'User registered successfully',
@@ -91,13 +114,39 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
             'rol': usuario.rol
         }, status=status.HTTP_201_CREATED)
     
-    @action(detail=False, methods=['post'])
+    @action(detail=False, methods=['post'], permission_classes=[AllowAny])
     def login(self, request):
         """
-        Login endpoint (simple password check).
+        Login endpoint with credential validation.
         
         POST /api/usuarios/login/
-        Body: {"email": "...", "password": "..."}
+        
+        Body:
+            {
+                "email": "john@example.com",
+                "password": "secure123"
+            }
+        
+        Response (success):
+            {
+                "user_id": 1,
+                "nombre": "John Doe",
+                "email": "john@example.com",
+                "telefono": "1234567890",
+                "rol": "consumidor",
+                "consumidor_id": 1,
+                "edad": 30,
+                "peso": 70.5,
+                "altura": 175.0,
+                "genero": "masculino",
+                "bmi": 23.1,
+                "created_at": "2025-11-01T12:00:00Z"
+            }
+        
+        Response (failure):
+            {
+                "error": "Invalid credentials"
+            }
         """
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -105,41 +154,52 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
         email = serializer.validated_data['email']
         password = serializer.validated_data['password']
         
-        try:
-            usuario = Usuario.objects.get(email=email)
-            
-            if usuario.check_password(password):
-                self.logger.info(f"User logged in: {email}")
-                
-                response_data = {
-                    'user_id': usuario.id,
-                    'nombre': usuario.nombre,
-                    'email': usuario.email,
-                    'rol': usuario.rol
-                }
-                
-                # Add consumidor_id if user is consumidor
-                if usuario.rol == 'consumidor':
-                    try:
-                        consumidor = usuario.consumidor
-                        response_data['consumidor_id'] = consumidor.id
-                    except Consumidor.DoesNotExist:
-                        pass
-                
-                return Response(response_data)
-            else:
-                self.logger.warning(f"Failed login attempt: {email} (wrong password)")
-                return Response(
-                    {'error': 'Invalid credentials'},
-                    status=status.HTTP_401_UNAUTHORIZED
-                )
+        # Use AuthenticationService (Service Layer Pattern)
+        success, user_data, error = AuthenticationService.authenticate(email, password)
         
-        except Usuario.DoesNotExist:
-            self.logger.warning(f"Failed login attempt: {email} (user not found)")
+        if not success:
             return Response(
-                {'error': 'Invalid credentials'},
+                {'error': error},
                 status=status.HTTP_401_UNAUTHORIZED
             )
+        
+        return Response(user_data, status=status.HTTP_200_OK)
+    
+    @action(detail=True, methods=['patch'])
+    def profile(self, request, pk=None):
+        """
+        Update user profile information.
+        
+        PATCH /api/usuarios/{id}/profile/
+        
+        Body (partial update allowed):
+            {
+                "nombre": "Updated Name",
+                "telefono": "9876543210",
+                "password": "newpassword",
+                "edad": 31,
+                "peso": 72.0
+            }
+        """
+        usuario = self.get_object()
+        serializer = UserProfileSerializer(data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        
+        # Use UserFactory to update (Service Layer Pattern)
+        success, message = UserFactory.update_user(usuario, serializer.validated_data)
+        
+        if not success:
+            return Response(
+                {'error': message},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Return updated user data
+        updated_serializer = UsuarioSerializer(usuario)
+        return Response({
+            'message': message,
+            'user': updated_serializer.data
+        }, status=status.HTTP_200_OK)
 
 
 class AdministradorViewSet(LoggingMixin, viewsets.ModelViewSet):

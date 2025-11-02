@@ -19,3 +19,47 @@
 [2025-11-01 23:03:19] [ERROR] [api.tasks:132] No recent sensor readings found. Cannot make prediction.
 [2025-11-01 23:07:37] [ERROR] [api.tasks:132] No recent sensor readings found. Cannot make prediction.
 [2025-11-01 23:10:04] [ERROR] [api.tasks:132] No recent sensor readings found. Cannot make prediction.
+[2025-11-02 01:07:04] [ERROR] [api.services.user_factory:85] Failed to create user: cannot insert a non-DEFAULT value into column "bmi"
+DETAIL:  Column "bmi" is a generated column.
+[2025-11-02 01:07:09] [ERROR] [api.services.user_factory:85] Failed to create user: cannot insert a non-DEFAULT value into column "bmi"
+DETAIL:  Column "bmi" is a generated column.
+[2025-11-02 01:07:11] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')], 'edad': [ErrorDetail(string='Age cannot exceed 120', code='max_value')]} | Context: action=register, view=UsuarioViewSet
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 101, in register
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')], 'edad': [ErrorDetail(string='Age cannot exceed 120', code='max_value')]}
+[2025-11-02 01:17:11] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]} | Context: action=register, view=UsuarioViewSet
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 101, in register
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]}
+[2025-11-02 01:17:13] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]} | Context: action=register, view=UsuarioViewSet
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 101, in register
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]}
+[2025-11-02 01:17:15] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')], 'edad': [ErrorDetail(string='Age cannot exceed 120', code='max_value')]} | Context: action=register, view=UsuarioViewSet
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 101, in register
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
+    raise ValidationError(self.errors)
+rest_framework.exceptions.ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')], 'edad': [ErrorDetail(string='Age cannot exceed 120', code='max_value')]}

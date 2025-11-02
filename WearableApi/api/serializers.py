@@ -347,35 +347,117 @@ class VwWeeklyComparisonSerializer(serializers.ModelSerializer):
 # ============================================
 
 class LoginSerializer(serializers.Serializer):
-    """Serializer for login endpoint"""
+    """
+    Serializer for login endpoint.
     
-    email = serializers.EmailField()
-    password = serializers.CharField(style={'input_type': 'password'})
+    Design Pattern: Data Transfer Object (DTO)
+    Simple validation for login credentials.
+    """
+    
+    email = serializers.EmailField(
+        required=True,
+        error_messages={
+            'required': 'Email is required',
+            'invalid': 'Enter a valid email address'
+        }
+    )
+    password = serializers.CharField(
+        required=True,
+        style={'input_type': 'password'},
+        error_messages={
+            'required': 'Password is required'
+        }
+    )
 
 
 class RegisterSerializer(serializers.Serializer):
-    """Serializer for user registration"""
+    """
+    Serializer for user registration.
     
-    nombre = serializers.CharField(max_length=100)
-    email = serializers.EmailField()
+    Design Pattern: Data Transfer Object (DTO) + Validation Layer
+    Handles basic registration for both Consumidor and Administrador.
+    
+    Note: Consumidor health fields (edad, peso, altura, genero) will be 
+    filled later via a separate profile completion form.
+    """
+    
+    # Base fields (required for all users)
+    nombre = serializers.CharField(
+        max_length=100,
+        required=True,
+        error_messages={'required': 'Name is required'}
+    )
+    email = serializers.EmailField(
+        required=True,
+        error_messages={
+            'required': 'Email is required',
+            'invalid': 'Enter a valid email address'
+        }
+    )
     password = serializers.CharField(
         min_length=6,
-        style={'input_type': 'password'}
+        required=True,
+        style={'input_type': 'password'},
+        error_messages={
+            'required': 'Password is required',
+            'min_length': 'Password must be at least 6 characters long'
+        }
     )
-    telefono = serializers.CharField(max_length=20, required=False, allow_blank=True)
-    rol = serializers.ChoiceField(choices=RolChoices.choices, default='consumidor')
-    
-    # Consumidor specific fields (optional)
-    edad = serializers.IntegerField(required=False, allow_null=True)
-    peso = serializers.FloatField(required=False, allow_null=True)
-    altura = serializers.FloatField(required=False, allow_null=True)
-    genero = serializers.ChoiceField(choices=GeneroChoices.choices, required=False)
-    
-    # Administrador specific fields (optional)
-    area_responsable = serializers.CharField(max_length=100, required=False, allow_blank=True)
+    telefono = serializers.CharField(
+        max_length=20,
+        required=False,
+        allow_blank=True,
+        default=''
+    )
+    rol = serializers.ChoiceField(
+        choices=RolChoices.choices,
+        default=RolChoices.CONSUMIDOR,
+        required=False
+    )
     
     def validate_email(self, value):
-        """Check if email already exists"""
+        """
+        Check if email already exists.
+        
+        Design Pattern: Validation Strategy
+        """
         if Usuario.objects.filter(email=value).exists():
-            raise serializers.ValidationError("Email already registered")
+            raise serializers.ValidationError("This email is already registered")
+        return value.lower()  # Normalize email to lowercase
+    
+    def validate_password(self, value):
+        """
+        Validate password strength.
+        
+        Rules:
+        - Minimum 6 characters (enforced by min_length)
+        - Must contain at least one letter
+        """
+        if not any(c.isalpha() for c in value):
+            raise serializers.ValidationError("Password must contain at least one letter")
         return value
+
+
+class UserProfileSerializer(serializers.Serializer):
+    """
+    Serializer for user profile updates.
+    
+    Allows partial updates of user information.
+    """
+    
+    nombre = serializers.CharField(max_length=100, required=False)
+    telefono = serializers.CharField(max_length=20, required=False, allow_blank=True)
+    password = serializers.CharField(
+        min_length=6,
+        required=False,
+        style={'input_type': 'password'}
+    )
+    
+    # Consumidor fields
+    edad = serializers.IntegerField(required=False, allow_null=True, min_value=1, max_value=120)
+    peso = serializers.FloatField(required=False, allow_null=True, min_value=1.0)
+    altura = serializers.FloatField(required=False, allow_null=True, min_value=50.0)
+    genero = serializers.ChoiceField(choices=GeneroChoices.choices, required=False)
+    
+    # Administrador fields
+    area_responsable = serializers.CharField(max_length=100, required=False, allow_blank=True)
