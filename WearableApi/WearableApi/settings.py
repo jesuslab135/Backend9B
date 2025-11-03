@@ -9,23 +9,36 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+from decouple import config as decouple_config
+from dotenv import load_dotenv
 import os
 from pathlib import Path
+import sentry_sdk
+import dj_database_url
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.celery import CeleryIntegration
+from sentry_sdk.integrations.redis import RedisIntegration
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables from .env file
+env_path = BASE_DIR / '.env'
+if env_path.exists():
+    load_dotenv(dotenv_path=env_path)
+    print(f"✅ .env cargado desde: {env_path}")
+else:
+    print(f"⚠️ .env no encontrado en: {env_path}")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y@ydq(6zvj*=r5)j7yv(r($jw%@@1b!f-413%-!rcr&xf0pmv^'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
+# SECURITY
+SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
+DEBUG = os.environ.get('DEBUG', 'False').lower() in ('true', '1', 'yes')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 # Application definition
 
@@ -36,24 +49,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_celery_results',
-    'django_celery_beat',
     
     # Local apps
     'api',
 
-
-    # REST framework
+    # Third party
     'rest_framework',
     'corsheaders',
     'drf_spectacular',
+    'django_celery_results',
+    'django_celery_beat',
+    'sslserver',
 ]
 
-# Celery Configuration
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'django-db'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -107,6 +115,8 @@ CORS_ALLOW_METHODS = [
 
 ROOT_URLCONF = 'WearableApi.urls'
 
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -129,14 +139,33 @@ WSGI_APPLICATION = 'WearableApi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# ===== DATABASE CONFIGURATION (DUAL MODE) =====
+# Determinar si usar PostgreSQL en Docker o local
+USE_DOCKER_DB = os.environ.get('USE_DOCKER_DB', 'false').lower() == 'true'
+
+if USE_DOCKER_DB:
+    # Modo Producción: PostgreSQL en Docker
+    DB_HOST = 'db'
+    DB_USER = os.environ.get('POSTGRES_USER', 'wearable')
+    print("📦 Usando PostgreSQL en Docker")
+else:
+    # Modo Desarrollo: PostgreSQL local
+    DB_HOST = os.environ.get('POSTGRES_HOST', 'localhost')
+    DB_USER = os.environ.get('POSTGRES_USER', 'postgres')
+    print("💻 Usando PostgreSQL local")
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "wearable",
-        "USER": "postgres",
-        "PASSWORD": "Dio$ama135",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DB', 'wearable'),
+        'USER': DB_USER,
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+        'HOST': DB_HOST,
+        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+        'CONN_MAX_AGE': 600,  # Mantener conexiones por 10 minutos
+        'OPTIONS': {
+            'connect_timeout': 10,
+        }
     }
 }
 
@@ -174,10 +203,11 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -355,6 +385,90 @@ LOGGING = {
         'level': 'INFO',
     },
 }
+
+
+
+# ===== SENDGRID CONFIGURATION =====
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY', '')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'lidering.esteban@gmail.com')
+
+
+# Verificar si está configurado
+if SENDGRID_API_KEY:
+    print(f"✅ SendGrid configurado (key empieza con: {SENDGRID_API_KEY[:10]}...)")
+else:
+    print("⚠️ SENDGRID_API_KEY no configurada")
+
+
+# ===== CELERY CONFIGURATION =====
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'django-db')
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'America/Tijuana'
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_RESULT_EXPIRES = 60 * 60 * 24
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+# ===== SENTRY CONFIGURATION =====
+SENTRY_DSN = os.environ.get('SENTRY_DSN')
+
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[
+            DjangoIntegration(),
+            CeleryIntegration(),
+            RedisIntegration(),
+        ],
+        traces_sample_rate=0.1,
+        send_default_pii=True,
+        environment=os.environ.get('ENVIRONMENT', 'production'),
+    )
+    print("✅ Sentry inicializado")
+else:
+    print("⚠️ SENTRY_DSN no configurado")
+
+# ===== CACHE CONFIGURATION =====
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': os.environ.get('CELERY_BROKER_URL', 'redis://localhost:6379/1'),
+    }
+}
+
+
+# ===== SECURITY SETTINGS (Production) =====
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+
+# ===== CUSTOM SETTINGS =====
+# Directorio para modelos ML
+ML_MODELS_DIR = os.path.join(BASE_DIR, 'models')
+os.makedirs(ML_MODELS_DIR, exist_ok=True)
+
+
+print("="*60)
+print("🚀 WearableApi Configuration")
+print("="*60)
+print(f"DEBUG: {DEBUG}")
+print(f"DATABASE: {DATABASES['default']['ENGINE']}")
+print(f"DATABASE HOST: {DATABASES['default']['HOST']}")
+print(f"CELERY BROKER: {CELERY_BROKER_URL}")
+print(f"SENTRY: {'✅ Enabled' if SENTRY_DSN else '❌ Disabled'}")
+print(f"SENDGRID: {'✅ Enabled' if SENDGRID_API_KEY else '❌ Disabled'}")
+print("="*60)
+
 
 # ============================================
 # PRODUCTION SETTINGS (uncomment for production)

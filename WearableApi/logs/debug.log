@@ -5986,3 +5986,424 @@ rest_framework.exceptions.ValidationError: {'password': [ErrorDetail(string='Pas
 [2025-11-02 01:37:11] [DEBUG] [django.db.backends:151] (0.000) SELECT "usuarios"."id", "usuarios"."created_at", "usuarios"."updated_at", "usuarios"."nombre", "usuarios"."telefono", "usuarios"."email", "usuarios"."password_hash", "usuarios"."rol" FROM "usuarios" WHERE "usuarios"."email" = 'nonexistent@test.com' LIMIT 21; args=('nonexistent@test.com',); alias=default
 [2025-11-02 01:37:11] [WARNING] [api.services.auth_service:90] Failed login: nonexistent@test.com (user not found)
 [2025-11-02 01:37:11] [INFO] [api.views.UsuarioViewSet:46] [finalize_response] 📤 ✗ Response: 401 | Action: login
+[2025-11-02 12:41:27] [DEBUG] [django.db.backends:151] (0.016) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 12:41:27] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 12:41:59] [DEBUG] [django.db.backends:151] (0.016) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:41:59.697231+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 41, 59, 697231, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:41:59] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:43:10] [DEBUG] [django.db.backends:151] (0.016) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 12:43:10] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 12:44:03] [DEBUG] [django.db.backends:151] (0.016) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 12:44:03] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 12:44:48] [DEBUG] [django.db.backends:151] (0.015) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 12:44:48] [DEBUG] [django.db.backends:151] (0.016) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 12:44:52] [DEBUG] [django.db.backends:151] (0.016) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:44:52.343334+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 44, 52, 343334, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:44:52] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:47:51] [DEBUG] [django.db.backends:151] (0.016) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 12:47:51] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 12:47:57] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:47:57.810257+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 47, 57, 810257, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:47:57] [DEBUG] [django.db.backends:151] (0.015) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:01] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:01.531691+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 1, 531691, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:01] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:05] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:05.451812+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 5, 451812, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:05] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:06] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:06.021785+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 6, 21785, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:06] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:06] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:06.625037+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 6, 625037, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:06] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:07] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:07.173823+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 7, 173823, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:07] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:07] [DEBUG] [django.db.backends:151] (0.015) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:07.732304+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 7, 732304, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:07] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:08] [DEBUG] [django.db.backends:151] (0.016) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:08.263557+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 8, 263557, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:08] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:08] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:08.770041+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 8, 770041, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:08] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:09] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:09.290031+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 9, 290031, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:09] [DEBUG] [django.db.backends:151] (0.016) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:09] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:09.704594+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 9, 704594, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:09] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:10] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:10.218572+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 10, 218572, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:10] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:10] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:10.603538+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 10, 603538, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:10] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:11] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:11.088561+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 11, 88561, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:11] [DEBUG] [django.db.backends:151] (0.016) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:11] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:11.623132+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 11, 623132, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:11] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:12] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:12.123006+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 12, 123006, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:12] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:12] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:12.559432+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 12, 559432, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:12] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:48:13] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:48:13.105561+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 48, 13, 105561, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:48:13] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:49:19] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:49:19.941723+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 49, 19, 941723, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:49:19] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:52:36] [DEBUG] [django.db.backends:151] (0.016) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-02 20:52:36.578067+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 2, 20, 52, 36, 578067, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 12:52:36] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 12:56:57] [DEBUG] [django.db.backends:151] (0.000) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 12:56:57] [DEBUG] [django.db.backends:151] (0.016) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 13:27:33] [DEBUG] [django.db.backends:151] (0.016) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 13:27:33] [DEBUG] [django.db.backends:151] (0.015) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 13:30:55] [ERROR] [WearableApi.email_service:41] Email failed: HTTP Error 401: Unauthorized
+[2025-11-02 13:31:24] [ERROR] [WearableApi.email_service:41] Email failed: HTTP Error 401: Unauthorized
+[2025-11-02 13:38:16] [DEBUG] [django.db.backends:151] (0.016) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 13:38:16] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 13:42:40] [DEBUG] [django.db.backends:151] (0.000) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 13:42:40] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 13:44:45] [ERROR] [WearableApi.email_service:41] Email failed: HTTP Error 401: Unauthorized
+[2025-11-02 13:46:35] [INFO] [WearableApi.email_service:78] Craving alert sent to lidering.esteban@gmail.com
+[2025-11-02 15:41:05] [INFO] [api.tasks:319] ======================================================================
+[2025-11-02 15:41:05] [INFO] [api.tasks:320] [CYCLE] Iniciando ciclo de simulaci�n autom�tico
+[2025-11-02 15:41:05] [INFO] [api.tasks:337] [USER] Consumidor seleccionado: Test Consumer (ID: 6)
+[2025-11-02 15:41:05] [INFO] [api.tasks:350] [WINDOW] Ventana creada: ID 84
+[2025-11-02 15:41:05] [INFO] [api.tasks:385] [OK] 60 lecturas generadas (HR base: 78.3)
+[2025-11-02 15:41:05] [INFO] [api.tasks:388] [ML] Disparando predicci�n ML...
+[2025-11-02 15:41:05] [INFO] [api.tasks:396] [OK] Predicci�n encolada (Task ID: 60963aa7-3ac0-4136-840a-3518cac7c2ab)
+[2025-11-02 15:41:05] [INFO] [api.tasks:397] ======================================================================
+[2025-11-02 15:41:07] [INFO] [api.tasks:93] Starting prediction for user 12
+[2025-11-02 15:41:07] [INFO] [api.tasks:121] Received features_dict: None
+[2025-11-02 15:41:07] [INFO] [api.tasks:122] features_dict is None: True
+[2025-11-02 15:41:07] [INFO] [api.tasks:123] features_dict type: <class 'NoneType'>
+[2025-11-02 15:41:07] [INFO] [api.tasks:127] Calculating features from sensor readings for consumidor 6
+[2025-11-02 15:41:07] [INFO] [api.tasks:140] Features calculated: {'hr_mean': 78.27350758428686, 'hr_std': 3.0576021676393443, 'hr_min': 73.2917226688511, 'hr_max': 83.16708724842566, 'hr_range': 9.875364579574565, 'accel_magnitude_mean': 1.4643467345091794, 'accel_magnitude_std': 0.3857565339104069, 'gyro_magnitude_mean': 0.800906204049397, 'gyro_magnitude_std': 0.18628703456116696, 'accel_energy': 137.5871677393361, 'gyro_energy': 40.56921641582446}
+[2025-11-02 15:41:15] [INFO] [api.tasks:222] Prediction: probability=10.32%, risk=low
+[2025-11-02 15:41:15] [INFO] [api.tasks:241] Features saved to Ventana ID 84
+[2025-11-02 15:41:15] [INFO] [api.tasks:256] Prediction saved: Analisis ID 88, risk=low, prob=10.32%
+[2025-11-02 15:42:05] [INFO] [api.tasks:319] ======================================================================
+[2025-11-02 15:42:05] [INFO] [api.tasks:320] [CYCLE] Iniciando ciclo de simulaci�n autom�tico
+[2025-11-02 15:42:05] [INFO] [api.tasks:337] [USER] Consumidor seleccionado: Test Consumer (ID: 6)
+[2025-11-02 15:42:05] [INFO] [api.tasks:350] [WINDOW] Ventana creada: ID 85
+[2025-11-02 15:42:05] [INFO] [api.tasks:385] [OK] 60 lecturas generadas (HR base: 91.7)
+[2025-11-02 15:42:05] [INFO] [api.tasks:388] [ML] Disparando predicci�n ML...
+[2025-11-02 15:42:05] [INFO] [api.tasks:396] [OK] Predicci�n encolada (Task ID: 05911f79-b767-4fac-85a1-3e9695f172a0)
+[2025-11-02 15:42:05] [INFO] [api.tasks:397] ======================================================================
+[2025-11-02 15:42:07] [INFO] [api.tasks:93] Starting prediction for user 12
+[2025-11-02 15:42:07] [INFO] [api.tasks:121] Received features_dict: None
+[2025-11-02 15:42:07] [INFO] [api.tasks:122] features_dict is None: True
+[2025-11-02 15:42:07] [INFO] [api.tasks:123] features_dict type: <class 'NoneType'>
+[2025-11-02 15:42:07] [INFO] [api.tasks:127] Calculating features from sensor readings for consumidor 6
+[2025-11-02 15:42:07] [INFO] [api.tasks:140] Features calculated: {'hr_mean': 78.27350758428686, 'hr_std': 3.0576021676393443, 'hr_min': 73.2917226688511, 'hr_max': 83.16708724842566, 'hr_range': 9.875364579574565, 'accel_magnitude_mean': 1.4643467345091794, 'accel_magnitude_std': 0.3857565339104069, 'gyro_magnitude_mean': 0.800906204049397, 'gyro_magnitude_std': 0.18628703456116696, 'accel_energy': 137.5871677393361, 'gyro_energy': 40.56921641582446}
+[2025-11-02 15:42:07] [INFO] [api.tasks:222] Prediction: probability=10.32%, risk=low
+[2025-11-02 15:42:07] [INFO] [api.tasks:241] Features saved to Ventana ID 84
+[2025-11-02 15:42:07] [INFO] [api.tasks:256] Prediction saved: Analisis ID 89, risk=low, prob=10.32%
+[2025-11-02 15:43:05] [INFO] [api.tasks:319] ======================================================================
+[2025-11-02 15:43:05] [INFO] [api.tasks:320] [CYCLE] Iniciando ciclo de simulaci�n autom�tico
+[2025-11-02 15:43:05] [INFO] [api.tasks:337] [USER] Consumidor seleccionado: Carlos Rodr�guez (ID: 3)
+[2025-11-02 15:43:05] [INFO] [api.tasks:350] [WINDOW] Ventana creada: ID 86
+[2025-11-02 15:43:05] [INFO] [api.tasks:385] [OK] 60 lecturas generadas (HR base: 67.6)
+[2025-11-02 15:43:05] [INFO] [api.tasks:388] [ML] Disparando predicci�n ML...
+[2025-11-02 15:43:05] [INFO] [api.tasks:396] [OK] Predicci�n encolada (Task ID: 2851ad02-ed51-4da7-81d0-910b04177be5)
+[2025-11-02 15:43:05] [INFO] [api.tasks:397] ======================================================================
+[2025-11-02 15:43:07] [INFO] [api.tasks:93] Starting prediction for user 4
+[2025-11-02 15:43:07] [INFO] [api.tasks:121] Received features_dict: None
+[2025-11-02 15:43:07] [INFO] [api.tasks:122] features_dict is None: True
+[2025-11-02 15:43:07] [INFO] [api.tasks:123] features_dict type: <class 'NoneType'>
+[2025-11-02 15:43:07] [INFO] [api.tasks:127] Calculating features from sensor readings for consumidor 3
+[2025-11-02 15:43:07] [INFO] [api.tasks:140] Features calculated: {'hr_mean': 77.21337525725694, 'hr_std': 3.0545780538892386, 'hr_min': 72.41972141742423, 'hr_max': 82.2004566750979, 'hr_range': 9.780735257673669, 'accel_magnitude_mean': 1.3993890496673906, 'accel_magnitude_std': 0.4617572847420896, 'gyro_magnitude_mean': 0.7594104804703569, 'gyro_magnitude_std': 0.21423052743420248, 'accel_energy': 130.29057014048337, 'gyro_energy': 37.35593980397728}
+[2025-11-02 15:43:07] [INFO] [api.tasks:222] Prediction: probability=9.20%, risk=low
+[2025-11-02 15:43:07] [INFO] [api.tasks:241] Features saved to Ventana ID 70
+[2025-11-02 15:43:07] [INFO] [api.tasks:256] Prediction saved: Analisis ID 90, risk=low, prob=9.20%
+[2025-11-02 16:13:23] [DEBUG] [django.db.backends:151] (0.016) 
+            SELECT
+                c.relname,
+                CASE
+                    WHEN c.relispartition THEN 'p'
+                    WHEN c.relkind IN ('m', 'v') THEN 'v'
+                    ELSE 't'
+                END,
+                obj_description(c.oid, 'pg_class')
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None; alias=default
+[2025-11-02 16:13:23] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=(); alias=default
+[2025-11-02 16:13:47] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-03 00:13:46.914498+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 3, 0, 13, 46, 914498, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 16:13:47] [DEBUG] [django.db.backends:151] (0.015) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 16:13:47] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-03 00:13:47.878198+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 3, 0, 13, 47, 878198, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 16:13:47] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default
+[2025-11-02 16:13:47] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 GET /api/administradores/ | Action: list
+[2025-11-02 16:13:47] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 POST /api/administradores/ | Action: create
+[2025-11-02 16:13:47] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 GET /api/administradores/{id}/ | Action: retrieve
+[2025-11-02 16:13:47] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 PUT /api/administradores/{id}/ | Action: update
+[2025-11-02 16:13:47] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 PATCH /api/administradores/{id}/ | Action: partial_update
+[2025-11-02 16:13:47] [INFO] [api.views.AdministradorViewSet:35] [initialize_request] 📥 DELETE /api/administradores/{id}/ | Action: destroy
+[2025-11-02 16:13:47] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 GET /api/analisis/ | Action: list
+[2025-11-02 16:13:47] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 POST /api/analisis/ | Action: create
+[2025-11-02 16:13:47] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 GET /api/analisis/{id}/ | Action: retrieve
+[2025-11-02 16:13:47] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 PUT /api/analisis/{id}/ | Action: update
+[2025-11-02 16:13:47] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 PATCH /api/analisis/{id}/ | Action: partial_update
+[2025-11-02 16:13:47] [INFO] [api.views.AnalisisViewSet:35] [initialize_request] 📥 DELETE /api/analisis/{id}/ | Action: destroy
+[2025-11-02 16:13:47] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 GET /api/consumidores/ | Action: list
+[2025-11-02 16:13:47] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 POST /api/consumidores/ | Action: create
+[2025-11-02 16:13:47] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 GET /api/consumidores/{id}/ | Action: retrieve
+[2025-11-02 16:13:47] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 PUT /api/consumidores/{id}/ | Action: update
+[2025-11-02 16:13:47] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 PATCH /api/consumidores/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.ConsumidorViewSet:35] [initialize_request] 📥 DELETE /api/consumidores/{id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 POST /api/dashboard/daily-summary/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/daily-summary/{consumidor_id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 PUT /api/dashboard/daily-summary/{consumidor_id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/daily-summary/{consumidor_id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.VwDailySummaryViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/daily-summary/{consumidor_id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 POST /api/dashboard/desires/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 POST /api/dashboard/desires-stats/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires-stats/{deseo_tipo}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 PUT /api/dashboard/desires-stats/{deseo_tipo}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/desires-stats/{deseo_tipo}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.VwDesiresStatsViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/desires-stats/{deseo_tipo}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/desires/{deseo_id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 PUT /api/dashboard/desires/{deseo_id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/desires/{deseo_id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.VwDesiresTrackingViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/desires/{deseo_id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-stats/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 POST /api/dashboard/habit-stats/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-stats/{consumidor_id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 PUT /api/dashboard/habit-stats/{consumidor_id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/habit-stats/{consumidor_id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.VwHabitStatsViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/habit-stats/{consumidor_id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-tracking/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 POST /api/dashboard/habit-tracking/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 GET /api/dashboard/habit-tracking/{consumidor_id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 PUT /api/dashboard/habit-tracking/{consumidor_id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/habit-tracking/{consumidor_id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.VwHabitTrackingViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/habit-tracking/{consumidor_id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 POST /api/dashboard/heart-rate/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 POST /api/dashboard/heart-rate-stats/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 PUT /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.VwHeartRateStatsViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/heart-rate-stats/{consumidor_id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/heart-rate/{id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 PUT /api/dashboard/heart-rate/{id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/heart-rate/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.VwHeartRateTimelineViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/heart-rate/{id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/prediction-summary/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 POST /api/dashboard/prediction-summary/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 GET /api/dashboard/prediction-summary/{consumidor_id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 PUT /api/dashboard/prediction-summary/{consumidor_id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/prediction-summary/{consumidor_id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.VwPredictionSummaryViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/prediction-summary/{consumidor_id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/predictions/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 POST /api/dashboard/predictions/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 GET /api/dashboard/predictions/{analisis_id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 PUT /api/dashboard/predictions/{analisis_id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/predictions/{analisis_id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.VwPredictionTimelineViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/predictions/{analisis_id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 GET /api/dashboard/weekly-comparison/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 POST /api/dashboard/weekly-comparison/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 GET /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 PUT /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 PATCH /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.VwWeeklyComparisonViewSet:35] [initialize_request] 📥 DELETE /api/dashboard/weekly-comparison/{consumidor_id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 GET /api/deseos/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 POST /api/deseos/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 GET /api/deseos/{id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 PUT /api/deseos/{id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 PATCH /api/deseos/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 DELETE /api/deseos/{id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.DeseoViewSet:35] [initialize_request] 📥 POST /api/deseos/{id}/resolve/ | Action: resolve
+[2025-11-02 16:13:48] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 GET /api/emociones/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 POST /api/emociones/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 GET /api/emociones/{id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 PUT /api/emociones/{id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 PATCH /api/emociones/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.EmocionViewSet:35] [initialize_request] 📥 DELETE /api/emociones/{id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 GET /api/formularios/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 POST /api/formularios/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 GET /api/formularios-temporales/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 POST /api/formularios-temporales/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 GET /api/formularios-temporales/{id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 PUT /api/formularios-temporales/{id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 PATCH /api/formularios-temporales/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.FormularioTemporalViewSet:35] [initialize_request] 📥 DELETE /api/formularios-temporales/{id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 GET /api/formularios/{id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 PUT /api/formularios/{id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 PATCH /api/formularios/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.FormularioViewSet:35] [initialize_request] 📥 DELETE /api/formularios/{id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 GET /api/habitos/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 POST /api/habitos/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 GET /api/habitos/{id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 PUT /api/habitos/{id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 PATCH /api/habitos/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.HabitoViewSet:35] [initialize_request] 📥 DELETE /api/habitos/{id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 GET /api/lecturas/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 POST /api/lecturas/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 GET /api/lecturas/{id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 PUT /api/lecturas/{id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 PATCH /api/lecturas/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.LecturaViewSet:35] [initialize_request] 📥 DELETE /api/lecturas/{id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 GET /api/motivos/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 POST /api/motivos/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 GET /api/motivos/{id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 PUT /api/motivos/{id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 PATCH /api/motivos/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.MotivoViewSet:35] [initialize_request] 📥 DELETE /api/motivos/{id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 GET /api/notificaciones/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 POST /api/notificaciones/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 GET /api/notificaciones/{id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 PUT /api/notificaciones/{id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 PATCH /api/notificaciones/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 DELETE /api/notificaciones/{id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 POST /api/notificaciones/{id}/mark_read/ | Action: mark_read
+[2025-11-02 16:13:48] [INFO] [api.views.NotificacionViewSet:35] [initialize_request] 📥 POST /api/notificaciones/{id}/mark_unread/ | Action: mark_unread
+[2025-11-02 16:13:48] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 GET /api/permisos/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 POST /api/permisos/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 GET /api/permisos/{id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 PUT /api/permisos/{id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 PATCH /api/permisos/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.PermisoViewSet:35] [initialize_request] 📥 DELETE /api/permisos/{id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 GET /api/soluciones/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 POST /api/soluciones/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 GET /api/soluciones/{id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 PUT /api/soluciones/{id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 PATCH /api/soluciones/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.SolucionViewSet:35] [initialize_request] 📥 DELETE /api/soluciones/{id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 GET /api/usuarios/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 GET /api/usuarios/{id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 PUT /api/usuarios/{id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 PATCH /api/usuarios/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 DELETE /api/usuarios/{id}/ | Action: destroy
+[2025-11-02 16:13:48] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 PATCH /api/usuarios/{id}/profile/ | Action: profile
+[2025-11-02 16:13:48] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-02 16:13:48] [INFO] [api.views.UsuarioViewSet:35] [initialize_request] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-02 16:13:48] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 GET /api/ventanas/ | Action: list
+[2025-11-02 16:13:48] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 POST /api/ventanas/ | Action: create
+[2025-11-02 16:13:48] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 GET /api/ventanas/{id}/ | Action: retrieve
+[2025-11-02 16:13:48] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 PUT /api/ventanas/{id}/ | Action: update
+[2025-11-02 16:13:48] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 PATCH /api/ventanas/{id}/ | Action: partial_update
+[2025-11-02 16:13:48] [INFO] [api.views.VentanaViewSet:35] [initialize_request] 📥 DELETE /api/ventanas/{id}/ | Action: destroy
+[2025-11-02 16:14:01] [DEBUG] [django.db.backends:151] (0.000) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > '2025-11-03 00:14:01.792170+00:00'::timestamptz AND "django_session"."session_key" = 'qldskedda7o2s2y3hiwcbmsczpvfu7e4') LIMIT 21; args=(datetime.datetime(2025, 11, 3, 0, 14, 1, 792170, tzinfo=datetime.timezone.utc), 'qldskedda7o2s2y3hiwcbmsczpvfu7e4'); alias=default
+[2025-11-02 16:14:01] [DEBUG] [django.db.backends:151] (0.000) SELECT "auth_user"."id", "auth_user"."password", "auth_user"."last_login", "auth_user"."is_superuser", "auth_user"."username", "auth_user"."first_name", "auth_user"."last_name", "auth_user"."email", "auth_user"."is_staff", "auth_user"."is_active", "auth_user"."date_joined" FROM "auth_user" WHERE "auth_user"."id" = 1 LIMIT 21; args=(1,); alias=default

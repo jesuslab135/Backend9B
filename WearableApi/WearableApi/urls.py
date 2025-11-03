@@ -12,6 +12,9 @@ from drf_spectacular.views import (
     SpectacularRedocView,
 )
 
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
 urlpatterns = [
     # Admin interface
     path('admin/', admin.site.urls),

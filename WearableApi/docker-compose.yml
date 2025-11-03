@@ -1,0 +1,184 @@
+# docker-compose.yml
+# Setup que funciona tanto en local como en producción
+
+version: '3.8'
+
+services:
+  # PostgreSQL Database (Solo para producción)
+  # En local, comentar o no levantar este servicio
+  db:
+    image: postgres:15-alpine
+    container_name: wearable-db
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-wearable}
+      - POSTGRES_USER=${POSTGRES_USER:-wearable}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"  # Puerto 5433 en host para no conflictuar con PostgreSQL local
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-wearable}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - wearable-network
+
+  # Redis - Message Broker
+  redis:
+    image: redis:alpine
+    container_name: wearable-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - wearable-network
+
+  # Django Application
+  django:
+    build: .
+    container_name: wearable-django
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             gunicorn WearableApi.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120"
+    ports:
+      - "8000:8000"
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      # Database
+      - USE_DOCKER_DB=${USE_DOCKER_DB:-false}  # false = usa DB local, true = usa DB en Docker
+      - POSTGRES_DB=${POSTGRES_DB:-wearable}
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOST=${POSTGRES_HOST:-host.docker.internal}
+      - POSTGRES_PORT=${POSTGRES_PORT:-5432}
+      
+      # Celery
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=django-db
+      
+      # SendGrid
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+      - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}
+      
+      # Sentry
+      - SENTRY_DSN=${SENTRY_DSN}
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+      
+      # Django
+      - DEBUG=${DEBUG:-False}
+      - SECRET_KEY=${SECRET_KEY}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-*}
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - .:/app
+      - static-files:/app/staticfiles
+      - media-files:/app/media
+      - ml-models:/app/models
+    networks:
+      - wearable-network
+
+  # Celery Worker
+  celery-worker:
+    build: .
+    container_name: wearable-celery-worker
+    command: celery -A WearableApi worker --loglevel=info --concurrency=4
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      - USE_DOCKER_DB=${USE_DOCKER_DB:-false}
+      - POSTGRES_DB=${POSTGRES_DB:-wearable}
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOST=${POSTGRES_HOST:-host.docker.internal}
+      - POSTGRES_PORT=${POSTGRES_PORT:-5432}
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=django-db
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+      - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}
+      - SENTRY_DSN=${SENTRY_DSN}
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+      - SECRET_KEY=${SECRET_KEY}
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - .:/app
+      - ml-models:/app/models
+    networks:
+      - wearable-network
+
+  # Celery Beat
+  celery-beat:
+    build: .
+    container_name: wearable-celery-beat
+    command: celery -A WearableApi beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      - USE_DOCKER_DB=${USE_DOCKER_DB:-false}
+      - POSTGRES_DB=${POSTGRES_DB:-wearable}
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOST=${POSTGRES_HOST:-host.docker.internal}
+      - POSTGRES_PORT=${POSTGRES_PORT:-5432}
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - SENTRY_DSN=${SENTRY_DSN}
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+      - SECRET_KEY=${SECRET_KEY}
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - .:/app
+    networks:
+      - wearable-network
+
+  # Flower (Monitor de Celery)
+  flower:
+    build: .
+    container_name: wearable-flower
+    command: celery -A WearableApi flower --port=5555
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+      - celery-worker
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - FLOWER_PORT=5555
+    restart: unless-stopped
+    networks:
+      - wearable-network
+
+volumes:
+  postgres-data:
+    driver: local
+  redis-data:
+    driver: local
+  static-files:
+    driver: local
+  media-files:
+    driver: local
+  ml-models:
+    driver: local
+
+networks:
+  wearable-network:
+    driver: bridge
