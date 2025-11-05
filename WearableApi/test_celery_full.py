@@ -1,7 +1,3 @@
-"""
-Script completo para probar Celery con predicciones ML
-Ejecutar: py manage.py shell < test_celery_full.py
-"""
 import os
 import django
 
@@ -18,10 +14,8 @@ print("=" * 70)
 print("🧪 PRUEBA COMPLETA DE CELERY + MODELO ML")
 print("=" * 70)
 
-# Verificar pre-requisitos
 print("\n📋 Verificando pre-requisitos...")
 
-# 1. Usuario
 try:
     usuario = Usuario.objects.get(id=2)
     print(f"✅ Usuario: {usuario.email} (ID: {usuario.id})")
@@ -30,7 +24,6 @@ except Usuario.DoesNotExist:
     print("💡 Cambia el ID o crea el usuario")
     exit(1)
 
-# 2. Consumidor
 try:
     consumidor = usuario.consumidor
     print(f"✅ Consumidor: ID {consumidor.id}")
@@ -38,7 +31,6 @@ except:
     print("❌ Usuario no tiene Consumidor asociado")
     exit(1)
 
-# 3. Ventanas recientes
 ventanas_recientes = Ventana.objects.filter(
     consumidor=consumidor,
     window_start__gte=timezone.now() - timedelta(minutes=30)
@@ -56,7 +48,6 @@ else:
     print(f"✅ Lecturas en ventana más reciente: {lecturas_count}")
     has_recent_data = True
 
-# 4. Modelo ML
 import os
 if os.path.exists('models/smoking_craving_model.pkl'):
     print("✅ Modelo ML encontrado: models/smoking_craving_model.pkl")
@@ -67,7 +58,6 @@ else:
 
 print("\n" + "=" * 70)
 
-# TEST 1: Predicción Automática (desde lecturas)
 if has_recent_data:
     print("\n🔬 TEST 1: Predicción Automática (desde lecturas del wearable)")
     print("-" * 70)
@@ -78,7 +68,6 @@ if has_recent_data:
         print(f"   🆔 Task ID: {result1.id}")
         print(f"   ⏳ Esperando resultado...")
         
-        # Esperar con timeout
         output1 = result1.get(timeout=15)
         
         if output1.get('success'):
@@ -108,12 +97,10 @@ if has_recent_data:
 else:
     print("\n⏭️  TEST 1 omitido (no hay datos recientes)")
 
-# TEST 2: Predicción Manual (con features)
 print("\n" + "=" * 70)
 print("\n🔬 TEST 2: Predicción Manual (con features proporcionadas)")
 print("-" * 70)
 
-# Features que simulan alto riesgo
 features_alto_riesgo = {
     'hr_mean': 98.5,
     'hr_std': 14.2,
@@ -156,7 +143,6 @@ except Exception as e:
     print(f"\n   ❌ ERROR: {e}")
     print(f"   💡 Asegúrate de que Celery worker esté corriendo")
 
-# TEST 3: Predicción con Bajo Riesgo
 print("\n" + "=" * 70)
 print("\n🔬 TEST 3: Predicción Manual (bajo riesgo simulado)")
 print("-" * 70)
@@ -200,7 +186,6 @@ try:
 except Exception as e:
     print(f"\n   ❌ ERROR: {e}")
 
-# Resumen Final
 print("\n" + "=" * 70)
 print("✅ PRUEBAS COMPLETADAS")
 print("=" * 70)
@@ -217,3 +202,4 @@ print("   3. Si hay notificaciones, revisa la tabla 'notificacion'")
 print("   4. Prueba el endpoint REST: POST /api/predict/")
 
 print("\n" + "=" * 70)
+

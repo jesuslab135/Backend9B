@@ -1,153 +1,114 @@
-[2025-11-01 21:36:38] [ERROR] [api.tasks:88] Prediction failed: Usuario has no consumidor.
-[2025-11-01 21:37:38] [ERROR] [api.tasks:88] Prediction failed: Usuario has no consumidor.
-[2025-11-01 21:39:38] [ERROR] [api.tasks:88] Prediction failed: Usuario has no consumidor.
-[2025-11-01 21:43:38] [ERROR] [api.tasks:88] Prediction failed: Usuario has no consumidor.
-[2025-11-01 21:48:44] [ERROR] [api.tasks:88] Prediction failed: [Errno 2] No such file or directory: 'models/smoking_craving_model.pkl'
-[2025-11-01 21:49:44] [ERROR] [api.tasks:88] Prediction failed: [Errno 2] No such file or directory: 'models/smoking_craving_model.pkl'
-[2025-11-01 21:51:44] [ERROR] [api.tasks:88] Prediction failed: [Errno 2] No such file or directory: 'models/smoking_craving_model.pkl'
-[2025-11-01 22:09:10] [ERROR] [api.tasks:59] ML model file not found at 'models/smoking_craving_model.pkl'
-[2025-11-01 22:15:21] [ERROR] [api.tasks:133] Unexpected error in prediction: 'dict' object has no attribute 'predict'
-[2025-11-01 22:16:22] [ERROR] [api.tasks:133] Unexpected error in prediction: 'dict' object has no attribute 'predict'
-[2025-11-01 22:18:22] [ERROR] [api.tasks:133] Unexpected error in prediction: 'dict' object has no attribute 'predict'
-[2025-11-01 22:22:22] [ERROR] [api.tasks:133] Unexpected error in prediction: 'dict' object has no attribute 'predict'
-[2025-11-01 22:27:08] [ERROR] [api.tasks:152] Unexpected error in prediction: "None of [Index(['hr_mean', 'hr_std', 'hr_min', 'hr_max', 'hr_range',\n       'accel_magnitude_mean', 'accel_magnitude_std', 'gyro_magnitude_mean',\n       'gyro_magnitude_std', 'accel_energy', 'gyro_energy'],\n      dtype='object')] are in the [columns]"
-[2025-11-01 22:28:08] [ERROR] [api.tasks:152] Unexpected error in prediction: "None of [Index(['hr_mean', 'hr_std', 'hr_min', 'hr_max', 'hr_range',\n       'accel_magnitude_mean', 'accel_magnitude_std', 'gyro_magnitude_mean',\n       'gyro_magnitude_std', 'accel_energy', 'gyro_energy'],\n      dtype='object')] are in the [columns]"
-[2025-11-01 22:30:08] [ERROR] [api.tasks:152] Unexpected error in prediction: "None of [Index(['hr_mean', 'hr_std', 'hr_min', 'hr_max', 'hr_range',\n       'accel_magnitude_mean', 'accel_magnitude_std', 'gyro_magnitude_mean',\n       'gyro_magnitude_std', 'accel_energy', 'gyro_energy'],\n      dtype='object')] are in the [columns]"
-[2025-11-01 22:34:05] [ERROR] [api.tasks:184] Missing required features: "None of [Index(['hr_mean', 'hr_std', 'hr_min', 'hr_max', 'hr_range',\n       'accel_magnitude_mean', 'accel_magnitude_std', 'gyro_magnitude_mean',\n       'gyro_magnitude_std', 'accel_energy', 'gyro_energy'],\n      dtype='object')] are in the [columns]". Required: ['hr_mean', 'hr_std', 'hr_min', 'hr_max', 'hr_range', 'accel_magnitude_mean', 'accel_magnitude_std', 'gyro_magnitude_mean', 'gyro_magnitude_std', 'accel_energy', 'gyro_energy']
-[2025-11-01 22:34:08] [ERROR] [api.tasks:184] Missing required features: "None of [Index(['hr_mean', 'hr_std', 'hr_min', 'hr_max', 'hr_range',\n       'accel_magnitude_mean', 'accel_magnitude_std', 'gyro_magnitude_mean',\n       'gyro_magnitude_std', 'accel_energy', 'gyro_energy'],\n      dtype='object')] are in the [columns]". Required: ['hr_mean', 'hr_std', 'hr_min', 'hr_max', 'hr_range', 'accel_magnitude_mean', 'accel_magnitude_std', 'gyro_magnitude_mean', 'gyro_magnitude_std', 'accel_energy', 'gyro_energy']
-[2025-11-01 22:40:19] [ERROR] [api.tasks:132] No recent sensor readings found. Cannot make prediction.
-[2025-11-01 23:03:19] [ERROR] [api.tasks:132] No recent sensor readings found. Cannot make prediction.
-[2025-11-01 23:07:37] [ERROR] [api.tasks:132] No recent sensor readings found. Cannot make prediction.
-[2025-11-01 23:10:04] [ERROR] [api.tasks:132] No recent sensor readings found. Cannot make prediction.
-[2025-11-02 01:07:04] [ERROR] [api.services.user_factory:85] Failed to create user: cannot insert a non-DEFAULT value into column "bmi"
-DETAIL:  Column "bmi" is a generated column.
-[2025-11-02 01:07:09] [ERROR] [api.services.user_factory:85] Failed to create user: cannot insert a non-DEFAULT value into column "bmi"
-DETAIL:  Column "bmi" is a generated column.
-[2025-11-02 01:07:11] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')], 'edad': [ErrorDetail(string='Age cannot exceed 120', code='max_value')]} | Context: action=register, view=UsuarioViewSet
+[2025-11-05 09:49:46] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] MethodNotAllowed: Method "GET" not allowed. | Context: action=None, view=UsuarioViewSet
 Traceback (most recent call last):
   File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
     response = handler(request, *args, **kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 101, in register
-    serializer.is_valid(raise_exception=True)
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
-    raise ValidationError(self.errors)
-rest_framework.exceptions.ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')], 'edad': [ErrorDetail(string='Age cannot exceed 120', code='max_value')]}
-[2025-11-02 01:17:11] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]} | Context: action=register, view=UsuarioViewSet
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 173, in http_method_not_allowed
+    raise exceptions.MethodNotAllowed(request.method)
+rest_framework.exceptions.MethodNotAllowed: Method "GET" not allowed.
+[2025-11-05 10:18:02] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] AuthenticationFailed: {'detail': ErrorDetail(string='User not found', code='authentication_failed'), 'code': ErrorDetail(string='user_not_found', code='authentication_failed')} | Context: action=retrieve, view=UsuarioViewSet
 Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
-    response = handler(request, *args, **kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 101, in register
-    serializer.is_valid(raise_exception=True)
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
-    raise ValidationError(self.errors)
-rest_framework.exceptions.ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]}
-[2025-11-02 01:17:13] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]} | Context: action=register, view=UsuarioViewSet
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 132, in get_user
+    user = self.user_model.objects.get(**{api_settings.USER_ID_FIELD: user_id})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\models\query.py", line 633, in get
+    raise self.model.DoesNotExist(
+django.contrib.auth.models.User.DoesNotExist: User matching query does not exist.
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
-    response = handler(request, *args, **kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 101, in register
-    serializer.is_valid(raise_exception=True)
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
-    raise ValidationError(self.errors)
-rest_framework.exceptions.ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]}
-[2025-11-02 01:17:15] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')], 'edad': [ErrorDetail(string='Age cannot exceed 120', code='max_value')]} | Context: action=register, view=UsuarioViewSet
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\__init__.py", line 332, in sentry_patched_drf_initial
+    return old_drf_initial(self, request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 420, in initial
+    self.perform_authentication(request)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 330, in perform_authentication
+    request.user
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\request.py", line 232, in user
+    self._authenticate()
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\request.py", line 385, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 51, in authenticate
+    return self.get_user(validated_token), validated_token
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 134, in get_user
+    raise AuthenticationFailed(
+rest_framework_simplejwt.exceptions.AuthenticationFailed: {'detail': ErrorDetail(string='User not found', code='authentication_failed'), 'code': ErrorDetail(string='user_not_found', code='authentication_failed')}
+[2025-11-05 10:18:07] [ERROR] [api.services.user_factory:85] Failed to create user: null value in column "genero" of relation "consumidores" violates not-null constraint
+DETAIL:  Failing row contains (11, 19, null, null, null, null, 2025-11-05 18:18:07.20139, 2025-11-05 18:18:07.20139, null).
+[2025-11-05 10:24:30] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] AuthenticationFailed: {'detail': ErrorDetail(string='User not found', code='authentication_failed'), 'code': ErrorDetail(string='user_not_found', code='authentication_failed')} | Context: action=retrieve, view=UsuarioViewSet
 Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
-    response = handler(request, *args, **kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 101, in register
-    serializer.is_valid(raise_exception=True)
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
-    raise ValidationError(self.errors)
-rest_framework.exceptions.ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')], 'edad': [ErrorDetail(string='Age cannot exceed 120', code='max_value')]}
-[2025-11-02 01:37:02] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]} | Context: action=register, view=UsuarioViewSet
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 132, in get_user
+    user = self.user_model.objects.get(**{api_settings.USER_ID_FIELD: user_id})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\models\query.py", line 633, in get
+    raise self.model.DoesNotExist(
+django.contrib.auth.models.User.DoesNotExist: User matching query does not exist.
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
-    response = handler(request, *args, **kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 97, in register
-    serializer.is_valid(raise_exception=True)
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
-    raise ValidationError(self.errors)
-rest_framework.exceptions.ValidationError: {'email': [ErrorDetail(string='This email is already registered', code='invalid')]}
-[2025-11-02 01:37:04] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')]} | Context: action=register, view=UsuarioViewSet
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\__init__.py", line 332, in sentry_patched_drf_initial
+    return old_drf_initial(self, request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 420, in initial
+    self.perform_authentication(request)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 330, in perform_authentication
+    request.user
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\request.py", line 232, in user
+    self._authenticate()
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\request.py", line 385, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 51, in authenticate
+    return self.get_user(validated_token), validated_token
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 134, in get_user
+    raise AuthenticationFailed(
+rest_framework_simplejwt.exceptions.AuthenticationFailed: {'detail': ErrorDetail(string='User not found', code='authentication_failed'), 'code': ErrorDetail(string='user_not_found', code='authentication_failed')}
+[2025-11-05 10:24:32] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] NotAuthenticated: Authentication credentials were not provided. | Context: action=retrieve, view=UsuarioViewSet
 Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
-    response = handler(request, *args, **kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\views.py", line 97, in register
-    serializer.is_valid(raise_exception=True)
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\serializers.py", line 233, in is_valid
-    raise ValidationError(self.errors)
-rest_framework.exceptions.ValidationError: {'password': [ErrorDetail(string='Password must be at least 6 characters long', code='min_length')]}
-[2025-11-02 12:41:59] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\__init__.py", line 332, in sentry_patched_drf_initial
+    return old_drf_initial(self, request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 421, in initial
+    self.check_permissions(request)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 339, in check_permissions
+    self.permission_denied(
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 180, in permission_denied
+    raise exceptions.NotAuthenticated()
+rest_framework.exceptions.NotAuthenticated: Authentication credentials were not provided.
+[2025-11-05 10:29:30] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] AttributeError: 'Usuario' object has no attribute 'is_authenticated' | Context: action=retrieve, view=UsuarioViewSet
 Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:41:59] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84520
-[2025-11-02 12:44:52] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:44:52] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:47:57] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:47:57] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:01] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:01] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84025
-[2025-11-02 12:48:05] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\__init__.py", line 332, in sentry_patched_drf_initial
+    return old_drf_initial(self, request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 421, in initial
+    self.check_permissions(request)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 338, in check_permissions
+    if not permission.has_permission(request, self):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\permissions.py", line 151, in has_permission
+    return bool(request.user and request.user.is_authenticated)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Usuario' object has no attribute 'is_authenticated'
+[2025-11-05 10:29:30] [ERROR] [django.request:253] Internal Server Error: /api/usuarios/22/
 Traceback (most recent call last):
   File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
@@ -158,430 +119,62 @@ Traceback (most recent call last):
   File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
     return callback(request, *args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:05] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84025
-[2025-11-02 12:48:06] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\mixins.py", line 59, in handle_exception
+    return super().handle_exception(exc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\__init__.py", line 332, in sentry_patched_drf_initial
+    return old_drf_initial(self, request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 421, in initial
+    self.check_permissions(request)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 338, in check_permissions
+    if not permission.has_permission(request, self):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\permissions.py", line 151, in has_permission
+    return bool(request.user and request.user.is_authenticated)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Usuario' object has no attribute 'is_authenticated'
+[2025-11-05 10:29:30] [ERROR] [django.server:213] "GET /api/usuarios/22/ HTTP/1.1" 500 131025
+[2025-11-05 10:29:32] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] NotAuthenticated: Authentication credentials were not provided. | Context: action=retrieve, view=UsuarioViewSet
 Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:06] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:06] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\__init__.py", line 332, in sentry_patched_drf_initial
+    return old_drf_initial(self, request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 421, in initial
+    self.check_permissions(request)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 339, in check_permissions
+    self.permission_denied(
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 180, in permission_denied
+    raise exceptions.NotAuthenticated()
+rest_framework.exceptions.NotAuthenticated: Authentication credentials were not provided.
+[2025-11-05 10:33:23] [ERROR] [api.views.UsuarioViewSet:210] [log_exception] NotAuthenticated: Authentication credentials were not provided. | Context: action=retrieve, view=UsuarioViewSet
 Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:06] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:07] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:07] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:07] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:07] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:08] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:08] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:08] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:08] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:09] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:09] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:09] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:09] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:10] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:10] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:10] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:10] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:11] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:11] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:11] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:11] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:12] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:12] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:12] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:12] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:48:13] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:48:13] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:49:20] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:49:20] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84162
-[2025-11-02 12:52:36] [ERROR] [django.request:253] Internal Server Error: /sentry-debug/
-Traceback (most recent call last):
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
-    return callback(request, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\WearableApi\urls.py", line 16, in trigger_error
-    division_by_zero = 1 / 0
-                       ~~^~~
-ZeroDivisionError: division by zero
-[2025-11-02 12:52:36] [ERROR] [django.server:213] "GET /sentry-debug/ HTTP/1.1" 500 84025
-[2025-11-02 13:30:55] [ERROR] [WearableApi.email_service:41] Email failed: HTTP Error 401: Unauthorized
-[2025-11-02 13:31:24] [ERROR] [WearableApi.email_service:41] Email failed: HTTP Error 401: Unauthorized
-[2025-11-02 13:44:45] [ERROR] [WearableApi.email_service:41] Email failed: HTTP Error 401: Unauthorized
-[2025-11-02 15:17:00] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:17:00] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:17:04] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:17:04] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:17:04] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:17:04] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:17:04] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:17:04] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:17:20] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:17:20] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:19:30] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:19:31] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:19:31] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:19:31] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:19:57] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:19:57] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:19:57] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:19:57] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:19:57] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:19:57] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:04] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:05] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:05] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:05] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:39] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:39] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:40] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:40] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:40] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:40] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:45] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:45] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:45] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:45] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:48] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:48] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:48] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:48] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:48] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:20:49] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:21:12] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:21:12] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:21:12] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:21:12] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:08] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:08] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:08] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:08] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:08] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:08] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:22] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:22] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:39] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:39] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:39] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:39] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:40] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:40] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:40] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:40] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:41] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:41] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:41] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:22:41] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:38] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:38] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:38] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:38] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:38] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:38] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:40] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:40] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:40] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:40] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:41] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:41] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:41] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:41] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:50] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:50] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:50] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:50] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:50] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:28:51] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:29:44] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:29:44] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:40:47] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:40:47] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:45:46] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:45:46] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:51:18] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:51:18] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:52:25] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:52:25] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:52:25] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:52:25] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:52:36] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:52:36] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:52:36] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:52:36] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:53:32] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:53:32] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:53:32] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:53:32] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:53:32] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:53:32] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:53:44] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:53:44] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:53:44] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:53:44] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:56:51] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:56:51] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:57:01] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:57:01] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:57:26] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:57:26] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:57:43] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:57:43] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:57:43] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:57:43] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:57:43] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:57:43] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:57:43] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:57:43] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:58:56] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 15:58:56] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:01:06] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:01:22] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:04:28] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:04:28] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:04:28] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:04:28] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:05:00] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:05:00] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:05:00] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:05:00] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:05:11] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:05:11] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:05:57] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:05:57] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:05:57] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:05:57] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:07:32] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:08:51] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:08:52] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:13:32] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
-[2025-11-02 16:13:32] [ERROR] [django.server:193] You're accessing the development server over HTTPS, but it only supports HTTP.
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 503, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\__init__.py", line 332, in sentry_patched_drf_initial
+    return old_drf_initial(self, request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 421, in initial
+    self.check_permissions(request)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 339, in check_permissions
+    self.permission_denied(
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 180, in permission_denied
+    raise exceptions.NotAuthenticated()
+rest_framework.exceptions.NotAuthenticated: Authentication credentials were not provided.

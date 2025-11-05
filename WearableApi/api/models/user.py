@@ -1,30 +1,13 @@
-"""
-User Models
-===========
-Models for user management: Usuario, Administrador, Consumidor
 
-Design Pattern: Class Table Inheritance
-Usuario is the base, with Administrador and Consumidor extending it.
-"""
-
-from django.db import models # type: ignore
-from django.contrib.auth.hashers import make_password, check_password # type: ignore
+from django.db import models
+from django.contrib.auth.hashers import make_password, check_password
 from .base import TimeStampedModel
 
-
 class RolChoices(models.TextChoices):
-    """Enum for user roles"""
     CONSUMIDOR = 'consumidor', 'Consumidor'
     ADMINISTRADOR = 'administrador', 'Administrador'
 
-
 class Usuario(TimeStampedModel):
-    """
-    Base user model for all users in the system.
-    
-    Handles authentication via email and password hash.
-    No Django User model integration for simplicity.
-    """
     
     nombre = models.CharField(
         max_length=100,
@@ -65,43 +48,32 @@ class Usuario(TimeStampedModel):
         return f"{self.nombre} ({self.email})"
     
     def set_password(self, raw_password):
-        """
-        Hash and set the password
-        
-        Args:
-            raw_password: Plain text password
-        """
         self.password_hash = make_password(raw_password)
     
     def check_password(self, raw_password):
-        """
-        Verify password against stored hash
-        
-        Args:
-            raw_password: Plain text password to check
-        
-        Returns:
-            bool: True if password matches
-        """
         return check_password(raw_password, self.password_hash)
     
     @property
     def is_administrador(self):
-        """Check if user is an administrator"""
         return self.rol == RolChoices.ADMINISTRADOR
     
     @property
     def is_consumidor(self):
-        """Check if user is a consumer"""
         return self.rol == RolChoices.CONSUMIDOR
-
+    
+    @property
+    def is_authenticated(self):
+        return True
+    
+    @property
+    def is_active(self):
+        return True
+    
+    @property
+    def is_anonymous(self):
+        return False
 
 class Administrador(TimeStampedModel):
-    """
-    Administrator model with one-to-one relationship to Usuario.
-    
-    Extends Usuario with admin-specific fields.
-    """
     
     usuario = models.OneToOneField(
         Usuario,
@@ -129,28 +101,17 @@ class Administrador(TimeStampedModel):
     
     @property
     def nombre(self):
-        """Get name from related usuario"""
         return self.usuario.nombre
     
     @property
     def email(self):
-        """Get email from related usuario"""
         return self.usuario.email
 
-
 class GeneroChoices(models.TextChoices):
-    """Enum for gender choices"""
     MASCULINO = 'masculino', 'Masculino'
     FEMENINO = 'femenino', 'Femenino'
 
-
 class Consumidor(TimeStampedModel):
-    """
-    Consumer model with health tracking data.
-    
-    One-to-one relationship with Usuario.
-    Includes health metrics and BMI calculation.
-    """
     
     usuario = models.OneToOneField(
         Usuario,
@@ -182,7 +143,9 @@ class Consumidor(TimeStampedModel):
     genero = models.CharField(
         max_length=30,
         choices=GeneroChoices.choices,
-        help_text="Gender"
+        null=True,
+        blank=True,
+        help_text="Gender (optional)"
     )
     
     class Meta:
@@ -198,21 +161,13 @@ class Consumidor(TimeStampedModel):
     
     @property
     def nombre(self):
-        """Get name from related usuario"""
         return self.usuario.nombre
     
     @property
     def email(self):
-        """Get email from related usuario"""
         return self.usuario.email
     
     def calculate_bmi(self):
-        """
-        Calculate BMI manually (database also calculates)
-        
-        Returns:
-            float: BMI value or None
-        """
         if self.peso and self.altura and self.altura > 0:
             altura_metros = self.altura / 100
             return round(self.peso / (altura_metros ** 2), 2)
@@ -220,12 +175,6 @@ class Consumidor(TimeStampedModel):
     
     @property
     def bmi_category(self):
-        """
-        Get BMI category
-        
-        Returns:
-            str: BMI category (Underweight, Normal, Overweight, Obese)
-        """
         if not self.bmi:
             return "Unknown"
         
@@ -237,3 +186,4 @@ class Consumidor(TimeStampedModel):
             return "Overweight"
         else:
             return "Obese"
+

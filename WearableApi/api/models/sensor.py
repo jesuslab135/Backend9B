@@ -1,28 +1,9 @@
-"""
-Sensor Data Models
-==================
-Models for wearable sensor data: Ventanas, Lecturas
 
-Ventanas (Windows) aggregate sensor readings over time periods.
-Lecturas (Readings) are individual sensor data points.
-"""
-
-from django.db import models # type: ignore
+from django.db import models
 from .base import TimeStampedModel
 from .user import Consumidor
 
-
 class Ventana(TimeStampedModel):
-    """
-    Time window model for aggregated sensor data.
-    
-    Represents a time period (window) with aggregated sensor metrics:
-    - Heart rate statistics (mean, std)
-    - Motion energy (gyroscope, accelerometer)
-    - ML model embeddings for emotions, motives, solutions
-    
-    Used for ML model input and analysis.
-    """
     
     consumidor = models.ForeignKey(
         Consumidor,
@@ -82,7 +63,6 @@ class Ventana(TimeStampedModel):
             models.Index(fields=['window_start']),
             models.Index(fields=['window_end']),
         ]
-        # Constraint: window_end must be after window_start
         constraints = [
             models.CheckConstraint(
                 check=models.Q(window_end__gt=models.F('window_start')),
@@ -98,12 +78,6 @@ class Ventana(TimeStampedModel):
     
     @property
     def duration_minutes(self):
-        """
-        Calculate window duration in minutes
-        
-        Returns:
-            float: Duration in minutes
-        """
         if self.window_start and self.window_end:
             delta = self.window_end - self.window_start
             return delta.total_seconds() / 60
@@ -111,7 +85,6 @@ class Ventana(TimeStampedModel):
     
     @property
     def has_sensor_data(self):
-        """Check if window has any sensor data"""
         return any([
             self.hr_mean is not None,
             self.gyro_energy is not None,
@@ -120,7 +93,6 @@ class Ventana(TimeStampedModel):
     
     @property
     def has_embeddings(self):
-        """Check if window has ML embeddings"""
         return any([
             self.emotion_embedding,
             self.motive_embedding,
@@ -128,12 +100,6 @@ class Ventana(TimeStampedModel):
         ])
     
     def get_heart_rate_range(self):
-        """
-        Estimate heart rate range from mean and std
-        
-        Returns:
-            tuple: (min_estimate, max_estimate) or None
-        """
         if self.hr_mean is not None and self.hr_std is not None:
             return (
                 round(self.hr_mean - self.hr_std, 2),
@@ -141,18 +107,7 @@ class Ventana(TimeStampedModel):
             )
         return None
 
-
 class Lectura(TimeStampedModel):
-    """
-    Individual sensor reading model.
-    
-    Stores raw sensor data points:
-    - Heart rate
-    - 3-axis accelerometer (x, y, z)
-    - 3-axis gyroscope (x, y, z)
-    
-    Multiple readings aggregate into a Ventana.
-    """
     
     ventana = models.ForeignKey(
         Ventana,
@@ -210,12 +165,10 @@ class Lectura(TimeStampedModel):
     
     @property
     def has_heart_rate(self):
-        """Check if reading has heart rate data"""
         return self.heart_rate is not None
     
     @property
     def has_accelerometer(self):
-        """Check if reading has accelerometer data"""
         return any([
             self.accel_x is not None,
             self.accel_y is not None,
@@ -224,7 +177,6 @@ class Lectura(TimeStampedModel):
     
     @property
     def has_gyroscope(self):
-        """Check if reading has gyroscope data"""
         return any([
             self.gyro_x is not None,
             self.gyro_y is not None,
@@ -232,12 +184,6 @@ class Lectura(TimeStampedModel):
         ])
     
     def get_accelerometer_magnitude(self):
-        """
-        Calculate accelerometer vector magnitude
-        
-        Returns:
-            float: Magnitude or None
-        """
         if self.has_accelerometer:
             import math
             x = self.accel_x or 0
@@ -247,12 +193,6 @@ class Lectura(TimeStampedModel):
         return None
     
     def get_gyroscope_magnitude(self):
-        """
-        Calculate gyroscope vector magnitude
-        
-        Returns:
-            float: Magnitude or None
-        """
         if self.has_gyroscope:
             import math
             x = self.gyro_x or 0
@@ -260,3 +200,4 @@ class Lectura(TimeStampedModel):
             z = self.gyro_z or 0
             return math.sqrt(x**2 + y**2 + z**2)
         return None
+

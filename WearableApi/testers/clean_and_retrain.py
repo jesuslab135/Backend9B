@@ -1,6 +1,3 @@
-"""
-Script para limpiar datos antiguos y entrenar con datos realistas
-"""
 import os
 import django
 
@@ -13,7 +10,6 @@ print("=" * 60)
 print("🗑️  LIMPIEZA DE DATOS ANTIGUOS")
 print("=" * 60)
 
-# Contar datos actuales
 ventanas_count = Ventana.objects.count()
 lecturas_count = Lectura.objects.count()
 analisis_count = Analisis.objects.count()
@@ -28,7 +24,6 @@ if ventanas_count > 0:
     response = input().strip().lower()
     
     if response == 'y':
-        # Eliminar en orden correcto (respetando foreign keys)
         Analisis.objects.all().delete()
         Lectura.objects.all().delete()
         Ventana.objects.all().delete()
@@ -43,3 +38,4 @@ else:
     print("💡 Ejecuta: py train_model.py")
 
 print("\n" + "=" * 60)
+

@@ -1,4 +1,2 @@
-from django.db import models # type: ignore
+from django.db import models
 
-# Create your models here.
-# models.py

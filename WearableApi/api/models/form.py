@@ -1,31 +1,10 @@
-"""
-Form Models
-===========
-Models for tracking user forms: Formularios, FormulariosTemporales
 
-These models store user-submitted data about habits, emotions, motives, and solutions.
-"""
-
-from django.db import models # type: ignore
+from django.db import models
 from .base import TimeStampedModel
 from .user import Consumidor
 from .lookup import Habito
 
-
 class Formulario(TimeStampedModel):
-    """
-    Main form model for tracking habits and related data.
-    
-    Stores:
-    - Which consumer filled the form
-    - Which habit it relates to
-    - Emotions, motives, and solutions (as JSONB)
-    
-    JSONB Structure Examples:
-        emociones: [{"id": 1, "intensidad": 8}, {"id": 3, "intensidad": 5}]
-        motivos: [{"id": 2, "relevancia": "alta"}]
-        soluciones: [{"id": 1, "efectividad": 7}]
-    """
     
     consumidor = models.ForeignKey(
         Consumidor,
@@ -78,30 +57,20 @@ class Formulario(TimeStampedModel):
     
     @property
     def emotion_count(self):
-        """Get count of emotions in the form"""
         return len(self.emociones) if self.emociones else 0
     
     @property
     def motive_count(self):
-        """Get count of motives in the form"""
         return len(self.motivos) if self.motivos else 0
     
     @property
     def solution_count(self):
-        """Get count of solutions in the form"""
         return len(self.soluciones) if self.soluciones else 0
     
     def get_emotion_ids(self):
-        """
-        Extract emotion IDs from JSONB
-        
-        Returns:
-            list: List of emotion IDs
-        """
         if not self.emociones:
             return []
         
-        # Handle different possible structures
         if isinstance(self.emociones, list):
             return [
                 e.get('id') if isinstance(e, dict) else e
@@ -110,12 +79,6 @@ class Formulario(TimeStampedModel):
         return []
     
     def get_motive_ids(self):
-        """
-        Extract motive IDs from JSONB
-        
-        Returns:
-            list: List of motive IDs
-        """
         if not self.motivos:
             return []
         
@@ -127,12 +90,6 @@ class Formulario(TimeStampedModel):
         return []
     
     def get_solution_ids(self):
-        """
-        Extract solution IDs from JSONB
-        
-        Returns:
-            list: List of solution IDs
-        """
         if not self.soluciones:
             return []
         
@@ -143,17 +100,7 @@ class Formulario(TimeStampedModel):
             ]
         return []
 
-
 class FormularioTemporal(TimeStampedModel):
-    """
-    Temporary form model for quick emotional snapshots.
-    
-    Simplified version of Formulario for rapid data capture.
-    Used when consumer needs to log emotions quickly without full form.
-    
-    JSONB Structure Example:
-        emociones: [{"id": 1, "intensidad": 8}, {"id": 2, "intensidad": 6}]
-    """
     
     consumidor = models.ForeignKey(
         Consumidor,
@@ -181,16 +128,9 @@ class FormularioTemporal(TimeStampedModel):
     
     @property
     def emotion_count(self):
-        """Get count of emotions in the temporary form"""
         return len(self.emociones) if self.emociones else 0
     
     def get_emotion_ids(self):
-        """
-        Extract emotion IDs from JSONB
-        
-        Returns:
-            list: List of emotion IDs
-        """
         if not self.emociones:
             return []
         
@@ -200,3 +140,4 @@ class FormularioTemporal(TimeStampedModel):
                 for e in self.emociones
             ]
         return []
+

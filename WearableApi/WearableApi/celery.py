@@ -7,15 +7,15 @@ app = Celery('WearableApi')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
-# Configuración de Celery Beat - Tareas Periódicas
 app.conf.beat_schedule = {
     'simulate-wearable-data-every-minute': {
         'task': 'api.tasks.simulate_wearable_cycle',
-        'schedule': 60.0,  # Cada 60 segundos (1 minuto)
+        'schedule': 60.0,
         'options': {
-            'expires': 50.0,  # Expira si no se ejecuta en 50 segundos
+            'expires': 50.0,
         }
     },
 }
 
 app.conf.timezone = 'UTC'
+

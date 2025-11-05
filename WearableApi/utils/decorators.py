@@ -1,37 +1,12 @@
-"""
-Decorators for Logging and Error Handling
-==========================================
-Provides reusable decorators for endpoint logging and error handling.
-
-Design Pattern: Decorator Pattern
-Adds logging functionality without modifying original functions.
-"""
 
 from functools import wraps
 from utils.logger import Logger, log_exception, log_request
 
-
 def log_endpoint(func):
-    """
-    Decorator to automatically log API endpoint access
-    
-    Logs:
-        - Method and path
-        - Request data
-        - Response status
-        - Execution time
-        - Any errors
-    
-    Usage:
-        @log_endpoint
-        def my_view(request):
-            return Response(data)
-    """
     @wraps(func)
     def wrapper(*args, **kwargs):
         logger = Logger.get_logger(func.__module__)
         
-        # Get request object (first arg for functions, or from kwargs)
         request = None
         if args:
             request = args[0] if hasattr(args[0], 'method') else (
@@ -45,13 +20,12 @@ def log_endpoint(func):
             )
         
         try:
-            # Execute the actual function
             import time
             start_time = time.time()
             
             response = func(*args, **kwargs)
             
-            execution_time = (time.time() - start_time) * 1000  # ms
+            execution_time = (time.time() - start_time) * 1000
             
             if request:
                 status = getattr(response, 'status_code', 'N/A')
@@ -76,16 +50,7 @@ def log_endpoint(func):
     
     return wrapper
 
-
 def log_errors(func):
-    """
-    Decorator to catch and log errors without stopping execution
-    
-    Usage:
-        @log_errors
-        def risky_operation():
-            # code that might fail
-    """
     @wraps(func)
     def wrapper(*args, **kwargs):
         logger = Logger.get_logger(func.__module__)
@@ -97,24 +62,11 @@ def log_errors(func):
                 'function': func.__name__,
                 'module': func.__module__
             })
-            # Re-raise the exception
             raise
     
     return wrapper
 
-
 def log_database_operation(operation_type="database"):
-    """
-    Decorator factory for logging database operations
-    
-    Args:
-        operation_type: Type of operation (create, update, delete, etc.)
-    
-    Usage:
-        @log_database_operation("create")
-        def create_user(data):
-            return User.objects.create(**data)
-    """
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -140,19 +92,7 @@ def log_database_operation(operation_type="database"):
         return wrapper
     return decorator
 
-
 def log_performance(threshold_ms=1000):
-    """
-    Decorator to log slow operations
-    
-    Args:
-        threshold_ms: Threshold in milliseconds to log warning
-    
-    Usage:
-        @log_performance(threshold_ms=500)
-        def slow_operation():
-            # potentially slow code
-    """
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -163,7 +103,7 @@ def log_performance(threshold_ms=1000):
             
             result = func(*args, **kwargs)
             
-            execution_time = (time.time() - start_time) * 1000  # ms
+            execution_time = (time.time() - start_time) * 1000
             
             if execution_time > threshold_ms:
                 logger.warning(
@@ -179,3 +119,4 @@ def log_performance(threshold_ms=1000):
         
         return wrapper
     return decorator
+

@@ -1,27 +1,10 @@
-"""
-Analysis Models
-===============
-Models for ML analysis and user interactions: Analisis, Deseos, Notificaciones
 
-These models handle ML predictions, desire tracking, and notifications.
-"""
-
-from django.db import models # type: ignore
+from django.db import models
 from .base import TimeStampedModel
 from .user import Consumidor
 from .sensor import Ventana
 
-
 class Analisis(TimeStampedModel):
-    """
-    ML model analysis/prediction results.
-    
-    Stores output from machine learning models:
-    - Model metadata (name, version)
-    - Prediction results (urge_label, probability)
-    - Performance metrics (recall, f1, accuracy, roc_auc)
-    - Feature importance for interpretability
-    """
     
     ventana = models.ForeignKey(
         Ventana,
@@ -102,17 +85,10 @@ class Analisis(TimeStampedModel):
     
     @property
     def is_urge_predicted(self):
-        """Check if urge was predicted"""
         return self.urge_label == 1
     
     @property
     def confidence_level(self):
-        """
-        Get confidence level of prediction
-        
-        Returns:
-            str: Low, Medium, or High
-        """
         if self.probabilidad_modelo is None:
             return "Unknown"
         
@@ -125,28 +101,16 @@ class Analisis(TimeStampedModel):
     
     @property
     def consumidor(self):
-        """Get related consumer through ventana"""
         return self.ventana.consumidor if self.ventana else None
 
-
 class DeseoTipoChoices(models.TextChoices):
-    """Enum for desire/urge types"""
     COMIDA = 'comida', 'Comida'
     BEBIDA = 'bebida', 'Bebida'
     COMPRA = 'compra', 'Compra'
     SUSTANCIA = 'sustancia', 'Sustancia'
     OTRO = 'otro', 'Otro'
 
-
 class Deseo(TimeStampedModel):
-    """
-    Desire/urge tracking model.
-    
-    Records when a consumer experiences an urge and tracks:
-    - Type of desire
-    - Associated time window (if from sensor data)
-    - Resolution status
-    """
     
     consumidor = models.ForeignKey(
         Consumidor,
@@ -189,46 +153,26 @@ class Deseo(TimeStampedModel):
     
     @property
     def is_active(self):
-        """Check if desire is still active (not resolved)"""
         return not self.resolved
     
     @property
     def time_to_resolution(self):
-        """
-        Calculate time to resolution in hours
-        
-        Returns:
-            float: Hours to resolution or None if not resolved
-        """
         if self.resolved and self.created_at and self.updated_at:
             delta = self.updated_at - self.created_at
             return round(delta.total_seconds() / 3600, 2)
         return None
     
     def mark_resolved(self):
-        """Mark desire as resolved"""
         self.resolved = True
         self.save()
 
-
 class NotificacionTipoChoices(models.TextChoices):
-    """Enum for notification types"""
     RECOMENDACION = 'recomendacion', 'Recomendación'
     ALERTA = 'alerta', 'Alerta'
     RECORDATORIO = 'recordatorio', 'Recordatorio'
     LOGRO = 'logro', 'Logro'
 
-
 class Notificacion(TimeStampedModel):
-    """
-    Notification model for sending messages to consumers.
-    
-    Handles:
-    - Recommendations (coping strategies)
-    - Alerts (potential urges detected)
-    - Reminders (check-ins, logging)
-    - Achievements (milestones reached)
-    """
     
     consumidor = models.ForeignKey(
         Consumidor,
@@ -279,28 +223,19 @@ class Notificacion(TimeStampedModel):
     
     @property
     def is_unread(self):
-        """Check if notification is unread"""
         return not self.leida
     
     def mark_read(self):
-        """Mark notification as read"""
         self.leida = True
         self.save()
     
     def mark_unread(self):
-        """Mark notification as unread"""
         self.leida = False
         self.save()
     
     @property
     def age_hours(self):
-        """
-        Get age of notification in hours
-        
-        Returns:
-            float: Hours since notification was sent
-        """
-        from django.utils import timezone # type: ignore
+        from django.utils import timezone
         if self.fecha_envio:
             delta = timezone.now() - self.fecha_envio
             return round(delta.total_seconds() / 3600, 2)
@@ -308,6 +243,6 @@ class Notificacion(TimeStampedModel):
     
     @property
     def is_recent(self):
-        """Check if notification is recent (less than 24 hours old)"""
         age = self.age_hours
         return age is not None and age < 24
+

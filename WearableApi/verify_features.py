@@ -1,6 +1,3 @@
-"""
-Script simple para verificar que las features se guardan en Ventana
-"""
 import os
 import django
 
@@ -14,7 +11,6 @@ print("=" * 60)
 print("🔍 VERIFICANDO FEATURES EN VENTANA")
 print("=" * 60)
 
-# Obtener últimas 10 ventanas
 ventanas = Ventana.objects.all().order_by('-id')[:10]
 
 print(f"\n📊 Últimas 10 ventanas:")
@@ -29,7 +25,6 @@ for v in ventanas:
     print(f"  accel_energy: {v.accel_energy}")
     print(f"  gyro_energy: {v.gyro_energy}")
 
-# Contar cuántas tienen features
 ventanas_con_features = Ventana.objects.filter(
     Q(hr_mean__isnull=False) | 
     Q(hr_std__isnull=False) | 
@@ -45,3 +40,4 @@ print(f"   Total ventanas: {total_ventanas}")
 print(f"   Con features guardadas: {ventanas_con_features}")
 print(f"   Sin features: {total_ventanas - ventanas_con_features}")
 print("=" * 60)
+

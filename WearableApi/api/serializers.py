@@ -1,25 +1,8 @@
-"""
-API Serializers
-===============
-Serializers for all models to convert between Python objects and JSON.
-
-Design Pattern: Data Transfer Object (DTO)
-Serializers act as DTOs for API communication.
-"""
 
 from rest_framework import serializers
 from api.models import *
 
-
-# ============================================
-# USER SERIALIZERS
-# ============================================
-
 class UsuarioSerializer(serializers.ModelSerializer):
-    """
-    Usuario serializer with password handling.
-    Never expose password_hash in responses.
-    """
     
     password = serializers.CharField(
         write_only=True,
@@ -39,7 +22,6 @@ class UsuarioSerializer(serializers.ModelSerializer):
         }
     
     def create(self, validated_data):
-        """Create user with hashed password"""
         password = validated_data.pop('password')
         usuario = Usuario(**validated_data)
         usuario.set_password(password)
@@ -47,7 +29,6 @@ class UsuarioSerializer(serializers.ModelSerializer):
         return usuario
     
     def update(self, instance, validated_data):
-        """Update user, hash password if provided"""
         password = validated_data.pop('password', None)
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
@@ -58,9 +39,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-
 class AdministradorSerializer(serializers.ModelSerializer):
-    """Administrador serializer with nested usuario"""
     
     usuario = UsuarioSerializer(read_only=True)
     usuario_id = serializers.PrimaryKeyRelatedField(
@@ -74,9 +53,7 @@ class AdministradorSerializer(serializers.ModelSerializer):
         fields = ['id', 'usuario', 'usuario_id', 'area_responsable', 'created_at', 'updated_at']
         read_only_fields = ['id', 'created_at', 'updated_at']
 
-
 class ConsumidorSerializer(serializers.ModelSerializer):
-    """Consumidor serializer with nested usuario and BMI"""
     
     usuario = UsuarioSerializer(read_only=True)
     usuario_id = serializers.PrimaryKeyRelatedField(
@@ -94,17 +71,11 @@ class ConsumidorSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['id', 'bmi', 'bmi_category', 'created_at', 'updated_at']
 
-
-# ============================================
-# LOOKUP SERIALIZERS
-# ============================================
-
 class EmocionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Emocion
         fields = '__all__'
         read_only_fields = ['id', 'created_at', 'updated_at']
-
 
 class MotivoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -112,20 +83,17 @@ class MotivoSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['id', 'created_at', 'updated_at']
 
-
 class SolucionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Solucion
         fields = '__all__'
         read_only_fields = ['id', 'created_at', 'updated_at']
 
-
 class HabitoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Habito
         fields = '__all__'
         read_only_fields = ['id', 'created_at', 'updated_at']
-
 
 class PermisoSerializer(serializers.ModelSerializer):
     is_readonly = serializers.ReadOnlyField()
@@ -136,13 +104,7 @@ class PermisoSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['id', 'created_at', 'updated_at']
 
-
-# ============================================
-# FORM SERIALIZERS
-# ============================================
-
 class FormularioSerializer(serializers.ModelSerializer):
-    """Formulario serializer with JSONB validation"""
     
     habito_nombre = serializers.CharField(source='habito.nombre', read_only=True)
     consumidor_nombre = serializers.CharField(source='consumidor.nombre', read_only=True)
@@ -160,9 +122,7 @@ class FormularioSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['id', 'fecha_envio', 'created_at', 'updated_at']
 
-
 class FormularioTemporalSerializer(serializers.ModelSerializer):
-    """FormularioTemporal serializer"""
     
     consumidor_nombre = serializers.CharField(source='consumidor.nombre', read_only=True)
     emotion_count = serializers.ReadOnlyField()
@@ -175,13 +135,7 @@ class FormularioTemporalSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['id', 'created_at', 'updated_at']
 
-
-# ============================================
-# SENSOR SERIALIZERS
-# ============================================
-
 class VentanaSerializer(serializers.ModelSerializer):
-    """Ventana serializer with computed properties"""
     
     consumidor_nombre = serializers.CharField(source='consumidor.nombre', read_only=True)
     duration_minutes = serializers.ReadOnlyField()
@@ -199,9 +153,7 @@ class VentanaSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['id', 'created_at', 'updated_at']
 
-
 class LecturaSerializer(serializers.ModelSerializer):
-    """Lectura serializer with sensor data"""
     
     has_heart_rate = serializers.ReadOnlyField()
     has_accelerometer = serializers.ReadOnlyField()
@@ -218,13 +170,7 @@ class LecturaSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['id', 'created_at', 'updated_at']
 
-
-# ============================================
-# ANALYSIS SERIALIZERS
-# ============================================
-
 class AnalisisSerializer(serializers.ModelSerializer):
-    """Analisis serializer with prediction details"""
     
     is_urge_predicted = serializers.ReadOnlyField()
     confidence_level = serializers.ReadOnlyField()
@@ -241,9 +187,7 @@ class AnalisisSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['id', 'created_at', 'updated_at']
 
-
 class DeseoSerializer(serializers.ModelSerializer):
-    """Deseo serializer with resolution tracking"""
     
     consumidor_nombre = serializers.CharField(source='consumidor.nombre', read_only=True)
     is_active = serializers.ReadOnlyField()
@@ -258,9 +202,7 @@ class DeseoSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['id', 'created_at', 'updated_at']
 
-
 class NotificacionSerializer(serializers.ModelSerializer):
-    """Notificacion serializer with read status"""
     
     consumidor_nombre = serializers.CharField(source='consumidor.nombre', read_only=True)
     is_unread = serializers.ReadOnlyField()
@@ -277,82 +219,57 @@ class NotificacionSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['id', 'fecha_envio', 'created_at', 'updated_at']
 
-
-# ============================================
-# DASHBOARD SERIALIZERS (Read-Only)
-# ============================================
-
 class VwHabitTrackingSerializer(serializers.ModelSerializer):
     class Meta:
         model = VwHabitTracking
         fields = '__all__'
-
 
 class VwHabitStatsSerializer(serializers.ModelSerializer):
     class Meta:
         model = VwHabitStats
         fields = '__all__'
 
-
 class VwHeartRateTimelineSerializer(serializers.ModelSerializer):
     class Meta:
         model = VwHeartRateTimeline
         fields = '__all__'
-
 
 class VwHeartRateStatsSerializer(serializers.ModelSerializer):
     class Meta:
         model = VwHeartRateStats
         fields = '__all__'
 
-
 class VwPredictionTimelineSerializer(serializers.ModelSerializer):
     class Meta:
         model = VwPredictionTimeline
         fields = '__all__'
-
 
 class VwPredictionSummarySerializer(serializers.ModelSerializer):
     class Meta:
         model = VwPredictionSummary
         fields = '__all__'
 
-
 class VwDesiresTrackingSerializer(serializers.ModelSerializer):
     class Meta:
         model = VwDesiresTracking
         fields = '__all__'
-
 
 class VwDesiresStatsSerializer(serializers.ModelSerializer):
     class Meta:
         model = VwDesiresStats
         fields = '__all__'
 
-
 class VwDailySummarySerializer(serializers.ModelSerializer):
     class Meta:
         model = VwDailySummary
         fields = '__all__'
-
 
 class VwWeeklyComparisonSerializer(serializers.ModelSerializer):
     class Meta:
         model = VwWeeklyComparison
         fields = '__all__'
 
-
-# ============================================
-# AUTH SERIALIZERS
-# ============================================
-
 class LoginSerializer(serializers.Serializer):
-    """
-    Serializer for login endpoint.
-    
-    Design Pattern: Data Transfer Object (DTO)
-    Simple validation for login credentials.
-    """
     
     email = serializers.EmailField(
         required=True,
@@ -369,19 +286,8 @@ class LoginSerializer(serializers.Serializer):
         }
     )
 
-
 class RegisterSerializer(serializers.Serializer):
-    """
-    Serializer for user registration.
     
-    Design Pattern: Data Transfer Object (DTO) + Validation Layer
-    Handles basic registration for both Consumidor and Administrador.
-    
-    Note: Consumidor health fields (edad, peso, altura, genero) will be 
-    filled later via a separate profile completion form.
-    """
-    
-    # Base fields (required for all users)
     nombre = serializers.CharField(
         max_length=100,
         required=True,
@@ -415,35 +321,24 @@ class RegisterSerializer(serializers.Serializer):
         required=False
     )
     
+    genero = serializers.ChoiceField(
+        choices=GeneroChoices.choices,
+        required=False,
+        allow_null=True,
+        default=None
+    )
+    
     def validate_email(self, value):
-        """
-        Check if email already exists.
-        
-        Design Pattern: Validation Strategy
-        """
         if Usuario.objects.filter(email=value).exists():
             raise serializers.ValidationError("This email is already registered")
-        return value.lower()  # Normalize email to lowercase
+        return value.lower()
     
     def validate_password(self, value):
-        """
-        Validate password strength.
-        
-        Rules:
-        - Minimum 6 characters (enforced by min_length)
-        - Must contain at least one letter
-        """
         if not any(c.isalpha() for c in value):
             raise serializers.ValidationError("Password must contain at least one letter")
         return value
 
-
 class UserProfileSerializer(serializers.Serializer):
-    """
-    Serializer for user profile updates.
-    
-    Allows partial updates of user information.
-    """
     
     nombre = serializers.CharField(max_length=100, required=False)
     telefono = serializers.CharField(max_length=20, required=False, allow_blank=True)
@@ -453,11 +348,10 @@ class UserProfileSerializer(serializers.Serializer):
         style={'input_type': 'password'}
     )
     
-    # Consumidor fields
     edad = serializers.IntegerField(required=False, allow_null=True, min_value=1, max_value=120)
     peso = serializers.FloatField(required=False, allow_null=True, min_value=1.0)
     altura = serializers.FloatField(required=False, allow_null=True, min_value=50.0)
     genero = serializers.ChoiceField(choices=GeneroChoices.choices, required=False)
     
-    # Administrador fields
     area_responsable = serializers.CharField(max_length=100, required=False, allow_blank=True)
+

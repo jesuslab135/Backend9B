@@ -1,6 +1,3 @@
-"""
-Test .env loading
-"""
 from dotenv import load_dotenv
 from pathlib import Path
 import os
@@ -16,7 +13,6 @@ print(f".env path: {env_path}")
 print(f".env exists: {env_path.exists()}")
 print()
 
-# Load .env
 if env_path.exists():
     load_dotenv(dotenv_path=env_path)
     print("✅ .env loaded successfully")
@@ -28,7 +24,6 @@ print("="*60)
 print("📋 Environment Variables")
 print("="*60)
 
-# Check key variables
 vars_to_check = [
     'DEBUG',
     'SECRET_KEY',
@@ -45,7 +40,6 @@ vars_to_check = [
 for var in vars_to_check:
     value = os.environ.get(var)
     if value:
-        # Mask sensitive data
         if 'KEY' in var or 'PASSWORD' in var or 'DSN' in var:
             display_value = value[:10] + '...' if len(value) > 10 else '***'
         else:
@@ -55,3 +49,4 @@ for var in vars_to_check:
         print(f"❌ {var}: NOT SET")
 
 print("="*60)
+

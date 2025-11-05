@@ -1,23 +1,7 @@
-"""
-Dashboard View Models
-=====================
-Read-only models mapping to PostgreSQL views for dashboard data.
 
-Design Pattern: Data Mapper Pattern
-These models map to database views (not tables) and are read-only.
-
-Important: managed = False means Django won't create/modify these in migrations.
-The PostgreSQL views must be created separately.
-"""
-
-from django.db import models # type: ignore
-
+from django.db import models
 
 class VwHabitTracking(models.Model):
-    """
-    Maps to vw_habit_tracking view.
-    Provides cigarette/habit tracking data over time.
-    """
     
     consumidor_id = models.IntegerField(primary_key=True)
     habito_nombre = models.CharField(max_length=50)
@@ -28,17 +12,12 @@ class VwHabitTracking(models.Model):
     cigarrillos_mes = models.IntegerField()
     
     class Meta:
-        managed = False  # Don't create table, it's a view
+        managed = False
         db_table = 'vw_habit_tracking'
         verbose_name = 'Habit Tracking'
         verbose_name_plural = 'Habit Tracking'
 
-
 class VwHabitStats(models.Model):
-    """
-    Maps to vw_habit_stats view.
-    Aggregated habit statistics.
-    """
     
     consumidor_id = models.IntegerField(primary_key=True)
     habito_nombre = models.CharField(max_length=50)
@@ -55,12 +34,7 @@ class VwHabitStats(models.Model):
         verbose_name = 'Habit Statistics'
         verbose_name_plural = 'Habit Statistics'
 
-
 class VwHeartRateTimeline(models.Model):
-    """
-    Maps to vw_heart_rate_timeline view.
-    Heart rate data over time for charts.
-    """
     
     id = models.IntegerField(primary_key=True)
     consumidor_id = models.IntegerField()
@@ -79,12 +53,7 @@ class VwHeartRateTimeline(models.Model):
         verbose_name = 'Heart Rate Timeline'
         verbose_name_plural = 'Heart Rate Timeline'
 
-
 class VwHeartRateStats(models.Model):
-    """
-    Maps to vw_heart_rate_stats view.
-    Aggregated heart rate statistics.
-    """
     
     consumidor_id = models.IntegerField(primary_key=True)
     total_mediciones = models.IntegerField()
@@ -101,12 +70,7 @@ class VwHeartRateStats(models.Model):
         verbose_name = 'Heart Rate Statistics'
         verbose_name_plural = 'Heart Rate Statistics'
 
-
 class VwPredictionTimeline(models.Model):
-    """
-    Maps to vw_prediction_timeline view.
-    Individual predictions over time.
-    """
     
     analisis_id = models.IntegerField(primary_key=True)
     consumidor_id = models.IntegerField()
@@ -125,12 +89,7 @@ class VwPredictionTimeline(models.Model):
         verbose_name = 'Prediction Timeline'
         verbose_name_plural = 'Prediction Timeline'
 
-
 class VwPredictionSummary(models.Model):
-    """
-    Maps to vw_prediction_summary view.
-    Simple prediction statistics.
-    """
     
     consumidor_id = models.IntegerField(primary_key=True)
     total_predicciones = models.IntegerField()
@@ -146,12 +105,7 @@ class VwPredictionSummary(models.Model):
         verbose_name = 'Prediction Summary'
         verbose_name_plural = 'Prediction Summary'
 
-
 class VwDesiresTracking(models.Model):
-    """
-    Maps to vw_desires_tracking view.
-    Individual desire records with details.
-    """
     
     deseo_id = models.IntegerField(primary_key=True)
     consumidor_id = models.IntegerField()
@@ -170,12 +124,7 @@ class VwDesiresTracking(models.Model):
         verbose_name = 'Desires Tracking'
         verbose_name_plural = 'Desires Tracking'
 
-
 class VwDesiresStats(models.Model):
-    """
-    Maps to vw_desires_stats view.
-    Aggregated desire statistics by type.
-    """
     
     consumidor_id = models.IntegerField()
     deseo_tipo = models.CharField(max_length=50, primary_key=True)
@@ -193,12 +142,7 @@ class VwDesiresStats(models.Model):
         verbose_name = 'Desires Statistics'
         verbose_name_plural = 'Desires Statistics'
 
-
 class VwDailySummary(models.Model):
-    """
-    Maps to vw_daily_summary view.
-    Daily summary with all key metrics for dashboard KPI cards.
-    """
     
     consumidor_id = models.IntegerField(primary_key=True)
     fecha = models.DateField()
@@ -218,12 +162,7 @@ class VwDailySummary(models.Model):
         verbose_name = 'Daily Summary'
         verbose_name_plural = 'Daily Summary'
 
-
 class VwWeeklyComparison(models.Model):
-    """
-    Maps to vw_weekly_comparison view.
-    Week-over-week comparison for progress tracking.
-    """
     
     consumidor_id = models.IntegerField(primary_key=True)
     cigarrillos_semana_actual = models.IntegerField()
@@ -237,3 +176,4 @@ class VwWeeklyComparison(models.Model):
         db_table = 'vw_weekly_comparison'
         verbose_name = 'Weekly Comparison'
         verbose_name_plural = 'Weekly Comparison'
+
