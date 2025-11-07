@@ -31,6 +31,7 @@ router.register(r'dashboard/heart-rate', views.VwHeartRateTimelineViewSet, basen
 router.register(r'dashboard/heart-rate-stats', views.VwHeartRateStatsViewSet, basename='dashboard-heart-rate-stats')
 router.register(r'dashboard/predictions', views.VwPredictionTimelineViewSet, basename='dashboard-predictions')
 router.register(r'dashboard/prediction-summary', views.VwPredictionSummaryViewSet, basename='dashboard-prediction-summary')
+router.register(r'dashboard/desires-tracking', views.VwDesiresTrackingViewSet, basename='dashboard-desires-tracking')
 router.register(r'dashboard/desires', views.VwDesiresTrackingViewSet, basename='dashboard-desires')
 router.register(r'dashboard/desires-stats', views.VwDesiresStatsViewSet, basename='dashboard-desires-stats')
 router.register(r'dashboard/daily-summary', views.VwDailySummaryViewSet, basename='dashboard-daily-summary')

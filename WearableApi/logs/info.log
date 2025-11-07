@@ -722,3 +722,1291 @@ rest_framework.exceptions.ValidationError: {'consumidor': [ErrorDetail(string='T
 [2025-11-05 13:40:28] [INFO] [django.server:213] "POST /api/formularios/ HTTP/1.1" 201 406
 [2025-11-05 13:41:43] [INFO] [django.utils.autoreload:265] C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\admin.py changed, reloading.
 [2025-11-05 13:41:44] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-05 13:45:39] [INFO] [api.views.UsuarioViewSet] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-05 13:45:40] [INFO] [api.services.user_factory:31] Created Consumidor: alo@gmail.com (ID: 30, Profile ID: 23)
+[2025-11-05 13:45:40] [INFO] [api.views.UsuarioViewSet] New user registered: alo@gmail.com (rol: consumidor)
+[2025-11-05 13:45:40] [INFO] [api.views.UsuarioViewSet] 📤 ✓ Response: 201 | Action: register
+[2025-11-05 13:45:40] [INFO] [django.server:213] "POST /api/usuarios/register/ HTTP/1.1" 201 708
+[2025-11-05 13:45:53] [INFO] [api.views.ConsumidorViewSet] 📥 GET /api/consumidores/23/ | Action: retrieve
+[2025-11-05 13:45:53] [INFO] [api.views.ConsumidorViewSet] 📤 ✓ Response: 200 | Action: retrieve
+[2025-11-05 13:45:53] [INFO] [django.server:213] "GET /api/consumidores/23/ HTTP/1.1" 200 339
+[2025-11-05 13:45:53] [INFO] [django.server:213] "OPTIONS /api/consumidores/23/ HTTP/1.1" 200 0
+[2025-11-05 13:45:53] [INFO] [api.views.ConsumidorViewSet] 📥 PATCH /api/consumidores/23/ | Action: partial_update
+[2025-11-05 13:45:53] [INFO] [api.views.ConsumidorViewSet] 📤 ✓ Response: 200 | Action: partial_update
+[2025-11-05 13:45:53] [INFO] [django.server:213] "PATCH /api/consumidores/23/ HTTP/1.1" 200 338
+[2025-11-05 13:49:10] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-05 13:54:53] [INFO] [api.views.UsuarioViewSet] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-05 13:54:54] [INFO] [api.services.user_factory:31] Created Consumidor: fernando@gmail.com (ID: 31, Profile ID: 24)
+[2025-11-05 13:54:54] [INFO] [api.views.UsuarioViewSet] New user registered: fernando@gmail.com (rol: consumidor)
+[2025-11-05 13:54:54] [INFO] [api.views.UsuarioViewSet] 📤 ✓ Response: 201 | Action: register
+[2025-11-05 13:54:54] [INFO] [django.server:213] "POST /api/usuarios/register/ HTTP/1.1" 201 718
+[2025-11-05 13:55:05] [INFO] [api.views.ConsumidorViewSet] 📥 GET /api/consumidores/24/ | Action: retrieve
+[2025-11-05 13:55:05] [INFO] [api.views.ConsumidorViewSet] 📤 ✓ Response: 200 | Action: retrieve
+[2025-11-05 13:55:05] [INFO] [django.server:213] "GET /api/consumidores/24/ HTTP/1.1" 200 349
+[2025-11-05 13:55:05] [INFO] [django.server:213] "OPTIONS /api/consumidores/24/ HTTP/1.1" 200 0
+[2025-11-05 13:55:05] [INFO] [api.views.ConsumidorViewSet] 📥 PATCH /api/consumidores/24/ | Action: partial_update
+[2025-11-05 13:55:05] [INFO] [api.views.ConsumidorViewSet] 📤 ✓ Response: 200 | Action: partial_update
+[2025-11-05 13:55:05] [INFO] [django.server:213] "PATCH /api/consumidores/24/ HTTP/1.1" 200 348
+[2025-11-05 13:55:20] [INFO] [api.views.FormularioViewSet] 📥 GET /api/formularios/ | Action: list
+[2025-11-05 13:55:20] [INFO] [api.views.FormularioViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-05 13:55:20] [INFO] [django.server:213] "GET /api/formularios/?consumidor=24 HTTP/1.1" 200 6404
+[2025-11-05 13:55:20] [INFO] [api.views.FormularioViewSet] 📥 POST /api/formularios/ | Action: create
+[2025-11-05 13:55:20] [INFO] [api.views.FormularioViewSet] 📤 ✓ Response: 201 | Action: create
+[2025-11-05 13:55:20] [INFO] [django.server:213] "POST /api/formularios/ HTTP/1.1" 201 372
+[2025-11-06 14:08:29] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 15:17:09] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 15:19:25] [INFO] [django.server:213] "OPTIONS /api/usuarios/login/ HTTP/1.1" 200 0
+[2025-11-06 15:19:25] [INFO] [api.views.UsuarioViewSet] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-06 15:19:26] [INFO] [api.services.auth_service:67] Successful login: perdomo@gmail.com (rol: consumidor)
+[2025-11-06 15:19:26] [INFO] [api.views.UsuarioViewSet] 📤 ✓ Response: 200 | Action: login
+[2025-11-06 15:19:26] [INFO] [django.server:213] "POST /api/usuarios/login/ HTTP/1.1" 200 715
+[2025-11-06 15:19:26] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 15:19:26] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 15:19:26] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 15:19:26] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 15:19:26] [WARNING] [django.request:253] Not Found: /api/dashboard/desires-tracking/
+[2025-11-06 15:19:26] [WARNING] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 404 48904
+[2025-11-06 15:19:26] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:19:26] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 15:19:26] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:19:26] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 469
+[2025-11-06 15:19:26] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:19:26] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 15:19:26] [ERROR] [api.views.VwHeartRateTimelineViewSet] ProgrammingError: column vw_heart_rate_timeline.id does not exist
+LINE 1: SELECT "vw_heart_rate_timeline"."id", "vw_heart_rate_timelin...
+               ^ | Context: action=list, view=VwHeartRateTimelineViewSet
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column vw_heart_rate_timeline.id does not exist
+LINE 1: SELECT "vw_heart_rate_timeline"."id", "vw_heart_rate_timelin...
+               ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\mixins.py", line 40, in list
+    page = self.paginate_queryset(queryset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\generics.py", line 175, in paginate_queryset
+    return self.paginator.paginate_queryset(queryset, self.request, view=self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\pagination.py", line 222, in paginate_queryset
+    return list(self.page)
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\paginator.py", line 191, in __len__
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\models\query.py", line 366, in __len__
+    self._fetch_all()
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\models\query.py", line 1949, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\utils.py", line 1851, in runner
+    return sentry_patched_function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\__init__.py", line 652, in execute
+    result = real_execute(self, sql, params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: column vw_heart_rate_timeline.id does not exist
+LINE 1: SELECT "vw_heart_rate_timeline"."id", "vw_heart_rate_timelin...
+               ^
+[2025-11-06 15:19:28] [ERROR] [django.request:253] Internal Server Error: /api/dashboard/heart-rate/
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column vw_heart_rate_timeline.id does not exist
+LINE 1: SELECT "vw_heart_rate_timeline"."id", "vw_heart_rate_timelin...
+               ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
+    return callback(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\mixins.py", line 38, in handle_exception
+    return super().handle_exception(exc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\mixins.py", line 40, in list
+    page = self.paginate_queryset(queryset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\generics.py", line 175, in paginate_queryset
+    return self.paginator.paginate_queryset(queryset, self.request, view=self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\pagination.py", line 222, in paginate_queryset
+    return list(self.page)
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\paginator.py", line 191, in __len__
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\models\query.py", line 366, in __len__
+    self._fetch_all()
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\models\query.py", line 1949, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\utils.py", line 1851, in runner
+    return sentry_patched_function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\__init__.py", line 652, in execute
+    result = real_execute(self, sql, params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: column vw_heart_rate_timeline.id does not exist
+LINE 1: SELECT "vw_heart_rate_timeline"."id", "vw_heart_rate_timelin...
+               ^
+[2025-11-06 15:19:28] [ERROR] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 500 213206
+[2025-11-06 15:36:02] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 15:37:26] [INFO] [django.server:213] "OPTIONS /api/usuarios/login/ HTTP/1.1" 200 0
+[2025-11-06 15:37:26] [INFO] [api.views.UsuarioViewSet] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-06 15:37:27] [INFO] [api.services.auth_service:67] Successful login: perdomo@gmail.com (rol: consumidor)
+[2025-11-06 15:37:27] [INFO] [api.views.UsuarioViewSet] 📤 ✓ Response: 200 | Action: login
+[2025-11-06 15:37:27] [INFO] [django.server:213] "POST /api/usuarios/login/ HTTP/1.1" 200 715
+[2025-11-06 15:37:28] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 15:37:28] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 15:37:28] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 15:37:28] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 15:37:28] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 15:37:28] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:37:28] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 15:37:28] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:37:28] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 15:37:28] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:37:28] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 469
+[2025-11-06 15:37:28] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:37:28] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 15:37:28] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:37:28] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 15:39:32] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 15:39:32] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 15:39:32] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 15:39:32] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 15:39:32] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 15:39:32] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:39:32] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 15:39:32] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:39:32] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 15:39:32] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:39:32] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 469
+[2025-11-06 15:39:32] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:39:32] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 15:39:32] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:39:32] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 15:43:45] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 15:43:45] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 15:43:45] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 15:43:45] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 15:43:45] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 15:43:45] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:43:45] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 15:43:45] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:43:45] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:43:45] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:43:45] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 469
+[2025-11-06 15:43:45] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 15:43:45] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 15:43:45] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:43:45] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 15:51:33] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 15:51:42] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 15:51:42] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:51:42] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 52025)
+[2025-11-06 15:51:47] [ERROR] [django.request:253] Internal Server Error: /api/dashboard/heart-rate-stats/
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
+    return callback(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\viewsets.py", line 104, in view
+    self = cls(**initkwargs)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\mixins.py", line 10, in __init__
+    self.logger = Logger.get_logger(
+                  ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py", line 58, in get_logger
+    console_handler = instance._create_console_handler(logging.INFO)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py", line 43, in _create_console_handler
+    handler.setFormatter(self.log_format)
+                         ^^^^^^^^^^^^^^^
+AttributeError: 'Logger' object has no attribute 'log_format'
+[2025-11-06 15:51:47] [ERROR] [django.request:253] Internal Server Error: /api/dashboard/daily-summary/
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
+    return callback(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\viewsets.py", line 104, in view
+    self = cls(**initkwargs)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\mixins.py", line 10, in __init__
+    self.logger = Logger.get_logger(
+                  ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py", line 58, in get_logger
+    console_handler = instance._create_console_handler(logging.INFO)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py", line 43, in _create_console_handler
+    handler.setFormatter(self.log_format)
+                         ^^^^^^^^^^^^^^^
+AttributeError: 'Logger' object has no attribute 'log_format'
+[2025-11-06 15:51:47] [ERROR] [django.request:253] Internal Server Error: /api/dashboard/desires-stats/
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
+    return callback(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\viewsets.py", line 104, in view
+    self = cls(**initkwargs)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\mixins.py", line 10, in __init__
+    self.logger = Logger.get_logger(
+                  ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py", line 58, in get_logger
+    console_handler = instance._create_console_handler(logging.INFO)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py", line 43, in _create_console_handler
+    handler.setFormatter(self.log_format)
+                         ^^^^^^^^^^^^^^^
+AttributeError: 'Logger' object has no attribute 'log_format'
+[2025-11-06 15:51:47] [ERROR] [django.request:253] Internal Server Error: /api/dashboard/desires-tracking/
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
+    return callback(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\viewsets.py", line 104, in view
+    self = cls(**initkwargs)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\mixins.py", line 10, in __init__
+    self.logger = Logger.get_logger(
+                  ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py", line 58, in get_logger
+    console_handler = instance._create_console_handler(logging.INFO)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py", line 43, in _create_console_handler
+    handler.setFormatter(self.log_format)
+                         ^^^^^^^^^^^^^^^
+AttributeError: 'Logger' object has no attribute 'log_format'
+[2025-11-06 15:51:47] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 52026)
+[2025-11-06 15:51:47] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 52027)
+[2025-11-06 15:51:47] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 52028)
+[2025-11-06 15:51:47] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 52029)
+[2025-11-06 15:53:38] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 15:58:51] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 15:58:52] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:58:52] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 15:58:52] [ERROR] [django.request:253] Internal Server Error: /api/dashboard/desires-stats/
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
+    return callback(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\viewsets.py", line 104, in view
+    self = cls(**initkwargs)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\mixins.py", line 10, in __init__
+    self.logger = Logger.get_logger(
+                  ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py", line 58, in get_logger
+    console_handler = instance._create_console_handler(logging.INFO)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py", line 43, in _create_console_handler
+    handler.setFormatter(self.log_format)
+                         ^^^^^^^^^^^^^^^
+AttributeError: 'Logger' object has no attribute 'log_format'
+[2025-11-06 15:58:52] [ERROR] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 500 104489
+[2025-11-06 15:58:53] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 15:58:53] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:58:53] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 469
+[2025-11-06 15:58:53] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 15:58:53] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 15:58:53] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 15:58:53] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 15:58:53] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 15:58:53] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:58:53] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 15:58:53] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:58:53] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 15:58:53] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:58:53] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 469
+[2025-11-06 15:58:53] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:58:53] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 15:58:53] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:58:53] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 15:59:17] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 15:59:17] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 15:59:17] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:59:17] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:59:17] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 469
+[2025-11-06 15:59:17] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 15:59:18] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 15:59:18] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 15:59:18] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 15:59:18] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 15:59:18] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 15:59:18] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:59:18] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 15:59:18] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:59:18] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 15:59:18] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:59:18] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 15:59:18] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:59:18] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 469
+[2025-11-06 15:59:18] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 15:59:18] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 16:03:06] [INFO] [django.utils.autoreload:265] C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\models\dashboard.py changed, reloading.
+[2025-11-06 16:03:08] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 16:03:48] [INFO] [django.utils.autoreload:265] C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\models\dashboard.py changed, reloading.
+[2025-11-06 16:03:50] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 16:04:06] [INFO] [django.utils.autoreload:265] C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\models\dashboard.py changed, reloading.
+[2025-11-06 16:04:08] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 16:04:34] [INFO] [django.utils.autoreload:265] C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\api\models\dashboard.py changed, reloading.
+[2025-11-06 16:04:36] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 16:05:40] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 16:05:47] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:05:47] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:05:47] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:05:47] [ERROR] [django.request:253] Internal Server Error: /api/dashboard/desires-stats/
+Traceback (most recent call last):
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\sentry_sdk\integrations\django\views.py", line 94, in sentry_wrapped_callback
+    return callback(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\env\Lib\site-packages\rest_framework\viewsets.py", line 104, in view
+    self = cls(**initkwargs)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\mixins.py", line 10, in __init__
+    self.logger = Logger.get_logger(
+                  ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py", line 58, in get_logger
+    console_handler = instance._create_console_handler(logging.INFO)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py", line 43, in _create_console_handler
+    handler.setFormatter(self.log_format)
+                         ^^^^^^^^^^^^^^^
+AttributeError: 'Logger' object has no attribute 'log_format'
+[2025-11-06 16:05:47] [ERROR] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 500 104489
+[2025-11-06 16:05:48] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:05:48] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:05:48] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:05:49] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:05:49] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:05:49] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:05:49] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:05:49] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 16:05:49] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:05:49] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:05:49] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:05:49] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:05:49] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:05:49] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:05:49] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:05:49] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:05:49] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:05:49] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 16:07:03] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:07:03] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 16:07:03] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:07:03] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:07:03] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:07:03] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:03] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:07:03] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:03] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:07:03] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:03] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:03] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:07:03] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:03] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:07:03] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 16:07:47] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:07:47] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:07:47] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:07:47] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 16:07:47] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:07:47] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:47] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:47] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:47] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:07:47] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:47] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:07:47] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:07:47] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:47] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:07:47] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 16:07:50] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:07:50] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:07:50] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 16:07:50] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:07:50] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:50] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:07:50] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:50] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:50] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:50] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:50] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:07:50] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 16:07:50] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:07:50] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:07:54] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:07:54] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:07:54] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:54] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:07:54] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:54] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:07:54] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:07:54] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:07:54] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:07:54] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:07:55] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 16:07:55] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:55] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:07:55] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:55] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:07:55] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:55] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:07:55] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:55] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:07:55] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:55] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 16:07:59] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:07:59] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:07:59] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:07:59] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:07:59] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 16:07:59] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:59] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:59] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:59] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:59] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:07:59] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:07:59] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:07:59] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:07:59] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:07:59] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 16:09:27] [INFO] [django.utils.autoreload:265] C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py changed, reloading.
+[2025-11-06 16:09:30] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 16:10:04] [INFO] [django.utils.autoreload:265] C:\Users\MSI\Desktop\9B\Proyecto 9B\API_wearable\Simulador-0910\WearableApi\utils\logger.py changed, reloading.
+[2025-11-06 16:10:06] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 16:10:40] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:10:40] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:10:40] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:10:40] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:10:40] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:10:40] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:10:43] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:10:43] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:10:43] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:10:43] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:10:43] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 16:10:43] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:10:43] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:10:43] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:10:43] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:10:43] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:10:43] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:10:43] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:10:43] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 16:10:43] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:10:43] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:11:07] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:11:07] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:11:07] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:07] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:07] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:11:07] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:11:08] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:11:08] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:11:08] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:08] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:11:08] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:08] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:11:52] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 16:11:56] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:11:56] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:11:56] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:11:56] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:11:56] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 16:11:56] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:56] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 53554)
+[2025-11-06 16:11:56] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:56] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 53560)
+[2025-11-06 16:11:56] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:56] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 53561)
+[2025-11-06 16:11:56] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:56] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 53555)
+[2025-11-06 16:11:56] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:56] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 53562)
+[2025-11-06 16:11:58] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:11:58] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:11:58] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:58] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:11:58] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:58] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:11:58] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:11:58] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:11:58] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:11:58] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 16:11:58] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:11:58] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:58] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:11:58] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:58] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:11:58] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:58] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:11:58] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:58] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:11:58] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:11:58] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 16:13:52] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:13:52] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:13:52] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:13:52] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:13:52] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:13:52] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:14:20] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:14:20] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:14:20] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:14:20] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:14:20] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:14:20] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:14:24] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 16:14:24] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:14:24] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:14:24] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:14:24] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:14:24] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:14:24] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:14:24] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:14:24] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:14:24] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:14:24] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:14:24] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:14:24] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 16:14:24] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:14:24] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:14:58] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:14:58] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:14:58] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:14:58] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 16:14:58] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:14:58] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:14:58] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:14:58] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:14:58] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:14:58] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:14:58] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:14:58] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:14:58] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:14:58] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:14:58] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 16:15:41] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:15:41] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:15:41] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 16:15:41] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:15:41] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:15:41] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:15:41] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:15:41] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:15:41] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:15:41] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:15:41] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:15:41] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:15:41] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:15:41] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:15:41] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 16:15:52] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:15:52] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:15:52] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:15:52] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:15:52] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 16:15:52] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:15:52] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:15:52] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:15:52] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:15:52] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:15:52] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:15:52] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:15:52] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 16:15:52] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:15:52] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 16:19:17] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 16:19:17] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 16:19:17] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:19:17] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 16:19:17] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:19:17] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 16:19:17] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 16:19:17] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 16:19:17] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:19:17] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 16:19:17] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 16:19:17] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:07:51] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 17:08:15] [INFO] [api.views.UsuarioViewSet] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-06 17:08:16] [INFO] [api.services.auth_service:67] Successful login: perdomo@gmail.com (rol: consumidor)
+[2025-11-06 17:08:16] [INFO] [api.views.UsuarioViewSet] 📤 ✓ Response: 200 | Action: login
+[2025-11-06 17:08:16] [INFO] [django.server:213] "POST /api/usuarios/login/ HTTP/1.1" 200 715
+[2025-11-06 17:08:17] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:08:17] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:08:17] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:08:17] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:08:17] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:08:17] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:08:17] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:08:17] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:08:17] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:08:17] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:08:17] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:08:17] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:20:35] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 17:20:41] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:20:41] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:20:41] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:20:41] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:20:41] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:20:41] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 50610)
+[2025-11-06 17:20:41] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:20:41] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:20:41] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 50609)
+[2025-11-06 17:20:41] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 50611)
+[2025-11-06 17:20:42] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:20:42] [INFO] [django.server:81] - Broken pipe from ('127.0.0.1', 50612)
+[2025-11-06 17:20:43] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:20:43] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:20:43] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:20:43] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:20:43] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:20:43] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:20:44] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:20:44] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:20:44] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:20:44] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:20:44] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:20:44] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:20:50] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:20:50] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:20:50] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:20:50] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:20:50] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:20:50] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:20:50] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:20:50] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:20:50] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:20:50] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:20:50] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:20:50] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:21:08] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:21:08] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:21:08] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:21:08] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:21:08] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:21:08] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:21:08] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:21:08] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:21:08] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:21:08] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:21:08] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:21:08] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:21:31] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:21:31] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:21:31] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:21:31] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:21:31] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:21:31] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:21:31] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:21:31] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:21:31] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:21:31] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:21:31] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:21:31] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:21:51] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:21:51] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:21:51] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:21:51] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:21:51] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:21:51] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:21:51] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:21:51] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:21:51] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:21:51] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:21:51] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:21:51] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:26:08] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:26:08] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:26:08] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:26:08] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:26:08] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:26:08] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:26:08] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:26:08] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:26:08] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:26:08] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:26:08] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:26:08] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:38:56] [INFO] [django.utils.autoreload:667] Watching for file changes with StatReloader
+[2025-11-06 17:39:00] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:39:00] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:39:00] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:39:00] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:39:00] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:39:00] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:39:40] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:39:40] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:39:40] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:39:40] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:39:40] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:39:40] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:40:21] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:40:21] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:40:21] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:40:21] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:40:21] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:40:21] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:40:42] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:40:42] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:40:42] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:40:42] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:40:42] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:40:42] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:40:42] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:40:42] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:40:42] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:40:42] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:40:42] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:40:42] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:40:54] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:40:54] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:40:54] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:40:54] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:40:54] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:40:54] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:40:54] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:40:54] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:40:54] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:40:54] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:40:54] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:40:54] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:41:00] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:41:00] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:41:00] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:41:00] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:41:00] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:00] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:00] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:41:00] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:00] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:41:00] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:41:00] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:41:19] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:41:19] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:41:19] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:19] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:19] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:41:19] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:41:19] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:41:19] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:41:19] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:19] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:19] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:41:19] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:41:24] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:41:24] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:41:24] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:41:24] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:41:24] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:24] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:41:24] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:24] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:24] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:24] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:41:24] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:41:24] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:41:26] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:41:26] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:41:26] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:26] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:26] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:41:26] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:41:31] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:41:31] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:41:31] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:31] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:31] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:41:31] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:41:31] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:41:31] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:41:31] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:31] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:41:31] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:41:31] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:43:33] [INFO] [django.server:213] "OPTIONS /api/usuarios/login/ HTTP/1.1" 200 0
+[2025-11-06 17:43:33] [INFO] [api.views.UsuarioViewSet] 📥 POST /api/usuarios/login/ | Action: login
+[2025-11-06 17:43:34] [INFO] [api.services.auth_service:67] Successful login: perdomo@gmail.com (rol: consumidor)
+[2025-11-06 17:43:34] [INFO] [api.views.UsuarioViewSet] 📤 ✓ Response: 200 | Action: login
+[2025-11-06 17:43:34] [INFO] [django.server:213] "POST /api/usuarios/login/ HTTP/1.1" 200 715
+[2025-11-06 17:43:34] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:43:34] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:43:34] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:43:34] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:43:34] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:43:34] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:43:34] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:43:34] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:43:34] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:43:34] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:43:34] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:43:34] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:43:34] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:43:34] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:43:34] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:43:34] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:43:34] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:43:34] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:43:35] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:43:35] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:43:35] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:44:54] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:44:54] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:44:54] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:44:54] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:44:54] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:44:54] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:54] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:54] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:54] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:44:54] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:44:54] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:54] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:44:54] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:54] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:44:54] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:44:54] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:44:54] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:44:54] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:44:54] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:44:54] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:44:54] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:54] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:44:55] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:55] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:55] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:44:55] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:55] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:55] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:44:55] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:44:55] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:44:59] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:44:59] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:44:59] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:44:59] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:44:59] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:44:59] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:59] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:44:59] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:59] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:59] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:59] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:44:59] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:44:59] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:44:59] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:44:59] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:45:40] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:45:40] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:45:40] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:45:40] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:45:40] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:45:40] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:45:40] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:45:40] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:45:40] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:45:40] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:45:40] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:45:40] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:45:40] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:45:40] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:45:40] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:45:57] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:45:57] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:45:57] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:45:57] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:45:57] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:45:57] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:45:57] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:45:57] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:45:57] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:45:57] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:45:57] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:45:57] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:45:57] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:45:57] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:45:57] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:46:57] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:46:57] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:46:57] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:46:57] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:46:57] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:46:57] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:46:57] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:46:57] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:46:57] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:46:57] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:46:57] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:46:57] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:46:57] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:46:57] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:46:57] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:47:00] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:47:00] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:47:00] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:47:00] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:47:00] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:47:00] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:47:00] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:47:00] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:47:00] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:47:00] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:47:00] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:47:00] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:47:00] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:47:00] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:47:00] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:47:42] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:47:42] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:47:42] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:47:42] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:47:42] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:47:42] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:47:42] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:47:42] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:47:42] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:47:42] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:47:42] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:47:42] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:47:42] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:47:42] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:47:42] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:48:08] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:48:08] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:48:08] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:48:08] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:48:08] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:48:08] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:48:08] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:48:08] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:48:08] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:48:08] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:48:08] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:48:08] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:48:08] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:48:08] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:48:08] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:48:10] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:48:10] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:48:10] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:48:10] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:48:10] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:48:10] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:48:10] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:48:10] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:48:10] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:48:10] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:48:10] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:48:10] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:48:10] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:48:10] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:48:10] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:51:52] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:51:52] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:51:52] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:51:52] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:51:52] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:51:52] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:51:53] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:51:53] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:51:53] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:51:53] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:51:53] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:51:53] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:51:53] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:51:53] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:51:53] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:52:05] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:52:05] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:52:05] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:52:05] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:52:05] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:52:05] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:52:05] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:52:05] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:52:05] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:52:05] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:52:05] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:52:05] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:52:05] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:52:05] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:52:05] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:53:58] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:53:58] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:53:58] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:53:58] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:53:58] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:53:58] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:53:58] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:53:58] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:53:58] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:53:58] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:53:58] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:53:58] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:53:58] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:53:58] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:53:58] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:55:35] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:55:35] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:55:35] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:55:35] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:55:35] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:55:35] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:55:35] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:55:35] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:55:35] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:55:35] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:55:35] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:55:35] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:55:35] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:55:35] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:55:35] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:55:44] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:55:44] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:55:44] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:55:44] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:55:44] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:55:44] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:55:44] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:55:44] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:55:44] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:55:44] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:55:44] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:55:44] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:55:44] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:55:44] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:55:44] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:56:33] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:56:33] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:56:33] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:56:33] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:56:33] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:56:33] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:56:33] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:56:33] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:56:33] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:56:33] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:56:33] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:56:33] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:56:33] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:56:33] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:56:33] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:57:11] [INFO] [django.server:213] "OPTIONS /api/usuarios/register/ HTTP/1.1" 200 0
+[2025-11-06 17:57:11] [INFO] [api.views.UsuarioViewSet] 📥 POST /api/usuarios/register/ | Action: register
+[2025-11-06 17:57:12] [INFO] [api.services.user_factory:31] Created Consumidor: gabriela@gmail.com (ID: 32, Profile ID: 25)
+[2025-11-06 17:57:12] [INFO] [api.views.UsuarioViewSet] New user registered: gabriela@gmail.com (rol: consumidor)
+[2025-11-06 17:57:12] [INFO] [api.views.UsuarioViewSet] 📤 ✓ Response: 201 | Action: register
+[2025-11-06 17:57:12] [INFO] [django.server:213] "POST /api/usuarios/register/ HTTP/1.1" 201 718
+[2025-11-06 17:57:25] [INFO] [api.views.ConsumidorViewSet] 📥 GET /api/consumidores/25/ | Action: retrieve
+[2025-11-06 17:57:25] [INFO] [api.views.ConsumidorViewSet] 📤 ✓ Response: 200 | Action: retrieve
+[2025-11-06 17:57:25] [INFO] [django.server:213] "GET /api/consumidores/25/ HTTP/1.1" 200 349
+[2025-11-06 17:57:25] [INFO] [django.server:213] "OPTIONS /api/consumidores/25/ HTTP/1.1" 200 0
+[2025-11-06 17:57:25] [INFO] [api.views.ConsumidorViewSet] 📥 PATCH /api/consumidores/25/ | Action: partial_update
+[2025-11-06 17:57:26] [INFO] [api.views.ConsumidorViewSet] 📤 ✓ Response: 200 | Action: partial_update
+[2025-11-06 17:57:26] [INFO] [django.server:213] "PATCH /api/consumidores/25/ HTTP/1.1" 200 348
+[2025-11-06 17:57:37] [INFO] [api.views.FormularioViewSet] 📥 GET /api/formularios/ | Action: list
+[2025-11-06 17:57:37] [INFO] [api.views.FormularioViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:57:37] [INFO] [django.server:213] "GET /api/formularios/?consumidor=25 HTTP/1.1" 200 6777
+[2025-11-06 17:57:38] [INFO] [django.server:213] "OPTIONS /api/formularios/ HTTP/1.1" 200 0
+[2025-11-06 17:57:38] [INFO] [api.views.FormularioViewSet] 📥 POST /api/formularios/ | Action: create
+[2025-11-06 17:57:38] [INFO] [api.views.FormularioViewSet] 📤 ✓ Response: 201 | Action: create
+[2025-11-06 17:57:38] [INFO] [django.server:213] "POST /api/formularios/ HTTP/1.1" 201 372
+[2025-11-06 17:57:41] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:57:41] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:57:41] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:57:41] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:57:41] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:57:41] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:57:41] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:57:41] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:57:41] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:57:41] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:57:41] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:57:41] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:57:41] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:57:41] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:57:41] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:58:33] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:58:33] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:58:33] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:58:33] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:58:33] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:58:33] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:58:33] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:58:33] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:58:33] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:58:33] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:58:33] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:58:33] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:58:33] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:58:33] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:58:33] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:58:52] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:58:52] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:58:52] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:58:52] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:58:52] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:58:52] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:58:52] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:58:52] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288
+[2025-11-06 17:58:52] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:58:52] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:58:52] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:58:52] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:58:52] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:58:52] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:58:52] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:59:04] [INFO] [api.views.VwDailySummaryViewSet] 📥 GET /api/dashboard/daily-summary/ | Action: list
+[2025-11-06 17:59:04] [INFO] [api.views.VwDesiresTrackingViewSet] 📥 GET /api/dashboard/desires-tracking/ | Action: list
+[2025-11-06 17:59:04] [INFO] [api.views.VwDesiresStatsViewSet] 📥 GET /api/dashboard/desires-stats/ | Action: list
+[2025-11-06 17:59:04] [INFO] [api.views.VwHeartRateStatsViewSet] 📥 GET /api/dashboard/heart-rate-stats/ | Action: list
+[2025-11-06 17:59:04] [INFO] [api.views.VwHeartRateTimelineViewSet] 📥 GET /api/dashboard/heart-rate/ | Action: list
+[2025-11-06 17:59:04] [INFO] [api.views.VwDailySummaryViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:59:04] [INFO] [api.views.VwDesiresTrackingViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:59:04] [INFO] [django.server:213] "GET /api/dashboard/daily-summary/?consumidor_id=1 HTTP/1.1" 200 292
+[2025-11-06 17:59:04] [INFO] [django.server:213] "GET /api/dashboard/desires-tracking/?consumidor_id=1 HTTP/1.1" 200 3036
+[2025-11-06 17:59:04] [INFO] [api.views.VwDesiresStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:59:04] [INFO] [api.views.VwHeartRateStatsViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:59:04] [INFO] [api.views.VwHeartRateTimelineViewSet] 📤 ✓ Response: 200 | Action: list
+[2025-11-06 17:59:04] [INFO] [django.server:213] "GET /api/dashboard/desires-stats/?consumidor_id=1 HTTP/1.1" 200 483
+[2025-11-06 17:59:04] [INFO] [django.server:213] "GET /api/dashboard/heart-rate-stats/?consumidor_id=1 HTTP/1.1" 200 238
+[2025-11-06 17:59:04] [INFO] [django.server:213] "GET /api/dashboard/heart-rate/?consumidor_id=1 HTTP/1.1" 200 1288

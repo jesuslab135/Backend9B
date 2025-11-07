@@ -8,18 +8,18 @@
 -- 1. SMOKING/HABIT TRACKING SUMMARY
 -- ==========================================================
 -- Tracks total cigarettes/habits smoked over time
+DROP VIEW IF EXISTS vw_habit_tracking CASCADE;
 CREATE OR REPLACE VIEW vw_habit_tracking AS
 SELECT 
     f.consumidor_id,
-    h.nombre AS habito_nombre,
+    COALESCE(f.habito->>'nombre', 'Sin hábito') AS habito_nombre,
     DATE(f.fecha_envio) AS fecha,
     COUNT(f.id) AS total_cigarrillos,
     COUNT(f.id) FILTER (WHERE DATE(f.fecha_envio) = CURRENT_DATE) AS cigarrillos_hoy,
     COUNT(f.id) FILTER (WHERE DATE(f.fecha_envio) >= CURRENT_DATE - INTERVAL '7 days') AS cigarrillos_semana,
     COUNT(f.id) FILTER (WHERE DATE(f.fecha_envio) >= CURRENT_DATE - INTERVAL '30 days') AS cigarrillos_mes
 FROM formularios f
-LEFT JOIN habitos h ON f.habito_id = h.id
-GROUP BY f.consumidor_id, h.nombre, DATE(f.fecha_envio)
+GROUP BY f.consumidor_id, f.habito->>'nombre', DATE(f.fecha_envio)
 ORDER BY fecha DESC;
 
 COMMENT ON VIEW vw_habit_tracking IS 'Daily cigarette/habit tracking with totals for timeline charts';
@@ -29,26 +29,23 @@ COMMENT ON VIEW vw_habit_tracking IS 'Daily cigarette/habit tracking with totals
 -- 2. AGGREGATED HABIT STATISTICS
 -- ==========================================================
 -- Overall statistics per consumer
+DROP VIEW IF EXISTS vw_habit_stats CASCADE;
 CREATE OR REPLACE VIEW vw_habit_stats AS
 SELECT 
     f.consumidor_id,
-    h.nombre AS habito_nombre,
+    COALESCE(f.habito->>'nombre', 'Sin hábito') AS habito_nombre,
     COUNT(f.id) AS total_eventos,
     MIN(f.fecha_envio) AS primer_registro,
     MAX(f.fecha_envio) AS ultimo_registro,
-    -- Events per day average
     ROUND(
         COUNT(f.id)::NUMERIC / 
         NULLIF(EXTRACT(DAY FROM (MAX(f.fecha_envio) - MIN(f.fecha_envio))) + 1, 0),
         2
     ) AS promedio_diario,
-    -- This month count
     COUNT(f.id) FILTER (WHERE DATE_TRUNC('month', f.fecha_envio) = DATE_TRUNC('month', CURRENT_DATE)) AS eventos_mes_actual,
-    -- Last month count
     COUNT(f.id) FILTER (WHERE DATE_TRUNC('month', f.fecha_envio) = DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month')) AS eventos_mes_anterior
 FROM formularios f
-LEFT JOIN habitos h ON f.habito_id = h.id
-GROUP BY f.consumidor_id, h.nombre;
+GROUP BY f.consumidor_id, f.habito->>'nombre';
 
 COMMENT ON VIEW vw_habit_stats IS 'Aggregated habit statistics for KPI cards and comparison charts';
 
@@ -57,8 +54,10 @@ COMMENT ON VIEW vw_habit_stats IS 'Aggregated habit statistics for KPI cards and
 -- 3. HEART RATE ANALYSIS
 -- ==========================================================
 -- Heart rate data over time for charts
+DROP VIEW IF EXISTS vw_heart_rate_timeline CASCADE;
 CREATE OR REPLACE VIEW vw_heart_rate_timeline AS
 SELECT 
+    ROW_NUMBER() OVER (ORDER BY v.window_start DESC) AS id,
     v.consumidor_id,
     v.window_start,
     v.window_end,
@@ -80,6 +79,7 @@ COMMENT ON VIEW vw_heart_rate_timeline IS 'Heart rate data over time for line/ar
 -- 4. HEART RATE STATISTICS
 -- ==========================================================
 -- Aggregated HR stats per consumer
+DROP VIEW IF EXISTS vw_heart_rate_stats CASCADE;
 CREATE OR REPLACE VIEW vw_heart_rate_stats AS
 SELECT 
     v.consumidor_id,
@@ -102,6 +102,7 @@ COMMENT ON VIEW vw_heart_rate_stats IS 'Aggregated heart rate statistics for KPI
 -- 5. PREDICTION TIMELINE
 -- ==========================================================
 -- Predictions over time for trend analysis
+DROP VIEW IF EXISTS vw_prediction_timeline CASCADE;
 CREATE OR REPLACE VIEW vw_prediction_timeline AS
 SELECT 
     v.consumidor_id,
@@ -125,6 +126,7 @@ COMMENT ON VIEW vw_prediction_timeline IS 'Individual predictions over time for 
 -- 6. PREDICTION ACCURACY SUMMARY
 -- ==========================================================
 -- Simple prediction accuracy metrics for consumer
+DROP VIEW IF EXISTS vw_prediction_summary CASCADE;
 CREATE OR REPLACE VIEW vw_prediction_summary AS
 SELECT 
     v.consumidor_id,
@@ -149,6 +151,7 @@ COMMENT ON VIEW vw_prediction_summary IS 'Simple prediction statistics for consu
 -- 7. DESIRES TRACKING
 -- ==========================================================
 -- Track desires (urges) and resolution status
+DROP VIEW IF EXISTS vw_desires_tracking CASCADE;
 CREATE OR REPLACE VIEW vw_desires_tracking AS
 SELECT 
     d.consumidor_id,
@@ -178,8 +181,10 @@ COMMENT ON VIEW vw_desires_tracking IS 'Desire/urge tracking with resolution tim
 -- 8. DESIRES STATISTICS
 -- ==========================================================
 -- Aggregated desire statistics
+DROP VIEW IF EXISTS vw_desires_stats CASCADE;
 CREATE OR REPLACE VIEW vw_desires_stats AS
 SELECT 
+    ROW_NUMBER() OVER (ORDER BY d.consumidor_id, d.tipo) AS id,
     d.consumidor_id,
     d.tipo AS deseo_tipo,
     COUNT(d.id) AS total_deseos,
@@ -189,13 +194,11 @@ SELECT
         (COUNT(d.id) FILTER (WHERE d.resolved = TRUE)::NUMERIC / NULLIF(COUNT(d.id), 0)) * 100,
         2
     ) AS porcentaje_resolucion,
-    -- Average resolution time in hours
     ROUND(
         AVG(EXTRACT(EPOCH FROM (d.updated_at - d.created_at)) / 3600) 
         FILTER (WHERE d.resolved = TRUE)::NUMERIC,
         2
     ) AS promedio_horas_resolucion,
-    -- Today's stats
     COUNT(d.id) FILTER (WHERE DATE(d.created_at) = CURRENT_DATE) AS deseos_hoy,
     COUNT(d.id) FILTER (WHERE DATE(d.updated_at) = CURRENT_DATE AND d.resolved = TRUE) AS deseos_resueltos_hoy
 FROM deseos d
@@ -208,6 +211,7 @@ COMMENT ON VIEW vw_desires_stats IS 'Aggregated desire statistics by type with r
 -- 9. DAILY SUMMARY DASHBOARD
 -- ==========================================================
 -- Complete daily summary for main dashboard
+DROP VIEW IF EXISTS vw_daily_summary CASCADE;
 CREATE OR REPLACE VIEW vw_daily_summary AS
 SELECT 
     c.id AS consumidor_id,
@@ -278,6 +282,7 @@ COMMENT ON VIEW vw_daily_summary IS 'Daily summary with all key metrics for main
 -- 10. WEEKLY COMPARISON
 -- ==========================================================
 -- Compare current week vs previous week
+DROP VIEW IF EXISTS vw_weekly_comparison CASCADE;
 CREATE OR REPLACE VIEW vw_weekly_comparison AS
 SELECT 
     c.id AS consumidor_id,

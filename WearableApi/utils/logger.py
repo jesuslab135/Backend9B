@@ -47,6 +47,9 @@ class Logger:
     def get_logger(cls, name):
         instance = cls()
         
+        if not hasattr(instance, 'log_format'):
+            instance._initialize_logging()
+        
         if name in cls._loggers:
             return cls._loggers[name]
         

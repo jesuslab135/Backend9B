@@ -16,6 +16,7 @@ class VwHabitTracking(models.Model):
         db_table = 'vw_habit_tracking'
         verbose_name = 'Habit Tracking'
         verbose_name_plural = 'Habit Tracking'
+        ordering = ['-fecha']
 
 class VwHabitStats(models.Model):
     
@@ -33,6 +34,7 @@ class VwHabitStats(models.Model):
         db_table = 'vw_habit_stats'
         verbose_name = 'Habit Statistics'
         verbose_name_plural = 'Habit Statistics'
+        ordering = ['consumidor_id']
 
 class VwHeartRateTimeline(models.Model):
     
@@ -52,6 +54,7 @@ class VwHeartRateTimeline(models.Model):
         db_table = 'vw_heart_rate_timeline'
         verbose_name = 'Heart Rate Timeline'
         verbose_name_plural = 'Heart Rate Timeline'
+        ordering = ['-fecha', '-hora']
 
 class VwHeartRateStats(models.Model):
     
@@ -69,6 +72,7 @@ class VwHeartRateStats(models.Model):
         db_table = 'vw_heart_rate_stats'
         verbose_name = 'Heart Rate Statistics'
         verbose_name_plural = 'Heart Rate Statistics'
+        ordering = ['consumidor_id']
 
 class VwPredictionTimeline(models.Model):
     
@@ -88,6 +92,7 @@ class VwPredictionTimeline(models.Model):
         db_table = 'vw_prediction_timeline'
         verbose_name = 'Prediction Timeline'
         verbose_name_plural = 'Prediction Timeline'
+        ordering = ['-fecha', '-hora']
 
 class VwPredictionSummary(models.Model):
     
@@ -104,6 +109,7 @@ class VwPredictionSummary(models.Model):
         db_table = 'vw_prediction_summary'
         verbose_name = 'Prediction Summary'
         verbose_name_plural = 'Prediction Summary'
+        ordering = ['consumidor_id']
 
 class VwDesiresTracking(models.Model):
     
@@ -123,11 +129,13 @@ class VwDesiresTracking(models.Model):
         db_table = 'vw_desires_tracking'
         verbose_name = 'Desires Tracking'
         verbose_name_plural = 'Desires Tracking'
+        ordering = ['-fecha_creacion']
 
 class VwDesiresStats(models.Model):
     
+    id = models.IntegerField(primary_key=True)
     consumidor_id = models.IntegerField()
-    deseo_tipo = models.CharField(max_length=50, primary_key=True)
+    deseo_tipo = models.CharField(max_length=50)
     total_deseos = models.IntegerField()
     deseos_resueltos = models.IntegerField()
     deseos_activos = models.IntegerField()
@@ -141,6 +149,7 @@ class VwDesiresStats(models.Model):
         db_table = 'vw_desires_stats'
         verbose_name = 'Desires Statistics'
         verbose_name_plural = 'Desires Statistics'
+        ordering = ['consumidor_id', 'deseo_tipo']
 
 class VwDailySummary(models.Model):
     
@@ -161,6 +170,7 @@ class VwDailySummary(models.Model):
         db_table = 'vw_daily_summary'
         verbose_name = 'Daily Summary'
         verbose_name_plural = 'Daily Summary'
+        ordering = ['-fecha']
 
 class VwWeeklyComparison(models.Model):
     
@@ -176,4 +186,5 @@ class VwWeeklyComparison(models.Model):
         db_table = 'vw_weekly_comparison'
         verbose_name = 'Weekly Comparison'
         verbose_name_plural = 'Weekly Comparison'
+        ordering = ['consumidor_id']
 
