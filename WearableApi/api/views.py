@@ -236,6 +236,132 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
             'message': message,
             'user': updated_serializer.data
         }, status=status.HTTP_200_OK)
+    
+    # ========================================
+    # SOFT DELETE ENDPOINTS (NEW)
+    # ========================================
+    
+    def destroy(self, request, *args, **kwargs):
+        """
+        Override destroy to prevent hard delete
+        Users must use soft_delete action instead
+        """
+        return Response(
+            {'error': 'Eliminación directa no permitida. Usa el endpoint soft_delete.'},
+            status=status.HTTP_403_FORBIDDEN
+        )
+    
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def soft_delete(self, request, pk=None):
+        """
+        Soft delete user account
+        
+        POST /api/usuarios/{id}/soft_delete/
+        
+        Response:
+        {
+            "message": "Cuenta eliminada exitosamente",
+            "deleted_at": "2025-11-16T10:30:00Z",
+            "can_restore_until": "2025-12-16T10:30:00Z"
+        }
+        """
+        try:
+            usuario = self.get_object()
+            
+            # Verify user is deleting their own account (or is admin)
+            if request.user.id != usuario.id and not request.user.is_administrador:
+                return Response(
+                    {'error': 'No tienes permiso para eliminar esta cuenta'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+            
+            # Check if already deleted
+            if usuario.is_deleted:
+                return Response(
+                    {'error': 'Esta cuenta ya está eliminada'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Perform soft delete
+            usuario.soft_delete()
+            
+            self.logger.info(f"Account soft deleted: {usuario.email} (ID: {usuario.id})")
+            
+            # Calculate restoration deadline
+            from datetime import timedelta
+            restore_deadline = usuario.deleted_at + timedelta(days=30)
+            
+            return Response({
+                'message': 'Cuenta desactivada exitosamente',
+                'deleted_at': usuario.deleted_at.isoformat(),
+                'can_restore_until': restore_deadline.isoformat(),
+                'restoration_days_left': 30
+            }, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            self.logger.error(f"Error during soft delete: {str(e)}")
+            return Response({
+                'error': 'Error al eliminar cuenta',
+                'detail': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def restore(self, request, pk=None):
+        """
+        Restore a soft-deleted account
+        
+        POST /api/usuarios/{id}/restore/
+        
+        Response:
+        {
+            "message": "Cuenta restaurada exitosamente"
+        }
+        """
+        try:
+            usuario = self.get_object()
+            
+            # Verify user is restoring their own account (or is admin)
+            if request.user.id != usuario.id and not request.user.is_administrador:
+                return Response(
+                    {'error': 'No tienes permiso para restaurar esta cuenta'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+            
+            # Check if account is actually deleted
+            if not usuario.is_deleted:
+                return Response(
+                    {'error': 'Esta cuenta no está eliminada'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Check if restoration period has expired
+            if not usuario.can_be_restored:
+                return Response(
+                    {'error': 'El período de restauración ha expirado (30 días)'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Restore account
+            usuario.restore()
+            
+            self.logger.info(f"Account restored: {usuario.email} (ID: {usuario.id})")
+            
+            return Response({
+                'message': 'Cuenta restaurada exitosamente',
+                'restored_at': timezone.now().isoformat()
+            }, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            self.logger.error(f"Error during account restoration: {str(e)}")
+            return Response({
+                'error': 'Error al restaurar cuenta',
+                'detail': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+    
+    # ========================================
+    # END SOFT DELETE ENDPOINTS
+    # ========================================
+
 
 
 class DeviceSessionViewSet(LoggingMixin, viewsets.ViewSet):

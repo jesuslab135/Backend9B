@@ -1,8 +1,6 @@
 # docker-compose.yml
 # Setup que funciona tanto en local como en producción
 
-version: '3.8'
-
 services:
   # PostgreSQL Database (Solo para producción)
   # En local, comentar o no levantar este servicio
