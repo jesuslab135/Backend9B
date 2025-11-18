@@ -112,7 +112,7 @@ BEFORE UPDATE ON habitos
 FOR EACH ROW
 EXECUTE FUNCTION update_timestamp();
 
-ALTER TABLE formularios 
+
 ADD COLUMN habitos JSONB;
 -- ==========================================================
 -- 1.4 Permisos base table
@@ -525,3 +525,6 @@ CREATE TRIGGER trigger_calculate_bmi
     ON consumidores
     FOR EACH ROW
     EXECUTE FUNCTION calculate_bmi();
+
+
+ALTER TABLE formularios 

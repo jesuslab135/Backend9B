@@ -171,6 +171,7 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.permissions.AllowAny',
     ],
     
     'DEFAULT_PARSER_CLASSES': [
@@ -220,11 +221,14 @@ SIMPLE_JWT = {
     'JTI_CLAIM': 'jti',
 }
 
+
+
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Health Tracker API',
     'DESCRIPTION': 'Complete API for health tracking with sensor data, ML predictions, and user management',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+    'SERVE_PERMISSIONS': ['rest_framework.permissions.AllowAny'],
     
     'SCHEMA_PATH_PREFIX': r'/api/',
     'COMPONENT_SPLIT_REQUEST': True,

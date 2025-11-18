@@ -28,11 +28,6 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
     serializer_class = UsuarioSerializer
     permission_classes = [IsAuthenticated]
     
-    def get_permissions(self):
-        if self.action in ['register', 'login', 'logout']:
-            return [AllowAny()]
-        return [permission() for permission in self.permission_classes]
-    
     @action(detail=False, methods=['post'], permission_classes=[AllowAny])
     def register(self, request):
         serializer = RegisterSerializer(data=request.data)
