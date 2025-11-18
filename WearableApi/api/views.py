@@ -627,6 +627,22 @@ class NotificacionViewSet(LoggingMixin, ConsumerFilterMixin, viewsets.ModelViewS
     ).all()
     serializer_class = NotificacionSerializer
     
+    # ✅ AGREGAR ESTE MÉTODO
+    def get_queryset(self):
+        """
+        Filtra notificaciones por consumidor y opcionalmente por estado leida
+        """
+        queryset = super().get_queryset()
+        
+        # Filtrar por leida si se proporciona el parámetro
+        leida_param = self.request.query_params.get('leida', None)
+        if leida_param is not None:
+            # Convertir string 'true'/'false' a booleano
+            leida_bool = leida_param.lower() in ['true', '1', 'yes']
+            queryset = queryset.filter(leida=leida_bool)
+        
+        return queryset
+    
     @action(detail=True, methods=['post'])
     def mark_read(self, request, pk=None):
         notificacion = self.get_object()

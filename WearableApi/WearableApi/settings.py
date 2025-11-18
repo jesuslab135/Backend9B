@@ -24,6 +24,7 @@ DEBUG = os.environ.get('DEBUG', 'False').lower() in ('true', '1', 'yes')
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'channels',
     'api',
 
     'rest_framework',
@@ -106,6 +108,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'WearableApi.wsgi.application'
+ASGI_APPLICATION = 'WearableApi.asgi.application'
 
 USE_DOCKER_DB = os.environ.get('USE_DOCKER_DB', 'false').lower() == 'true'
 
@@ -196,8 +199,8 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False,
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': False,
 
     'ALGORITHM': 'HS256',
@@ -388,6 +391,19 @@ if not DEBUG:
 
 ML_MODELS_DIR = os.path.join(BASE_DIR, 'models')
 os.makedirs(ML_MODELS_DIR, exist_ok=True)
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            # Usar el mismo Redis que Celery
+            "hosts": [os.environ.get('CELERY_BROKER_URL', 'redis://localhost:6379/0')],
+        },
+    },
+}
+
+print(f"🔌 WebSockets: {'✅ Enabled' if 'channels' in INSTALLED_APPS else '❌ Disabled'}")
+print("="*60)
 
 print("="*60)
 print("🚀 WearableApi Configuration")
