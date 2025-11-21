@@ -19,7 +19,9 @@ from celery.result import AsyncResult
 from api.tasks import (
     check_and_calculate_ventana_stats,
     calculate_ventana_statistics,
-    trigger_prediction_if_ready
+    trigger_prediction_if_ready,
+    check_sensor_activity,
+    stop_synthetic_generation
 )
 
 class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -141,9 +143,18 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
             }
             
             self.logger.info(
-                f"Auto-started monitoring session for consumer {consumidor.id} "
                 f"(Ventana {ventana.id})"
             )
+            
+            # ============================================
+            # SCHEDULE BACKUP DATA GENERATOR CHECK
+            # ============================================
+            # Wait 10 seconds, then check if we have received any data
+            check_sensor_activity.apply_async(
+                kwargs={'user_id': usuario.id, 'ventana_id': ventana.id},
+                countdown=10
+            )
+            self.logger.info(f"Scheduled sensor activity check for 10s from now")
         
         return Response(auth_data, status=status.HTTP_200_OK)
     
@@ -194,6 +205,9 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
                     self.logger.info(
                         f"Monitoring session stopped on logout: Consumer {consumidor.id}"
                     )
+                    
+                    # Stop any active synthetic data generator
+                    stop_synthetic_generation.delay(usuario.id)
             
             # Blacklist the token (if using token blacklist)
             # This depends on your JWT implementation
