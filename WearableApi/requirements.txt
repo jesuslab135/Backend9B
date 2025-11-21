@@ -20,3 +20,7 @@ pandas==2.3.3
 joblib==1.5.2
 django-sslserver==0.22
 dj-database-url>=2.0.0
+channels==4.0.0
+channels-redis==4.1.0
+daphne==4.0.0
+websockets==15.0.1
