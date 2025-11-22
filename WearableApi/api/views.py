@@ -555,6 +555,61 @@ class ConsumidorViewSet(LoggingMixin, viewsets.ModelViewSet):
     
     queryset = Consumidor.objects.select_related('usuario').all()
     serializer_class = ConsumidorSerializer
+    
+    @action(detail=True, methods=['patch'], permission_classes=[IsAuthenticated])
+    def toggle_simulation(self, request, pk=None):
+        """
+        Activar/desactivar la simulación de datos para un consumidor.
+        Solo los administradores pueden hacerlo.
+        
+        PATCH /api/consumidores/{id}/toggle_simulation/
+        Body: {"is_simulating": true}
+        
+        Response:
+        {
+            "success": true,
+            "consumidor_id": 22,
+            "is_simulating": true,
+            "message": "Simulación activada exitosamente"
+        }
+        """
+        try:
+            # Verificar que el usuario sea administrador
+            if request.user.rol != 'administrador':
+                return Response({
+                    'error': 'Solo los administradores pueden controlar las simulaciones'
+                }, status=status.HTTP_403_FORBIDDEN)
+            
+            consumidor = self.get_object()
+            is_simulating = request.data.get('is_simulating', None)
+            
+            if is_simulating is None:
+                return Response({
+                    'error': 'El campo "is_simulating" es requerido (true/false)'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            consumidor.is_simulating = is_simulating
+            consumidor.save()
+            
+            # Registrar en logs
+            self.logger.info(
+                f"{'[Simulación ACTIVADA]' if is_simulating else '[Simulación DESACTIVADA]'} "
+                f"para consumidor {consumidor.id} por admin {request.user.id}"
+            )
+            
+            return Response({
+                'success': True,
+                'consumidor_id': consumidor.id,
+                'is_simulating': consumidor.is_simulating,
+                'message': f"Simulación {'activada' if is_simulating else 'desactivada'} exitosamente"
+            }, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            self.logger.error(f"Error al cambiar estado de simulación: {str(e)}")
+            return Response({
+                'error': 'Error al cambiar estado de simulación',
+                'detail': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class EmocionViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Emocion.objects.all()

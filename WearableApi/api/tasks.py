@@ -269,6 +269,7 @@ def predict_smoking_craving(self, user_id, features_dict=None):
 def simulate_wearable_cycle(self, ventana_id=None):
     """
     Simulates wearable sensor data.
+    Solo genera datos para consumidores con is_simulating=True
     
     Args:
         ventana_id (int, optional): If provided, generates data for this SPECIFIC window (User Session).
@@ -287,15 +288,34 @@ def simulate_wearable_cycle(self, ventana_id=None):
                 ventana = Ventana.objects.get(id=ventana_id)
                 consumidor = ventana.consumidor
                 usuario = consumidor.usuario
+                
+                # ✅ VERIFICAR SI LA SIMULACIÓN ESTÁ ACTIVADA
+                if not consumidor.is_simulating:
+                    logger.info(f"[SKIP] Simulación DESACTIVADA para consumidor {consumidor.id}")
+                    return {
+                        'success': False, 
+                        'error': 'Simulation disabled for this consumer',
+                        'consumidor_id': consumidor.id
+                    }
+                
                 logger.info(f"[TARGET] Generando datos para Usuario: {usuario.email}")
             except Ventana.DoesNotExist:
                 logger.error(f"[ERROR] Ventana {ventana_id} no existe. Abortando.")
                 return {'success': False, 'error': 'Ventana not found'}
         else:
-            # LEGACY MODE: Random consumer
-            consumidores = list(Consumidor.objects.select_related('usuario').all())
+            # LEGACY MODE: Solo consumidores con simulación ACTIVADA
+            consumidores = list(
+                Consumidor.objects.filter(is_simulating=True)
+                .select_related('usuario')
+            )
+            
             if not consumidores:
-                return {'success': False, 'error': 'No hay consumidores'}
+                logger.info("[SKIP] No hay consumidores con simulación activa")
+                return {
+                    'success': False, 
+                    'error': 'No consumers with simulation enabled'
+                }
+            
             consumidor = random.choice(consumidores)
             usuario = consumidor.usuario
             

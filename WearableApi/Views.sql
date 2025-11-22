@@ -221,15 +221,9 @@ SELECT
     COUNT(d.id) AS total_deseos,
     COUNT(d.id) FILTER (WHERE d.resolved = TRUE) AS deseos_resueltos,
     COUNT(d.id) FILTER (WHERE d.resolved = FALSE) AS deseos_activos,
-    ROUND(
-        (COUNT(d.id) FILTER (WHERE d.resolved = TRUE)::NUMERIC / NULLIF(COUNT(d.id), 0)) * 100,
-        2
-    ) AS porcentaje_resolucion,
-    ROUND(
-        AVG(EXTRACT(EPOCH FROM (d.updated_at - d.created_at)) / 3600) 
-        FILTER (WHERE d.resolved = TRUE)::NUMERIC,
-        2
-    ) AS promedio_horas_resolucion,
+    (COUNT(d.id) FILTER (WHERE d.resolved = TRUE)::FLOAT / NULLIF(COUNT(d.id), 0)) * 100 AS porcentaje_resolucion,
+    AVG(EXTRACT(EPOCH FROM (d.updated_at - d.created_at)) / 3600) 
+        FILTER (WHERE d.resolved = TRUE) AS promedio_horas_resolucion,
     COUNT(d.id) FILTER (WHERE DATE(d.created_at) = CURRENT_DATE) AS deseos_hoy,
     COUNT(d.id) FILTER (WHERE DATE(d.updated_at) = CURRENT_DATE AND d.resolved = TRUE) AS deseos_resueltos_hoy
 FROM deseos d

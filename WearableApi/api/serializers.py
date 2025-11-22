@@ -67,7 +67,8 @@ class ConsumidorSerializer(serializers.ModelSerializer):
         model = Consumidor
         fields = [
             'id', 'usuario', 'usuario_id', 'edad', 'peso', 'altura', 
-            'bmi', 'bmi_category', 'genero', 'created_at', 'updated_at'
+            'bmi', 'bmi_category', 'genero', 'is_simulating', 
+            'created_at', 'updated_at'
         ]
         read_only_fields = ['id', 'bmi', 'bmi_category', 'created_at', 'updated_at']
 

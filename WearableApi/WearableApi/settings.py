@@ -171,7 +171,6 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-        'rest_framework.permissions.AllowAny',
     ],
     
     'DEFAULT_PARSER_CLASSES': [
@@ -182,6 +181,11 @@ REST_FRAMEWORK = {
     
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'api.authentication.CustomJWTAuthentication',
+    ],
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        # NO pongas IsAuthenticated aquí - deja que cada view maneje sus permisos
+        'rest_framework.permissions.AllowAny',  # ← Temporal para desarrollo
     ],
     
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -235,13 +239,49 @@ SPECTACULAR_SETTINGS = {
     
     'SWAGGER_UI_SETTINGS': {
         'deepLinking': True,
-        'persistAuthorization': True,
+        'persistAuthorization': True,  # Keeps your token after page refresh
         'displayOperationId': True,
         'filter': True,
     },
     
-    'SECURITY': [],
+    # ==========================================================================
+    # ✅ JWT BEARER AUTHENTICATION FOR SWAGGER
+    # ==========================================================================
+    # This adds the "Authorize" button to Swagger so you can add your JWT token
+    
+    'SECURITY': [
+        {
+            'Bearer': []  # Tells Swagger to use Bearer authentication
+        }
+    ],
+    
+    'COMPONENTS': {
+        'securitySchemes': {
+            'Bearer': {
+                'type': 'http',
+                'scheme': 'bearer',
+                'bearerFormat': 'JWT',
+                'description': (
+                    'Enter your JWT token from the login response. '
+                    'Format: Bearer <your-token-here>'
+                )
+            }
+        }
+    },
+    
+    # Optional: Customize which endpoints require authentication
+    # By default, all endpoints will show the lock icon in Swagger
+    'APPEND_COMPONENTS': {
+        'securitySchemes': {
+            'Bearer': {
+                'type': 'http',
+                'scheme': 'bearer',
+                'bearerFormat': 'JWT',
+            }
+        }
+    },
 }
+
 
 LOGS_DIR = BASE_DIR / 'logs'
 LOGS_DIR.mkdir(exist_ok=True)
