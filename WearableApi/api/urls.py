@@ -41,6 +41,7 @@ router.register(r'dashboard/desires-stats', views.VwDesiresStatsViewSet, basenam
 router.register(r'dashboard/daily-summary', views.VwDailySummaryViewSet, basename='dashboard-daily-summary')
 router.register(r'dashboard/weekly-comparison', views.VwWeeklyComparisonViewSet, basename='dashboard-weekly-comparison')
 router.register(r'dashboard/heart-rate-today', views.VwHeartRateTodayViewSet, basename='dashboard-heart-rate-today')
+router.register(r'dashboard/sensor-data', views.SensorDataViewSet, basename='dashboard-sensor-data')
 
 urlpatterns = [
     path('', include(router.urls)),

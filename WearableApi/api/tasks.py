@@ -623,39 +623,181 @@ def check_and_calculate_ventana_stats(self, ventana_id, min_readings=5):
 @shared_task(bind=True)
 def periodic_ventana_calculation(self):
     """
-    Periodic task to calculate statistics for all active ventanas
-    Run this every 5-10 minutes via Celery Beat
+    Periodic task to create and process 5-minute sliding windows
+    Run this EVERY 5 MINUTES via Celery Beat
+    
+    For each active consumer (with active session):
+    1. Create a new 5-minute ventana
+    2. Move lecturas from previous ventana to new ventana if needed
+    3. Calculate statistics for completed ventanas
+    4. Trigger ML predictions
     """
     try:
-        logger.info("[PERIODIC] Starting periodic ventana calculation")
+        logger.info("[PERIODIC-5MIN] Starting 5-minute ventana cycle")
         
-        # Get all ventanas from the last hour that have lecturas but no calculated stats
-        one_hour_ago = timezone.now() - timedelta(hours=1)
+        now = timezone.now()
+        five_minutes_ago = now - timedelta(minutes=5)
         
-        ventanas_to_process = Ventana.objects.filter(
-            window_start__gte=one_hour_ago,
-            hr_mean__isnull=True  # Not yet calculated
-        ).annotate(
-            lectura_count=models.Count('lecturas')
-        ).filter(
-            lectura_count__gte=5  # At least 5 readings
+        # Get all consumers with active sessions (logged in recently)
+        # Check cache for active sessions
+        from django.core.cache import cache
+        
+        # Get all consumidores with active monitoring sessions
+        active_sessions = []
+        for key in cache.keys('active_session:*'):
+            session_data = cache.get(key)
+            if session_data:
+                active_sessions.append(session_data['consumidor_id'])
+        
+        if not active_sessions:
+            logger.info("[PERIODIC-5MIN] No active consumer sessions found")
+            return {
+                'success': True,
+                'message': 'No active sessions'
+            }
+        
+        logger.info(f"[PERIODIC-5MIN] Processing {len(active_sessions)} active consumers")
+        
+        ventanas_created = 0
+        ventanas_calculated = 0
+        predictions_triggered = 0
+        
+        for consumidor_id in active_sessions:
+            try:
+                consumidor = Consumidor.objects.get(id=consumidor_id)
+                usuario = consumidor.usuario
+                
+                # Get the current active ventana for this consumer
+                current_ventana = Ventana.objects.filter(
+                    consumidor=consumidor,
+                    window_end__gt=now  # Still active
+                ).order_by('-window_start').first()
+                
+                if not current_ventana:
+                    logger.warning(f"[PERIODIC-5MIN] No active ventana for consumer {consumidor_id}")
+                    continue
+                
+                # Check if it's time to close this window and create a new one
+                # Windows are 5 minutes long
+                window_duration = (now - current_ventana.window_start).total_seconds() / 60
+                
+                if window_duration >= 5:
+                    logger.info(
+                        f"[PERIODIC-5MIN] Closing ventana {current_ventana.id} "
+                        f"for consumer {consumidor_id} (duration: {window_duration:.1f}min)"
+                    )
+                    
+                    # 1. Calculate statistics for the completed window
+                    lectura_count = Lectura.objects.filter(ventana=current_ventana).count()
+                    
+                    if lectura_count >= 5:  # Minimum readings for valid stats
+                        logger.info(
+                            f"[PERIODIC-5MIN] Calculating stats for ventana {current_ventana.id} "
+                            f"({lectura_count} readings)"
+                        )
+                        
+                        # Calculate statistics synchronously (it's fast)
+                        result = calculate_ventana_statistics.apply_async(
+                            args=[current_ventana.id]
+                        ).get(timeout=10)
+                        
+                        if result.get('success'):
+                            ventanas_calculated += 1
+                            
+                            # Send WebSocket update for heart rate data
+                            try:
+                                from channels.layers import get_channel_layer
+                                from asgiref.sync import async_to_sync
+                                
+                                channel_layer = get_channel_layer()
+                                
+                                # Refresh ventana to get calculated values
+                                current_ventana.refresh_from_db()
+                                
+                                async_to_sync(channel_layer.group_send)(
+                                    f'heart_rate_{consumidor_id}',
+                                    {
+                                        'type': 'hr_update',
+                                        'data': {
+                                            'ventana_id': current_ventana.id,
+                                            'window_start': current_ventana.window_start.isoformat(),
+                                            'window_end': current_ventana.window_end.isoformat(),
+                                            'hr_mean': float(current_ventana.hr_mean) if current_ventana.hr_mean else None,
+                                            'hr_std': float(current_ventana.hr_std) if current_ventana.hr_std else None,
+                                        }
+                                    }
+                                )
+                                logger.debug(f"💓 WebSocket HR update sent for ventana {current_ventana.id}")
+                            except Exception as ws_error:
+                                logger.warning(f"Failed to send WebSocket HR update: {ws_error}")
+                            
+                            # 2. Trigger ML prediction
+                            logger.info(
+                                f"[PERIODIC-5MIN] Triggering prediction for "
+                                f"user {usuario.id}, ventana {current_ventana.id}"
+                            )
+                            
+                            predict_smoking_craving.delay(usuario.id, features_dict=None)
+                            predictions_triggered += 1
+                    else:
+                        logger.warning(
+                            f"[PERIODIC-5MIN] Not enough readings for ventana {current_ventana.id} "
+                            f"({lectura_count} < 5)"
+                        )
+                    
+                    # 3. Create new 5-minute window
+                    new_ventana = Ventana.objects.create(
+                        consumidor=consumidor,
+                        window_start=now,
+                        window_end=now + timedelta(minutes=5)
+                    )
+                    
+                    ventanas_created += 1
+                    
+                    logger.info(
+                        f"[PERIODIC-5MIN] Created new ventana {new_ventana.id} "
+                        f"for consumer {consumidor_id}"
+                    )
+                    
+                    # Update session cache with new ventana
+                    session_key = f'active_session:{consumidor_id}'
+                    session_data = cache.get(session_key)
+                    if session_data:
+                        session_data['ventana_id'] = new_ventana.id
+                        cache.set(session_key, session_data, timeout=28800)
+                        
+                        # Also update device session
+                        device_key = f"device_session:{session_data.get('device_id', 'default')}"
+                        device_data = cache.get(device_key)
+                        if device_data:
+                            device_data['ventana_id'] = new_ventana.id
+                            cache.set(device_key, device_data, timeout=28800)
+                
+            except Consumidor.DoesNotExist:
+                logger.error(f"[PERIODIC-5MIN] Consumidor {consumidor_id} not found")
+                continue
+            except Exception as e:
+                logger.error(
+                    f"[PERIODIC-5MIN] Error processing consumer {consumidor_id}: {e}"
+                )
+                continue
+        
+        logger.info(
+            f"[PERIODIC-5MIN] ✓ Cycle complete: "
+            f"{ventanas_created} created, {ventanas_calculated} calculated, "
+            f"{predictions_triggered} predictions triggered"
         )
-        
-        processed_count = 0
-        for ventana in ventanas_to_process:
-            logger.info(f"[PERIODIC] Processing Ventana {ventana.id}")
-            calculate_ventana_statistics.delay(ventana.id)
-            processed_count += 1
-        
-        logger.info(f"[PERIODIC] ✓ Triggered calculation for {processed_count} ventanas")
         
         return {
             'success': True,
-            'ventanas_processed': processed_count
+            'ventanas_created': ventanas_created,
+            'ventanas_calculated': ventanas_calculated,
+            'predictions_triggered': predictions_triggered,
+            'active_consumers': len(active_sessions)
         }
         
     except Exception as exc:
-        logger.error(f"[PERIODIC] Error in periodic calculation: {exc}")
+        logger.error(f"[PERIODIC-5MIN] Error in periodic calculation: {exc}")
         return {
             'success': False,
             'error': str(exc)

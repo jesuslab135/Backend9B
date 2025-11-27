@@ -99,13 +99,15 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
         
         if hasattr(usuario, 'consumidor'):
             consumidor = usuario.consumidor
-            device_id = 'default'  # Can be customized if multiple devices
+            # Use device_id from request if provided, otherwise use 'default'
+            device_id = request.data.get('device_id', 'default')
             
-            # Create new ventana for this session
+            # Create first 5-minute ventana for this session
+            now = timezone.now()
             ventana = Ventana.objects.create(
                 consumidor=consumidor,
-                window_start=timezone.now(),
-                window_end=timezone.now() + timezone.timedelta(hours=8)  # 8-hour session
+                window_start=now,
+                window_end=now + timezone.timedelta(minutes=5)  # 5-minute window
             )
             
             # Generate session ID
@@ -373,7 +375,7 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 
 
-class DeviceSessionViewSet(LoggingMixin, viewsets.ViewSet):
+class DeviceSessionViewSet(LoggingMixin, viewsets.GenericViewSet):
     """
     ViewSet for ESP32 device session management
     Sessions are automatically created on consumer login
@@ -383,6 +385,9 @@ class DeviceSessionViewSet(LoggingMixin, viewsets.ViewSet):
     - GET /device-session/active/ - Get active session info (website, requires auth)
     - POST /device-session/extend-window/ - Extend ventana window (ESP32, no auth)
     """
+    # Required for GenericViewSet even though we don't use it for these actions
+    queryset = Ventana.objects.none()
+    serializer_class = VentanaSerializer
     
     def get_permissions(self):
         """
@@ -392,7 +397,7 @@ class DeviceSessionViewSet(LoggingMixin, viewsets.ViewSet):
             return [AllowAny()]
         return [IsAuthenticated()]
     
-    @action(detail=False, methods=['post'], permission_classes=[AllowAny])
+    @action(detail=False, methods=['post'], permission_classes=[AllowAny], url_path='check-session')
     def check_session(self, request):
         """
         ESP32 checks if there's an active session for this device
@@ -503,7 +508,7 @@ class DeviceSessionViewSet(LoggingMixin, viewsets.ViewSet):
                 'detail': str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
     
-    @action(detail=False, methods=['post'], permission_classes=[AllowAny])
+    @action(detail=False, methods=['post'], permission_classes=[AllowAny], url_path='extend-window')
     def extend_window(self, request):
         """
         Extend the current ventana window
@@ -670,12 +675,69 @@ class DeseoViewSet(LoggingMixin, ConsumerFilterMixin, viewsets.ModelViewSet):
     queryset = Deseo.objects.select_related('consumidor__usuario', 'ventana').all()
     serializer_class = DeseoSerializer
     
+    def perform_create(self, serializer):
+        """Override to send WebSocket update when desire is created"""
+        deseo = serializer.save()
+        
+        # Send WebSocket update
+        try:
+            from channels.layers import get_channel_layer
+            from asgiref.sync import async_to_sync
+            from .models import DeseoTipoChoices
+            
+            channel_layer = get_channel_layer()
+            consumidor_id = deseo.consumidor_id
+            
+            # Get human-readable tipo label
+            tipo_label = dict(DeseoTipoChoices.choices).get(deseo.tipo, deseo.tipo)
+            
+            async_to_sync(channel_layer.group_send)(
+                f'desires_{consumidor_id}',
+                {
+                    'type': 'desire_update',
+                    'data': {
+                        'action': 'created',
+                        'deseo_id': deseo.id,
+                        'tipo': tipo_label,
+                        'fecha': deseo.created_at.isoformat(),
+                    }
+                }
+            )
+            self.logger.debug(f"🚬 WebSocket desire created update sent")
+        except Exception as ws_error:
+            self.logger.warning(f"Failed to send WebSocket desire update: {ws_error}")
+        
+        return deseo
+    
     @action(detail=True, methods=['post'])
     def resolve(self, request, pk=None):
         deseo = self.get_object()
         deseo.mark_resolved()
         
         self.logger.info(f"Desire {pk} marked as resolved")
+        
+        # Send WebSocket update
+        try:
+            from channels.layers import get_channel_layer
+            from asgiref.sync import async_to_sync
+            
+            channel_layer = get_channel_layer()
+            consumidor_id = deseo.consumidor_id
+            
+            async_to_sync(channel_layer.group_send)(
+                f'desires_{consumidor_id}',
+                {
+                    'type': 'desire_update',
+                    'data': {
+                        'action': 'resolved',
+                        'deseo_id': deseo.id,
+                        'resolved': True,
+                    }
+                }
+            )
+            self.logger.debug(f"🚬 WebSocket desire resolved update sent")
+        except Exception as ws_error:
+            self.logger.warning(f"Failed to send WebSocket desire update: {ws_error}")
         
         return Response({
             'message': 'Desire marked as resolved',
@@ -917,22 +979,42 @@ class LecturaViewSet(LoggingMixin, viewsets.ModelViewSet):
                 f"Gyro=({data.get('gyro_x')}, {data.get('gyro_y')}, {data.get('gyro_z')})"
             )
             
-            # TRIGGER CELERY TASKS
-            # Check if we have enough readings to calculate statistics
-            lectura_count = Lectura.objects.filter(ventana_id=ventana_id).count()
+            # NOTE: Ventana calculations are now handled by periodic_ventana_calculation
+            # which runs every 5 minutes via Celery Beat. This ensures:
+            # 1. Windows are exactly 5 minutes long
+            # 2. ML predictions run on schedule, not on reading count
+            # 3. No race conditions or duplicate calculations
             
-            # Trigger check and calculation every 5 readings
-            # This prevents overwhelming the task queue
-            if lectura_count % 5 == 0:
-                self.logger.info(
-                    f"📊 Triggering ventana calculation check (count: {lectura_count})"
+            self.logger.debug(f"✓ Lectura saved to ventana {ventana_id}")
+            
+            # Send WebSocket update for real-time sensor data
+            try:
+                from channels.layers import get_channel_layer
+                from asgiref.sync import async_to_sync
+                
+                channel_layer = get_channel_layer()
+                consumidor_id = ventana.consumidor_id
+                
+                async_to_sync(channel_layer.group_send)(
+                    f'sensor_data_{consumidor_id}',
+                    {
+                        'type': 'sensor_update',
+                        'lectura': {
+                            'id': lectura.id,
+                            'heart_rate': float(lectura.heart_rate) if lectura.heart_rate else None,
+                            'accel_x': float(lectura.accel_x) if lectura.accel_x else None,
+                            'accel_y': float(lectura.accel_y) if lectura.accel_y else None,
+                            'accel_z': float(lectura.accel_z) if lectura.accel_z else None,
+                            'gyro_x': float(lectura.gyro_x) if lectura.gyro_x else None,
+                            'gyro_y': float(lectura.gyro_y) if lectura.gyro_y else None,
+                            'gyro_z': float(lectura.gyro_z) if lectura.gyro_z else None,
+                            'created_at': lectura.created_at.isoformat(),
+                        }
+                    }
                 )
-                check_and_calculate_ventana_stats.delay(ventana_id, min_readings=5)
-            
-            # If ventana is ending soon, force calculation
-            if ventana.window_end and timezone.now() >= ventana.window_end:
-                self.logger.info(f"⏰ Ventana {ventana_id} window ended, forcing calculation")
-                calculate_ventana_statistics.delay(ventana_id)
+                self.logger.debug(f"📡 WebSocket sensor update sent to consumidor {consumidor_id}")
+            except Exception as ws_error:
+                self.logger.warning(f"Failed to send WebSocket update: {ws_error}")
             
             headers = self.get_success_headers(serializer.data)
             return Response(
@@ -941,8 +1023,6 @@ class LecturaViewSet(LoggingMixin, viewsets.ModelViewSet):
                     'id': lectura.id,
                     'ventana_id': ventana_id,
                     'message': 'Sensor data saved successfully',
-                    'lectura_count': lectura_count,
-                    'calculation_pending': lectura_count % 5 == 0,
                     'data': serializer.data
                 },
                 status=status.HTTP_201_CREATED,
@@ -1091,3 +1171,69 @@ class LecturaViewSet(LoggingMixin, viewsets.ModelViewSet):
                 'ventanas_pending': ventanas_pending,
                 'calculation_rate': f"{(ventanas_calculated/total_ventanas*100):.1f}%" if total_ventanas > 0 else "0%"
             })
+
+class SensorDataViewSet(LoggingMixin, ConsumerFilterMixin, ReadOnlyMixin, viewsets.ModelViewSet):
+    """
+    ViewSet for retrieving latest sensor readings for dashboard display.
+    
+    Provides a list endpoint that returns the most recent sensor readings (last 50)
+    for visualization purposes. Requires consumidor_id as query parameter.
+    """
+    queryset = Lectura.objects.all()
+    serializer_class = LecturaSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        """
+        Filter lecturas by consumidor_id and return the most recent 50 readings.
+        """
+        queryset = super().get_queryset()
+        consumidor_id = self.request.query_params.get('consumidor_id')
+        
+        if consumidor_id:
+            queryset = queryset.filter(
+                ventana__consumidor_id=consumidor_id
+            ).select_related('ventana').order_by('-created_at')[:50]
+        
+        return queryset
+    
+    def list(self, request, *args, **kwargs):
+        """
+        List latest sensor readings with formatted response.
+        """
+        consumidor_id = request.query_params.get('consumidor_id')
+        
+        if not consumidor_id:
+            return Response(
+                {'error': 'consumidor_id parameter is required'}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        try:
+            lecturas = self.get_queryset()
+            
+            # Format data for frontend - use created_at instead of timestamp
+            data = []
+            for lectura in lecturas:
+                data.append({
+                    'id': lectura.id,
+                    'created_at': lectura.created_at.isoformat(),  # ✓ Changed from timestamp
+                    'updated_at': lectura.updated_at.isoformat(),  # ✓ Also include updated_at
+                    'heart_rate': float(lectura.heart_rate) if lectura.heart_rate else None,
+                    'accel_x': float(lectura.accel_x) if lectura.accel_x else None,
+                    'accel_y': float(lectura.accel_y) if lectura.accel_y else None,
+                    'accel_z': float(lectura.accel_z) if lectura.accel_z else None,
+                    'gyro_x': float(lectura.gyro_x) if lectura.gyro_x else None,
+                    'gyro_y': float(lectura.gyro_y) if lectura.gyro_y else None,
+                    'gyro_z': float(lectura.gyro_z) if lectura.gyro_z else None,
+                    'ventana_id': lectura.ventana_id,
+                })
+            
+            return Response(data, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            self.logger.error(f"Error fetching sensor data: {str(e)}")
+            return Response(
+                {'error': f'Failed to fetch sensor data: {str(e)}'}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

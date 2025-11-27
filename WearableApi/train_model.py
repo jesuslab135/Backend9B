@@ -12,8 +12,9 @@ django.setup()
 from api.models import Lectura, Ventana, Analisis, Consumidor
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, classification_report
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, classification_report, confusion_matrix
 
 def extract_features_from_lecturas():
     print("📊 Extrayendo datos de la base de datos...")
@@ -119,6 +120,8 @@ def get_labels():
     print("⚠️  No hay análisis previos. Generando labels sintéticos...")
     print("💡 En producción, debes etiquetar los datos realmente")
     
+    from django.db.models import Avg
+    
     ventanas = Ventana.objects.all()
     if ventanas.count() == 0:
         print("❌ No hay ventanas en la base de datos")
@@ -128,7 +131,7 @@ def get_labels():
     for ventana in ventanas:
         lecturas = Lectura.objects.filter(ventana=ventana)
         if lecturas.exists():
-            hr_mean = lecturas.aggregate(hr=models.Avg('heart_rate'))['hr'] or 70
+            hr_mean = lecturas.aggregate(hr=Avg('heart_rate'))['hr'] or 70
             urge_label = 1 if hr_mean > 90 else 0
         else:
             urge_label = 0
@@ -168,8 +171,12 @@ def train_model():
     
     print(f"✅ Dataset final: {len(data)} muestras")
     
+    # ⚠️ IMPORTANTE: Remover ventana_id para evitar data leakage
     X = data.drop(['ventana_id', 'urge_label'], axis=1)
     y = data['urge_label']
+    
+    print(f"\n📊 Features usados en el modelo: {list(X.columns)}")
+    print(f"   Total features: {len(X.columns)}")
     
     print(f"\n📊 Distribución de clases:")
     print(f"   - Sin deseo (0): {(y == 0).sum()} muestras ({(y == 0).mean()*100:.1f}%)")
@@ -199,17 +206,59 @@ def train_model():
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
     
-    print("\n🎓 Entrenando Logistic Regression...")
-    model = LogisticRegression(
-        max_iter=1000,
-        random_state=42,
-        class_weight='balanced',
-        C=0.1,
-        penalty='l2',
-        solver='lbfgs'
-    )
-    model.fit(X_train_scaled, y_train)
-    print("✅ Modelo entrenado!")
+    print("\n🤖 Eligiendo modelo...")
+    print("   Opción 1: Logistic Regression (interpretable, rápido)")
+    print("   Opción 2: Random Forest (más robusto, menos overfitting)")
+    
+    # Probar ambos modelos
+    use_random_forest = len(data) > 80  # RF para datasets más grandes
+    
+    if use_random_forest:
+        print("\n🌲 Entrenando Random Forest...")
+        model = RandomForestClassifier(
+            n_estimators=100,
+            max_depth=5,  # Limitar profundidad para evitar overfitting
+            min_samples_split=10,
+            min_samples_leaf=5,
+            random_state=42,
+            class_weight='balanced',
+            max_features='sqrt'
+        )
+        model.fit(X_train_scaled, y_train)
+        print("✅ Random Forest entrenado!")
+        
+        # Feature importance para Random Forest
+        feature_importance = pd.DataFrame({
+            'feature': X.columns,
+            'importance': model.feature_importances_
+        }).sort_values('importance', ascending=False)
+        
+        print("\n🔍 Top 5 features más importantes:")
+        for idx, row in feature_importance.head(5).iterrows():
+            print(f"   🌟 {row['feature']}: {row['importance']:.4f}")
+    else:
+        print("\n🎓 Entrenando Logistic Regression con regularización...")
+        model = LogisticRegression(
+            max_iter=1000,
+            random_state=42,
+            class_weight='balanced',
+            C=1.0,  # Regularización moderada
+            penalty='l2',
+            solver='lbfgs'
+        )
+        model.fit(X_train_scaled, y_train)
+        print("✅ Logistic Regression entrenado!")
+        
+        # Mostrar features más importantes
+        feature_importance = pd.DataFrame({
+            'feature': X.columns,
+            'coefficient': model.coef_[0]
+        }).sort_values('coefficient', key=abs, ascending=False)
+        
+        print("\n🔍 Top 5 features más influyentes:")
+        for idx, row in feature_importance.head(5).iterrows():
+            direction = "↑" if row['coefficient'] > 0 else "↓"
+            print(f"   {direction} {row['feature']}: {row['coefficient']:.4f}")
     
     print("\n📈 Evaluando modelo...")
     
@@ -232,10 +281,19 @@ def train_model():
     print(f"      - Recall:    {recall:.3f}")
     print(f"      - F1-Score:  {f1:.3f}")
     
+    # Validación de sanity check
+    if train_accuracy >= 0.99:
+        print(f"\n⚠️  ALERTA: Train accuracy sospechosamente alta ({train_accuracy:.3f})")
+        print(f"   Posible data leakage o features con información del futuro")
+        print(f"   Verifica que no estés usando IDs o timestamps como features")
+    
     if train_accuracy - accuracy > 0.15:
         print(f"\n⚠️  WARNING: Posible overfitting detectado!")
         print(f"   Train accuracy ({train_accuracy:.3f}) >> Test accuracy ({accuracy:.3f})")
         print(f"   Considera: más datos, más regularización, o features más simples")
+    elif train_accuracy - accuracy < 0.05:
+        print(f"\n✅ Buen balance train/test ({train_accuracy:.3f} vs {accuracy:.3f})")
+        print(f"   El modelo generaliza bien")
     
     if len(y_test.unique()) > 1:
         roc_auc = roc_auc_score(y_test, y_pred_proba)
@@ -243,6 +301,16 @@ def train_model():
     
     print("\n📊 Reporte de clasificación:")
     print(classification_report(y_test, y_pred, zero_division=0))
+    
+    print("\n🎯 Matriz de confusión:")
+    cm = confusion_matrix(y_test, y_pred)
+    print(f"   TN: {cm[0][0]:3d}  |  FP: {cm[0][1]:3d}")
+    print(f"   FN: {cm[1][0]:3d}  |  TP: {cm[1][1]:3d}")
+    
+    if cm[0][1] > 0:
+        print(f"\n⚠️  {cm[0][1]} Falsos Positivos (predijo craving cuando no había)")
+    if cm[1][0] > 0:
+        print(f"⚠️  {cm[1][0]} Falsos Negativos (perdió {cm[1][0]} cravings reales)")
     
     os.makedirs('models', exist_ok=True)
     
@@ -285,10 +353,10 @@ def train_model():
 
 def generate_synthetic_window(consumidor, pattern_type):
     """
-    Helper to generate a window with specific patterns:
+    Helper to generate a window with MORE REALISTIC and OVERLAPPING patterns:
     - 'rest': Low HR, Low Motion (Label 0)
     - 'exercise': High HR, High Motion (Label 0)
-    - 'craving': Elevated HR, Low Motion (Label 1)
+    - 'craving': Elevated HR, Moderate Motion (Label 1) - OVERLAP with rest/exercise
     """
     from django.utils import timezone
     
@@ -299,30 +367,43 @@ def generate_synthetic_window(consumidor, pattern_type):
         window_end=window_start + timezone.timedelta(minutes=5)
     )
     
-    # Define base parameters based on pattern
+    # Define base parameters with MORE OVERLAP to make it realistic
     if pattern_type == 'craving':
-        # CRAVING: Elevated HR but user is sitting still (anxiety/stress)
-        hr_base = np.random.uniform(85, 100)
-        motion_intensity = 0.1  # Very low motion
+        # CRAVING: Slightly elevated HR, moderate motion (NOT perfect separation)
+        hr_base = np.random.uniform(75, 95)  # Overlap with rest and light exercise
+        motion_intensity = np.random.uniform(0.3, 0.8)  # Some motion variance
+        hr_variance = 8  # Higher variance (stress/anxiety)
         urge_label = 1
     elif pattern_type == 'exercise':
-        # EXERCISE: High HR and High Motion
-        hr_base = np.random.uniform(110, 140)
-        motion_intensity = 2.5  # High motion
+        # EXERCISE: High HR and High Motion (but some overlap with craving HR)
+        hr_base = np.random.uniform(95, 130)  # Can overlap with craving
+        motion_intensity = np.random.uniform(1.5, 3.0)  # High motion
+        hr_variance = 12  # High variance during activity
         urge_label = 0
     else: # 'rest'
-        # REST: Low HR and Low Motion
-        hr_base = np.random.uniform(60, 75)
-        motion_intensity = 0.2  # Low motion
+        # REST: Low HR and Low Motion (but can have outliers)
+        hr_base = np.random.uniform(60, 80)  # Can overlap with craving
+        motion_intensity = np.random.uniform(0.1, 0.5)  # Some fidgeting
+        hr_variance = 5  # Low variance at rest
         urge_label = 0
+    
+    # Add outlier windows (10% chance) to make it harder
+    if np.random.random() < 0.1:
+        hr_base += np.random.choice([-10, 10])  # Sudden change
+        motion_intensity += np.random.uniform(-0.2, 0.2)
         
     for _ in range(30):
-        # Add some random fluctuation
-        hr = np.random.normal(hr_base, 5)
+        # Add realistic fluctuation with noise
+        hr = np.random.normal(hr_base, hr_variance)
         
-        # Motion components
-        accel = np.random.normal(motion_intensity, motion_intensity * 0.5)
-        gyro = np.random.normal(motion_intensity * 0.5, motion_intensity * 0.2)
+        # Add motion noise and outliers (sensor errors)
+        accel = np.abs(np.random.normal(motion_intensity, motion_intensity * 0.4))
+        gyro = np.abs(np.random.normal(motion_intensity * 0.4, motion_intensity * 0.3))
+        
+        # 5% chance of sensor glitch
+        if np.random.random() < 0.05:
+            accel *= np.random.uniform(0.5, 2.0)
+            gyro *= np.random.uniform(0.5, 2.0)
         
         Lectura.objects.create(
             ventana=ventana,
@@ -334,13 +415,18 @@ def generate_synthetic_window(consumidor, pattern_type):
             gyro_y=gyro * np.random.randn(),
             gyro_z=gyro * np.random.randn()
         )
+    
+    # Create analysis label with realistic probability (not 0.1 or 0.9)
+    if urge_label == 1:
+        prob = np.random.uniform(0.55, 0.85)  # Not too confident
+    else:
+        prob = np.random.uniform(0.15, 0.45)  # Some uncertainty
         
-    # Create analysis label
     Analisis.objects.create(
         ventana=ventana,
-        probabilidad_modelo=0.9 if urge_label == 1 else 0.1,
+        probabilidad_modelo=prob,
         urge_label=urge_label,
-        modelo_usado='manual_training_data'
+        modelo_usado='realistic_synthetic_data'
     )
     return ventana
 
@@ -365,23 +451,29 @@ def insert_sample_data():
         print("❌ Error buscando usuario")
         return
     
-    print("📦 Generando 60 ventanas de entrenamiento...")
-    print("   - 20 Reposo (Label 0)")
-    print("   - 20 Ejercicio (Label 0) [Para evitar falsos positivos]")
-    print("   - 20 Ansiedad/Deseo (Label 1) [Target]")
+    print("📦 Generando 100 ventanas con patrones realistas y overlapping...")
+    print("   - 40 Reposo (Label 0) - Puede tener HR elevado ocasionalmente")
+    print("   - 30 Ejercicio (Label 0) - Puede tener momentos de calma")
+    print("   - 30 Ansiedad/Deseo (Label 1) - Overlaps con reposo/ejercicio")
     
-    for i in range(20):
-        generate_synthetic_window(consumidor, 'rest')
-        generate_synthetic_window(consumidor, 'exercise')
-        generate_synthetic_window(consumidor, 'craving')
+    patterns = []
+    patterns.extend(['rest'] * 40)
+    patterns.extend(['exercise'] * 30)
+    patterns.extend(['craving'] * 30)
+    
+    # Shuffle para evitar orden artificial
+    np.random.shuffle(patterns)
+    
+    for i, pattern in enumerate(patterns):
+        generate_synthetic_window(consumidor, pattern)
         
-        if (i+1) % 5 == 0:
-            print(f"   ✅ {i+1} sets creados...")
+        if (i+1) % 20 == 0:
+            print(f"   ✅ {i+1}/100 ventanas creadas...")
             
-    print(f"✅ Datos insertados exitosamente")
+    print(f"✅ 100 ventanas realistas insertadas con overlap")
 
 def insert_sample_data_auto():
-    print("\n📝 Insertando datos automáticos (Modo CI/CD)...")
+    print("\n📝 Insertando datos automáticos realistas (Modo CI/CD)...")
     try:
         from api.models import Usuario
         usuario = Usuario.objects.filter(consumidor__isnull=False).first()
@@ -389,13 +481,16 @@ def insert_sample_data_auto():
             return
         consumidor = usuario.consumidor
         
-        # Generate balanced dataset
-        for _ in range(20):
-            generate_synthetic_window(consumidor, 'rest')
-            generate_synthetic_window(consumidor, 'exercise')
-            generate_synthetic_window(consumidor, 'craving')
+        # Generate realistic overlapping dataset
+        patterns = ['rest'] * 40 + ['exercise'] * 30 + ['craving'] * 30
+        np.random.shuffle(patterns)
+        
+        for i, pattern in enumerate(patterns):
+            generate_synthetic_window(consumidor, pattern)
+            if (i+1) % 25 == 0:
+                print(f"   ✅ {i+1}/100 ventanas generadas...")
             
-        print(f"✅ 60 ventanas de entrenamiento generadas")
+        print(f"✅ 100 ventanas con patrones overlapping generadas")
     except Exception as e:
         print(f"❌ Error: {e}")
 

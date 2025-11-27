@@ -1,6 +1,19 @@
 
 from django.db import models
 
+
+class PreParsedJSONField(models.JSONField):
+    """
+    Custom JSONField that handles pre-parsed JSON data from PostgreSQL views.
+    PostgreSQL's JSON_AGG returns already-parsed JSON objects, not strings.
+    """
+    def from_db_value(self, value, expression, connection):
+        # If value is already a list/dict (pre-parsed by psycopg), return it directly
+        if value is None or isinstance(value, (list, dict)):
+            return value
+        # Otherwise, use the default JSONField behavior
+        return super().from_db_value(value, expression, connection)
+
 class VwHabitTracking(models.Model):
     
     consumidor_id = models.IntegerField(primary_key=True)
@@ -83,7 +96,8 @@ class VwHeartRateToday(models.Model):
     promedio_dia = models.DecimalField(max_digits=10, decimal_places=1, null=True)
     minimo_dia = models.DecimalField(max_digits=10, decimal_places=1, null=True)
     maximo_dia = models.DecimalField(max_digits=10, decimal_places=1, null=True)
-    ventanas = models.JSONField()
+    # Use PreParsedJSONField for JSON_AGG data from PostgreSQL views
+    ventanas = PreParsedJSONField()
     
     class Meta:
         managed = False
