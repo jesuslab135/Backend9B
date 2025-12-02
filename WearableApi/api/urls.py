@@ -33,6 +33,7 @@ router.register(r'dashboard/habit-stats', views.VwHabitStatsViewSet, basename='d
 router.register(r'dashboard/heart-rate', views.VwHeartRateTimelineViewSet, basename='dashboard-heart-rate')
 router.register(r'dashboard/heart-rate-stats', views.VwHeartRateStatsViewSet, basename='dashboard-heart-rate-stats')
 router.register(r'dashboard/predictions', views.VwPredictionTimelineViewSet, basename='dashboard-predictions')
+router.register(r'dashboard/prediction-timeline', views.VwPredictionTimelineViewSet, basename='dashboard-prediction-timeline')
 router.register(r'dashboard/prediction-summary', views.VwPredictionSummaryViewSet, basename='dashboard-prediction-summary')
 router.register(r'dashboard/desires-tracking', views.VwDesiresTrackingViewSet, basename='dashboard-desires-tracking')
 router.register(r'dashboard/desires', views.VwDesiresTrackingViewSet, basename='dashboard-desires')
@@ -40,6 +41,7 @@ router.register(r'dashboard/desires-stats', views.VwDesiresStatsViewSet, basenam
 router.register(r'dashboard/daily-summary', views.VwDailySummaryViewSet, basename='dashboard-daily-summary')
 router.register(r'dashboard/weekly-comparison', views.VwWeeklyComparisonViewSet, basename='dashboard-weekly-comparison')
 router.register(r'dashboard/heart-rate-today', views.VwHeartRateTodayViewSet, basename='dashboard-heart-rate-today')
+router.register(r'dashboard/sensor-data', views.SensorDataViewSet, basename='dashboard-sensor-data')
 
 urlpatterns = [
     path('', include(router.urls)),

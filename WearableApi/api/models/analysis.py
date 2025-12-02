@@ -226,20 +226,27 @@ class Notificacion(TimeStampedModel):
         return not self.leida
     
     def mark_read(self):
+        """Marca la notificación como leída"""
         self.leida = True
-        self.save()
-    
+        self.save(update_fields=['leida'])  # auto_now maneja updated_at
+
     def mark_unread(self):
+        """Marca la notificación como no leída"""
         self.leida = False
-        self.save()
+        self.save(update_fields=['leida'])
     
     @property
     def age_hours(self):
-        from django.utils import timezone
-        if self.fecha_envio:
-            delta = timezone.now() - self.fecha_envio
-            return round(delta.total_seconds() / 3600, 2)
-        return None
+        """Retorna horas desde el envío, manejando timezone correctamente"""
+        from django.utils import timezone as tz
+        
+        # Asegurar que fecha_envio tenga timezone
+        fecha = self.fecha_envio
+        if fecha and (fecha.tzinfo is None or fecha.tzinfo.utcoffset(fecha) is None):
+            fecha = tz.make_aware(fecha, tz.get_current_timezone())
+        
+        delta = tz.now() - fecha
+        return delta.total_seconds() / 3600
     
     @property
     def is_recent(self):

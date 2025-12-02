@@ -24,6 +24,7 @@ DEBUG = os.environ.get('DEBUG', 'False').lower() in ('true', '1', 'yes')
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'channels',
     'api',
 
     'rest_framework',
@@ -106,6 +108,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'WearableApi.wsgi.application'
+ASGI_APPLICATION = 'WearableApi.asgi.application'
 
 USE_DOCKER_DB = os.environ.get('USE_DOCKER_DB', 'false').lower() == 'true'
 
@@ -179,6 +182,11 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'api.authentication.CustomJWTAuthentication',
     ],
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        # NO pongas IsAuthenticated aquí - deja que cada view maneje sus permisos
+        'rest_framework.permissions.AllowAny',  # ← Temporal para desarrollo
+    ],
     
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 50,
@@ -196,8 +204,8 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False,
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': False,
 
     'ALGORITHM': 'HS256',
@@ -217,24 +225,63 @@ SIMPLE_JWT = {
     'JTI_CLAIM': 'jti',
 }
 
+
+
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Health Tracker API',
     'DESCRIPTION': 'Complete API for health tracking with sensor data, ML predictions, and user management',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+    'SERVE_PERMISSIONS': ['rest_framework.permissions.AllowAny'],
     
     'SCHEMA_PATH_PREFIX': r'/api/',
     'COMPONENT_SPLIT_REQUEST': True,
     
     'SWAGGER_UI_SETTINGS': {
         'deepLinking': True,
-        'persistAuthorization': True,
+        'persistAuthorization': True,  # Keeps your token after page refresh
         'displayOperationId': True,
         'filter': True,
     },
     
-    'SECURITY': [],
+    # ==========================================================================
+    # ✅ JWT BEARER AUTHENTICATION FOR SWAGGER
+    # ==========================================================================
+    # This adds the "Authorize" button to Swagger so you can add your JWT token
+    
+    'SECURITY': [
+        {
+            'Bearer': []  # Tells Swagger to use Bearer authentication
+        }
+    ],
+    
+    'COMPONENTS': {
+        'securitySchemes': {
+            'Bearer': {
+                'type': 'http',
+                'scheme': 'bearer',
+                'bearerFormat': 'JWT',
+                'description': (
+                    'Enter your JWT token from the login response. '
+                    'Format: Bearer <your-token-here>'
+                )
+            }
+        }
+    },
+    
+    # Optional: Customize which endpoints require authentication
+    # By default, all endpoints will show the lock icon in Swagger
+    'APPEND_COMPONENTS': {
+        'securitySchemes': {
+            'Bearer': {
+                'type': 'http',
+                'scheme': 'bearer',
+                'bearerFormat': 'JWT',
+            }
+        }
+    },
 }
+
 
 LOGS_DIR = BASE_DIR / 'logs'
 LOGS_DIR.mkdir(exist_ok=True)
@@ -388,6 +435,19 @@ if not DEBUG:
 
 ML_MODELS_DIR = os.path.join(BASE_DIR, 'models')
 os.makedirs(ML_MODELS_DIR, exist_ok=True)
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            # Usar el mismo Redis que Celery
+            "hosts": [os.environ.get('CELERY_BROKER_URL', 'redis://localhost:6379/0')],
+        },
+    },
+}
+
+print(f"🔌 WebSockets: {'✅ Enabled' if 'channels' in INSTALLED_APPS else '❌ Disabled'}")
+print("="*60)
 
 print("="*60)
 print("🚀 WearableApi Configuration")

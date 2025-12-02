@@ -8,6 +8,10 @@ from django.core.cache import cache
 from django.utils import timezone
 from api.models import Consumidor, Analisis, Ventana, Usuario, Notificacion, Deseo, Lectura
 
+import json
+from django_celery_beat.models import PeriodicTask, IntervalSchedule
+from api.models import Consumidor, Analisis, Ventana, Usuario, Notificacion, Deseo, Lectura
+
 logger = logging.getLogger(__name__)
 
 def calculate_features_from_readings(consumidor, time_window_minutes=30):
@@ -262,100 +266,180 @@ def predict_smoking_craving(self, user_id, features_dict=None):
         raise self.retry(exc=exc, countdown=60 * (2 ** self.request.retries))
 
 @shared_task(bind=True, max_retries=2)
-def simulate_wearable_cycle(self):
+def simulate_wearable_cycle(self, ventana_id=None):
+    """
+    Simulates wearable sensor data.
+    Solo genera datos para consumidores con is_simulating=True
+    
+    Args:
+        ventana_id (int, optional): If provided, generates data for this SPECIFIC window (User Session).
+                                    If None, picks a random consumer (Legacy/Demo mode).
+    """
     import random
     from datetime import timedelta
     
     logger.info("=" * 70)
-    logger.info("[CYCLE] Iniciando ciclo de simulación automático")
+    logger.info(f"[CYCLE] Iniciando ciclo de simulación (Target Ventana: {ventana_id})")
     
     try:
-        consumidores = list(Consumidor.objects.select_related('usuario').all())
+        if ventana_id:
+            # TARGETED MODE: Generate data for specific user session
+            try:
+                ventana = Ventana.objects.get(id=ventana_id)
+                consumidor = ventana.consumidor
+                usuario = consumidor.usuario
+                
+                # ✅ VERIFICAR SI LA SIMULACIÓN ESTÁ ACTIVADA
+                if not consumidor.is_simulating:
+                    logger.info(f"[SKIP] Simulación DESACTIVADA para consumidor {consumidor.id}")
+                    return {
+                        'success': False, 
+                        'error': 'Simulation disabled for this consumer',
+                        'consumidor_id': consumidor.id
+                    }
+                
+                logger.info(f"[TARGET] Generando datos para Usuario: {usuario.email}")
+            except Ventana.DoesNotExist:
+                logger.error(f"[ERROR] Ventana {ventana_id} no existe. Abortando.")
+                return {'success': False, 'error': 'Ventana not found'}
+        else:
+            # LEGACY MODE: Solo consumidores con simulación ACTIVADA
+            consumidores = list(
+                Consumidor.objects.filter(is_simulating=True)
+                .select_related('usuario')
+            )
+            
+            if not consumidores:
+                logger.info("[SKIP] No hay consumidores con simulación activa")
+                return {
+                    'success': False, 
+                    'error': 'No consumers with simulation enabled'
+                }
+            
+            consumidor = random.choice(consumidores)
+            usuario = consumidor.usuario
+            
+            now = timezone.now()
+            ventana = Ventana.objects.create(
+                consumidor=consumidor,
+                window_start=now - timedelta(minutes=1),
+                window_end=now
+            )
+            logger.info(f"[LEGACY] Ventana aleatoria creada: {ventana.id}")
+
+        # Generate realistic data patterns
+        # 10% chance of "Craving" pattern (High HR + Low Motion)
+        is_craving = random.random() < 0.10
         
-        if not consumidores:
-            logger.warning("[WARNING] No hay consumidores en la base de datos")
-            return {
-                'success': False,
-                'error': 'No hay consumidores disponibles'
-            }
-        
-        consumidor = random.choice(consumidores)
-        usuario = consumidor.usuario
-        
-        logger.info(f"[USER] Consumidor seleccionado: {consumidor.nombre} (ID: {consumidor.id})")
-        
-        now = timezone.now()
-        window_start = now - timedelta(minutes=1)
-        window_end = now
-        
-        ventana = Ventana.objects.create(
-            consumidor=consumidor,
-            window_start=window_start,
-            window_end=window_end
-        )
-        
-        logger.info(f"[WINDOW] Ventana creada: ID {ventana.id}")
-        
-        base_hr = random.uniform(65, 95)
-        
+        if is_craving:
+            base_hr = random.uniform(85, 100) # Elevated HR
+            motion_factor = 0.1 # Low motion
+            logger.info("[PATTERN] Simulating CRAVING (High HR, Low Motion)")
+        else:
+            base_hr = random.uniform(65, 80) # Normal HR
+            motion_factor = 1.0 # Normal motion
+            
         lecturas_creadas = 0
-        for i in range(60):
-            hr = base_hr + random.uniform(-5, 5)
-            hr = max(50, min(150, hr))
+        # Generate 12 readings (assuming 5-second interval call, this creates a burst)
+        # Or if called frequently, maybe just 1 reading? 
+        # Let's generate a small batch (e.g., 5 seconds worth of data at 1Hz = 5 readings)
+        
+        for i in range(5):
+            hr = base_hr + random.uniform(-3, 3)
             
-            accel_x = random.uniform(-1.5, 1.5)
-            accel_y = random.uniform(-1.5, 1.5)
-            accel_z = random.uniform(-1.5, 1.5)
+            accel_x = random.uniform(-1.0, 1.0) * motion_factor
+            accel_y = random.uniform(-1.0, 1.0) * motion_factor
+            accel_z = random.uniform(-1.0, 1.0) * motion_factor
             
-            gyro_x = random.uniform(-0.8, 0.8)
-            gyro_y = random.uniform(-0.8, 0.8)
-            gyro_z = random.uniform(-0.8, 0.8)
+            gyro_x = random.uniform(-0.5, 0.5) * motion_factor
+            gyro_y = random.uniform(-0.5, 0.5) * motion_factor
+            gyro_z = random.uniform(-0.5, 0.5) * motion_factor
             
             Lectura.objects.create(
                 ventana=ventana,
-                heart_rate=hr,
-                accel_x=accel_x,
-                accel_y=accel_y,
-                accel_z=accel_z,
-                gyro_x=gyro_x,
-                gyro_y=gyro_y,
-                gyro_z=gyro_z
+                heart_rate=max(50, min(150, hr)),
+                accel_x=accel_x, accel_y=accel_y, accel_z=accel_z,
+                gyro_x=gyro_x, gyro_y=gyro_y, gyro_z=gyro_z
             )
             lecturas_creadas += 1
         
-        logger.info(f"[OK] {lecturas_creadas} lecturas generadas (HR base: {base_hr:.1f})")
+        logger.info(f"[OK] {lecturas_creadas} lecturas generadas para Ventana {ventana.id}")
         
-        logger.info(f"[ML] Disparando predicción ML...")
-        
-        result = predict_smoking_craving.apply_async(
+        # Trigger prediction
+        predict_smoking_craving.apply_async(
             kwargs={'user_id': usuario.id, 'features_dict': None},
-            countdown=2
+            countdown=1
         )
-        
-        logger.info(f"[OK] Predicción encolada (Task ID: {result.id})")
-        logger.info("=" * 70)
         
         return {
             'success': True,
-            'consumidor_id': consumidor.id,
             'ventana_id': ventana.id,
-            'lecturas_count': lecturas_creadas,
-            'prediction_task_id': result.id,
-            'base_hr': round(base_hr, 1)
+            'lecturas': lecturas_creadas,
+            'pattern': 'craving' if is_craving else 'normal'
         }
         
     except Exception as exc:
         logger.error(f"[ERROR] Error en ciclo de simulación: {exc}")
-        logger.exception(exc)
+        return {'success': False, 'error': str(exc)}
+
+@shared_task(bind=True)
+def check_sensor_activity(self, user_id, ventana_id):
+    """
+    Checks if sensor data is being received. If not, starts synthetic generator.
+    """
+    logger.info(f"[CHECK] Verificando actividad de sensores para Ventana {ventana_id}")
+    
+    try:
+        # Check if any readings exist for this window
+        readings_count = Lectura.objects.filter(ventana_id=ventana_id).count()
         
-        if self.request.retries < self.max_retries:
-            logger.info(f"[RETRY] Reintentando en 30 segundos")
-            raise self.retry(exc=exc, countdown=30)
-        
-        return {
-            'success': False,
-            'error': str(exc)
-        }
+        if readings_count == 0:
+            logger.warning(f"[ALERT] No data received for Ventana {ventana_id}. Starting BACKUP GENERATOR.")
+            
+            # Get or create 5-second schedule
+            schedule, _ = IntervalSchedule.objects.get_or_create(
+                every=5,
+                period=IntervalSchedule.SECONDS,
+            )
+            
+            # Create dynamic periodic task
+            task_name = f"synthetic_data_user_{user_id}"
+            
+            PeriodicTask.objects.update_or_create(
+                name=task_name,
+                defaults={
+                    'interval': schedule,
+                    'task': 'api.tasks.simulate_wearable_cycle',
+                    'args': json.dumps([]),
+                    'kwargs': json.dumps({'ventana_id': ventana_id}),
+                    'enabled': True
+                }
+            )
+            logger.info(f"[SUCCESS] Backup generator started: {task_name}")
+            return "Backup generator started"
+            
+        else:
+            logger.info(f"[OK] Data detected ({readings_count} readings). No backup needed.")
+            return "Data detected"
+            
+    except Exception as e:
+        logger.error(f"[ERROR] Failed to check sensor activity: {e}")
+        return f"Error: {e}"
+
+@shared_task(bind=True)
+def stop_synthetic_generation(self, user_id):
+    """
+    Stops the synthetic data generator for a user.
+    """
+    task_name = f"synthetic_data_user_{user_id}"
+    try:
+        deleted_count, _ = PeriodicTask.objects.filter(name=task_name).delete()
+        if deleted_count > 0:
+            logger.info(f"[STOP] Backup generator stopped for User {user_id}")
+        else:
+            logger.info(f"[STOP] No active generator found for User {user_id}")
+    except Exception as e:
+        logger.error(f"[ERROR] Failed to stop generator: {e}")
 
 
 @shared_task(bind=True, max_retries=3)
@@ -539,39 +623,181 @@ def check_and_calculate_ventana_stats(self, ventana_id, min_readings=5):
 @shared_task(bind=True)
 def periodic_ventana_calculation(self):
     """
-    Periodic task to calculate statistics for all active ventanas
-    Run this every 5-10 minutes via Celery Beat
+    Periodic task to create and process 5-minute sliding windows
+    Run this EVERY 5 MINUTES via Celery Beat
+    
+    For each active consumer (with active session):
+    1. Create a new 5-minute ventana
+    2. Move lecturas from previous ventana to new ventana if needed
+    3. Calculate statistics for completed ventanas
+    4. Trigger ML predictions
     """
     try:
-        logger.info("[PERIODIC] Starting periodic ventana calculation")
+        logger.info("[PERIODIC-5MIN] Starting 5-minute ventana cycle")
         
-        # Get all ventanas from the last hour that have lecturas but no calculated stats
-        one_hour_ago = timezone.now() - timedelta(hours=1)
+        now = timezone.now()
+        five_minutes_ago = now - timedelta(minutes=5)
         
-        ventanas_to_process = Ventana.objects.filter(
-            window_start__gte=one_hour_ago,
-            hr_mean__isnull=True  # Not yet calculated
-        ).annotate(
-            lectura_count=models.Count('lecturas')
-        ).filter(
-            lectura_count__gte=5  # At least 5 readings
+        # Get all consumers with active sessions (logged in recently)
+        # Check cache for active sessions
+        from django.core.cache import cache
+        
+        # Get all consumidores with active monitoring sessions
+        active_sessions = []
+        for key in cache.keys('active_session:*'):
+            session_data = cache.get(key)
+            if session_data:
+                active_sessions.append(session_data['consumidor_id'])
+        
+        if not active_sessions:
+            logger.info("[PERIODIC-5MIN] No active consumer sessions found")
+            return {
+                'success': True,
+                'message': 'No active sessions'
+            }
+        
+        logger.info(f"[PERIODIC-5MIN] Processing {len(active_sessions)} active consumers")
+        
+        ventanas_created = 0
+        ventanas_calculated = 0
+        predictions_triggered = 0
+        
+        for consumidor_id in active_sessions:
+            try:
+                consumidor = Consumidor.objects.get(id=consumidor_id)
+                usuario = consumidor.usuario
+                
+                # Get the current active ventana for this consumer
+                current_ventana = Ventana.objects.filter(
+                    consumidor=consumidor,
+                    window_end__gt=now  # Still active
+                ).order_by('-window_start').first()
+                
+                if not current_ventana:
+                    logger.warning(f"[PERIODIC-5MIN] No active ventana for consumer {consumidor_id}")
+                    continue
+                
+                # Check if it's time to close this window and create a new one
+                # Windows are 5 minutes long
+                window_duration = (now - current_ventana.window_start).total_seconds() / 60
+                
+                if window_duration >= 5:
+                    logger.info(
+                        f"[PERIODIC-5MIN] Closing ventana {current_ventana.id} "
+                        f"for consumer {consumidor_id} (duration: {window_duration:.1f}min)"
+                    )
+                    
+                    # 1. Calculate statistics for the completed window
+                    lectura_count = Lectura.objects.filter(ventana=current_ventana).count()
+                    
+                    if lectura_count >= 5:  # Minimum readings for valid stats
+                        logger.info(
+                            f"[PERIODIC-5MIN] Calculating stats for ventana {current_ventana.id} "
+                            f"({lectura_count} readings)"
+                        )
+                        
+                        # Calculate statistics synchronously (it's fast)
+                        result = calculate_ventana_statistics.apply_async(
+                            args=[current_ventana.id]
+                        ).get(timeout=10)
+                        
+                        if result.get('success'):
+                            ventanas_calculated += 1
+                            
+                            # Send WebSocket update for heart rate data
+                            try:
+                                from channels.layers import get_channel_layer
+                                from asgiref.sync import async_to_sync
+                                
+                                channel_layer = get_channel_layer()
+                                
+                                # Refresh ventana to get calculated values
+                                current_ventana.refresh_from_db()
+                                
+                                async_to_sync(channel_layer.group_send)(
+                                    f'heart_rate_{consumidor_id}',
+                                    {
+                                        'type': 'hr_update',
+                                        'data': {
+                                            'ventana_id': current_ventana.id,
+                                            'window_start': current_ventana.window_start.isoformat(),
+                                            'window_end': current_ventana.window_end.isoformat(),
+                                            'hr_mean': float(current_ventana.hr_mean) if current_ventana.hr_mean else None,
+                                            'hr_std': float(current_ventana.hr_std) if current_ventana.hr_std else None,
+                                        }
+                                    }
+                                )
+                                logger.debug(f"💓 WebSocket HR update sent for ventana {current_ventana.id}")
+                            except Exception as ws_error:
+                                logger.warning(f"Failed to send WebSocket HR update: {ws_error}")
+                            
+                            # 2. Trigger ML prediction
+                            logger.info(
+                                f"[PERIODIC-5MIN] Triggering prediction for "
+                                f"user {usuario.id}, ventana {current_ventana.id}"
+                            )
+                            
+                            predict_smoking_craving.delay(usuario.id, features_dict=None)
+                            predictions_triggered += 1
+                    else:
+                        logger.warning(
+                            f"[PERIODIC-5MIN] Not enough readings for ventana {current_ventana.id} "
+                            f"({lectura_count} < 5)"
+                        )
+                    
+                    # 3. Create new 5-minute window
+                    new_ventana = Ventana.objects.create(
+                        consumidor=consumidor,
+                        window_start=now,
+                        window_end=now + timedelta(minutes=5)
+                    )
+                    
+                    ventanas_created += 1
+                    
+                    logger.info(
+                        f"[PERIODIC-5MIN] Created new ventana {new_ventana.id} "
+                        f"for consumer {consumidor_id}"
+                    )
+                    
+                    # Update session cache with new ventana
+                    session_key = f'active_session:{consumidor_id}'
+                    session_data = cache.get(session_key)
+                    if session_data:
+                        session_data['ventana_id'] = new_ventana.id
+                        cache.set(session_key, session_data, timeout=28800)
+                        
+                        # Also update device session
+                        device_key = f"device_session:{session_data.get('device_id', 'default')}"
+                        device_data = cache.get(device_key)
+                        if device_data:
+                            device_data['ventana_id'] = new_ventana.id
+                            cache.set(device_key, device_data, timeout=28800)
+                
+            except Consumidor.DoesNotExist:
+                logger.error(f"[PERIODIC-5MIN] Consumidor {consumidor_id} not found")
+                continue
+            except Exception as e:
+                logger.error(
+                    f"[PERIODIC-5MIN] Error processing consumer {consumidor_id}: {e}"
+                )
+                continue
+        
+        logger.info(
+            f"[PERIODIC-5MIN] ✓ Cycle complete: "
+            f"{ventanas_created} created, {ventanas_calculated} calculated, "
+            f"{predictions_triggered} predictions triggered"
         )
-        
-        processed_count = 0
-        for ventana in ventanas_to_process:
-            logger.info(f"[PERIODIC] Processing Ventana {ventana.id}")
-            calculate_ventana_statistics.delay(ventana.id)
-            processed_count += 1
-        
-        logger.info(f"[PERIODIC] ✓ Triggered calculation for {processed_count} ventanas")
         
         return {
             'success': True,
-            'ventanas_processed': processed_count
+            'ventanas_created': ventanas_created,
+            'ventanas_calculated': ventanas_calculated,
+            'predictions_triggered': predictions_triggered,
+            'active_consumers': len(active_sessions)
         }
         
     except Exception as exc:
-        logger.error(f"[PERIODIC] Error in periodic calculation: {exc}")
+        logger.error(f"[PERIODIC-5MIN] Error in periodic calculation: {exc}")
         return {
             'success': False,
             'error': str(exc)

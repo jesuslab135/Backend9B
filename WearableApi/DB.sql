@@ -39,6 +39,20 @@ ALTER TABLE usuarios ALTER COLUMN rol TYPE rol_type USING rol::rol_type;
 ALTER TABLE usuarios
 ADD CONSTRAINT check_email_format 
 CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
+
+-- Migration file: Add soft delete fields to usuarios table
+
+ALTER TABLE usuarios 
+ADD COLUMN is_active BOOLEAN DEFAULT TRUE,
+ADD COLUMN deleted_at TIMESTAMP NULL;
+
+-- Add index for better query performance
+CREATE INDEX idx_usuarios_is_active ON usuarios(is_active);
+CREATE INDEX idx_usuarios_deleted_at ON usuarios(deleted_at);
+
+-- Add comments for documentation
+COMMENT ON COLUMN usuarios.is_active IS 'FALSE when account is soft deleted';
+COMMENT ON COLUMN usuarios.deleted_at IS 'Timestamp when account was deleted (NULL if active)';
 -- ==========================================================
 -- 1.3 Lookup tables (controlled vocabularies)
 -- ==========================================================
@@ -98,7 +112,7 @@ BEFORE UPDATE ON habitos
 FOR EACH ROW
 EXECUTE FUNCTION update_timestamp();
 
-ALTER TABLE formularios 
+
 ADD COLUMN habitos JSONB;
 -- ==========================================================
 -- 1.4 Permisos base table
@@ -511,3 +525,6 @@ CREATE TRIGGER trigger_calculate_bmi
     ON consumidores
     FOR EACH ROW
     EXECUTE FUNCTION calculate_bmi();
+
+
+ALTER TABLE formularios 

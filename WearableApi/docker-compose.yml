@@ -1,8 +1,6 @@
 # docker-compose.yml
 # Setup que funciona tanto en local como en producción
 
-version: '3.8'
-
 services:
   # PostgreSQL Database (Solo para producción)
   # En local, comentar o no levantar este servicio
@@ -43,14 +41,14 @@ services:
     networks:
       - wearable-network
 
-  # Django Application
+  # Django Application (con soporte WebSockets)
   django:
     build: .
     container_name: wearable-django
     command: >
       sh -c "python manage.py migrate &&
              python manage.py collectstatic --noinput &&
-             gunicorn WearableApi.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120"
+             daphne -b 0.0.0.0 -p 8000 WearableApi.asgi:application"
     ports:
       - "8000:8000"
     depends_on:

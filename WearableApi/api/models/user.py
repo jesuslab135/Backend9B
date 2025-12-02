@@ -1,6 +1,6 @@
-
 from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
+from django.utils import timezone
 from .base import TimeStampedModel
 
 class RolChoices(models.TextChoices):
@@ -33,6 +33,16 @@ class Usuario(TimeStampedModel):
         default=RolChoices.CONSUMIDOR,
         help_text="User role (consumidor or administrador)"
     )
+    # Soft delete fields
+    is_active = models.BooleanField(
+        default=True,
+        help_text="False when account is soft deleted"
+    )
+    deleted_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="Timestamp when account was deleted"
+    )
     
     class Meta:
         db_table = 'usuarios'
@@ -42,6 +52,8 @@ class Usuario(TimeStampedModel):
         indexes = [
             models.Index(fields=['email']),
             models.Index(fields=['rol']),
+            models.Index(fields=['is_active']),
+            models.Index(fields=['deleted_at']),
         ]
     
     def __str__(self):
@@ -52,6 +64,40 @@ class Usuario(TimeStampedModel):
     
     def check_password(self, raw_password):
         return check_password(raw_password, self.password_hash)
+    
+    # ========================================
+    # SOFT DELETE METHODS (NEW)
+    # ========================================
+    
+    def soft_delete(self):
+        """Soft delete the user account"""
+        self.is_active = False
+        self.deleted_at = timezone.now()
+        self.save()
+    
+    def restore(self):
+        """Restore a soft-deleted account"""
+        self.is_active = True
+        self.deleted_at = None
+        self.save()
+    
+    @property
+    def is_deleted(self):
+        """Check if account is soft deleted"""
+        return not self.is_active and self.deleted_at is not None
+    
+    @property
+    def can_be_restored(self):
+        """Check if account can be restored (within 30 days)"""
+        if not self.deleted_at:
+            return False
+        from datetime import timedelta
+        days_since_deletion = (timezone.now() - self.deleted_at).days
+        return days_since_deletion <= 30
+    
+    # ========================================
+    # END SOFT DELETE METHODS
+    # ========================================
     
     @property
     def is_administrador(self):
@@ -65,13 +111,17 @@ class Usuario(TimeStampedModel):
     def is_authenticated(self):
         return True
     
-    @property
-    def is_active(self):
-        return True
+    # Remove the duplicate is_active property since it's now a database field
+    # @property
+    # def is_active(self):
+    #     return True
     
     @property
     def is_anonymous(self):
         return False
+
+
+# Rest of your models (Administrador, Consumidor) remain unchanged
 
 class Administrador(TimeStampedModel):
     
@@ -146,6 +196,10 @@ class Consumidor(TimeStampedModel):
         null=True,
         blank=True,
         help_text="Gender (optional)"
+    )
+    is_simulating = models.BooleanField(
+        default=False,
+        help_text="If True, synthetic data will be generated for this user"
     )
     
     class Meta:

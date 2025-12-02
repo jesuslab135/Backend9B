@@ -1,4 +1,3 @@
-
 import logging
 from typing import Dict, Optional, Tuple
 from django.contrib.auth.hashers import check_password
@@ -22,9 +21,20 @@ class AuthenticationService:
         try:
             usuario = Usuario.objects.get(email=email)
             
+            # ========================================
+            # CHECK IF ACCOUNT IS DELETED (NEW)
+            # ========================================
+            if not usuario.is_active or usuario.deleted_at is not None:
+                logger.warning(f"Login attempt for deleted account: {email}")
+                if usuario.can_be_restored:
+                    return False, None, "Esta cuenta ha sido desactivada. Tienes 30 días para restaurarla."
+                else:
+                    return False, None, "Esta cuenta ha sido eliminada permanentemente."
+            # ========================================
+            
             if not usuario.check_password(password):
                 logger.warning(f"Failed login: {email} (invalid password)")
-                return False, None, "Invalid credentials"
+                return False, None, "Credenciales inválidas"
             
             tokens = AuthenticationService.generate_tokens(usuario)
             
@@ -69,19 +79,19 @@ class AuthenticationService:
         
         except Usuario.DoesNotExist:
             logger.warning(f"Failed login: {email} (user not found)")
-            return False, None, "Invalid credentials"
+            return False, None, "Credenciales inválidas"
         
         except Exception as e:
             logger.error(f"Authentication error for {email}: {str(e)}")
-            return False, None, "Authentication failed"
+            return False, None, "Error de autenticación"
     
     @staticmethod
     def validate_password_strength(password: str) -> Tuple[bool, Optional[str]]:
         if len(password) < 6:
-            return False, "Password must be at least 6 characters long"
+            return False, "La contraseña debe tener al menos 6 caracteres"
         
         if not any(c.isalpha() for c in password):
-            return False, "Password must contain at least one letter"
+            return False, "La contraseña debe contener al menos una letra"
         
         has_digit = any(c.isdigit() for c in password)
         if not has_digit:
@@ -92,4 +102,3 @@ class AuthenticationService:
     @staticmethod
     def email_exists(email: str) -> bool:
         return Usuario.objects.filter(email=email).exists()
-

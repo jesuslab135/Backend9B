@@ -19,7 +19,9 @@ from celery.result import AsyncResult
 from api.tasks import (
     check_and_calculate_ventana_stats,
     calculate_ventana_statistics,
-    trigger_prediction_if_ready
+    trigger_prediction_if_ready,
+    check_sensor_activity,
+    stop_synthetic_generation
 )
 
 class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -27,11 +29,6 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
     permission_classes = [IsAuthenticated]
-    
-    def get_permissions(self):
-        if self.action in ['register', 'login', 'logout']:
-            return [AllowAny()]
-        return [permission() for permission in self.permission_classes]
     
     @action(detail=False, methods=['post'], permission_classes=[AllowAny])
     def register(self, request):
@@ -102,13 +99,15 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
         
         if hasattr(usuario, 'consumidor'):
             consumidor = usuario.consumidor
-            device_id = 'default'  # Can be customized if multiple devices
+            # Use device_id from request if provided, otherwise use 'default'
+            device_id = request.data.get('device_id', 'default')
             
-            # Create new ventana for this session
+            # Create first 5-minute ventana for this session
+            now = timezone.now()
             ventana = Ventana.objects.create(
                 consumidor=consumidor,
-                window_start=timezone.now(),
-                window_end=timezone.now() + timezone.timedelta(hours=8)  # 8-hour session
+                window_start=now,
+                window_end=now + timezone.timedelta(minutes=5)  # 5-minute window
             )
             
             # Generate session ID
@@ -146,9 +145,18 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
             }
             
             self.logger.info(
-                f"Auto-started monitoring session for consumer {consumidor.id} "
                 f"(Ventana {ventana.id})"
             )
+            
+            # ============================================
+            # SCHEDULE BACKUP DATA GENERATOR CHECK
+            # ============================================
+            # Wait 10 seconds, then check if we have received any data
+            check_sensor_activity.apply_async(
+                kwargs={'user_id': usuario.id, 'ventana_id': ventana.id},
+                countdown=10
+            )
+            self.logger.info(f"Scheduled sensor activity check for 10s from now")
         
         return Response(auth_data, status=status.HTTP_200_OK)
     
@@ -199,6 +207,9 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
                     self.logger.info(
                         f"Monitoring session stopped on logout: Consumer {consumidor.id}"
                     )
+                    
+                    # Stop any active synthetic data generator
+                    stop_synthetic_generation.delay(usuario.id)
             
             # Blacklist the token (if using token blacklist)
             # This depends on your JWT implementation
@@ -236,9 +247,135 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
             'message': message,
             'user': updated_serializer.data
         }, status=status.HTTP_200_OK)
+    
+    # ========================================
+    # SOFT DELETE ENDPOINTS (NEW)
+    # ========================================
+    
+    def destroy(self, request, *args, **kwargs):
+        """
+        Override destroy to prevent hard delete
+        Users must use soft_delete action instead
+        """
+        return Response(
+            {'error': 'Eliminación directa no permitida. Usa el endpoint soft_delete.'},
+            status=status.HTTP_403_FORBIDDEN
+        )
+    
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def soft_delete(self, request, pk=None):
+        """
+        Soft delete user account
+        
+        POST /api/usuarios/{id}/soft_delete/
+        
+        Response:
+        {
+            "message": "Cuenta eliminada exitosamente",
+            "deleted_at": "2025-11-16T10:30:00Z",
+            "can_restore_until": "2025-12-16T10:30:00Z"
+        }
+        """
+        try:
+            usuario = self.get_object()
+            
+            # Verify user is deleting their own account (or is admin)
+            if request.user.id != usuario.id and not request.user.is_administrador:
+                return Response(
+                    {'error': 'No tienes permiso para eliminar esta cuenta'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+            
+            # Check if already deleted
+            if usuario.is_deleted:
+                return Response(
+                    {'error': 'Esta cuenta ya está eliminada'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Perform soft delete
+            usuario.soft_delete()
+            
+            self.logger.info(f"Account soft deleted: {usuario.email} (ID: {usuario.id})")
+            
+            # Calculate restoration deadline
+            from datetime import timedelta
+            restore_deadline = usuario.deleted_at + timedelta(days=30)
+            
+            return Response({
+                'message': 'Cuenta desactivada exitosamente',
+                'deleted_at': usuario.deleted_at.isoformat(),
+                'can_restore_until': restore_deadline.isoformat(),
+                'restoration_days_left': 30
+            }, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            self.logger.error(f"Error during soft delete: {str(e)}")
+            return Response({
+                'error': 'Error al eliminar cuenta',
+                'detail': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def restore(self, request, pk=None):
+        """
+        Restore a soft-deleted account
+        
+        POST /api/usuarios/{id}/restore/
+        
+        Response:
+        {
+            "message": "Cuenta restaurada exitosamente"
+        }
+        """
+        try:
+            usuario = self.get_object()
+            
+            # Verify user is restoring their own account (or is admin)
+            if request.user.id != usuario.id and not request.user.is_administrador:
+                return Response(
+                    {'error': 'No tienes permiso para restaurar esta cuenta'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+            
+            # Check if account is actually deleted
+            if not usuario.is_deleted:
+                return Response(
+                    {'error': 'Esta cuenta no está eliminada'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Check if restoration period has expired
+            if not usuario.can_be_restored:
+                return Response(
+                    {'error': 'El período de restauración ha expirado (30 días)'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Restore account
+            usuario.restore()
+            
+            self.logger.info(f"Account restored: {usuario.email} (ID: {usuario.id})")
+            
+            return Response({
+                'message': 'Cuenta restaurada exitosamente',
+                'restored_at': timezone.now().isoformat()
+            }, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            self.logger.error(f"Error during account restoration: {str(e)}")
+            return Response({
+                'error': 'Error al restaurar cuenta',
+                'detail': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+    
+    # ========================================
+    # END SOFT DELETE ENDPOINTS
+    # ========================================
 
 
-class DeviceSessionViewSet(LoggingMixin, viewsets.ViewSet):
+
+class DeviceSessionViewSet(LoggingMixin, viewsets.GenericViewSet):
     """
     ViewSet for ESP32 device session management
     Sessions are automatically created on consumer login
@@ -248,6 +385,9 @@ class DeviceSessionViewSet(LoggingMixin, viewsets.ViewSet):
     - GET /device-session/active/ - Get active session info (website, requires auth)
     - POST /device-session/extend-window/ - Extend ventana window (ESP32, no auth)
     """
+    # Required for GenericViewSet even though we don't use it for these actions
+    queryset = Ventana.objects.none()
+    serializer_class = VentanaSerializer
     
     def get_permissions(self):
         """
@@ -257,7 +397,7 @@ class DeviceSessionViewSet(LoggingMixin, viewsets.ViewSet):
             return [AllowAny()]
         return [IsAuthenticated()]
     
-    @action(detail=False, methods=['post'], permission_classes=[AllowAny])
+    @action(detail=False, methods=['post'], permission_classes=[AllowAny], url_path='check-session')
     def check_session(self, request):
         """
         ESP32 checks if there's an active session for this device
@@ -368,7 +508,7 @@ class DeviceSessionViewSet(LoggingMixin, viewsets.ViewSet):
                 'detail': str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
     
-    @action(detail=False, methods=['post'], permission_classes=[AllowAny])
+    @action(detail=False, methods=['post'], permission_classes=[AllowAny], url_path='extend-window')
     def extend_window(self, request):
         """
         Extend the current ventana window
@@ -420,6 +560,61 @@ class ConsumidorViewSet(LoggingMixin, viewsets.ModelViewSet):
     
     queryset = Consumidor.objects.select_related('usuario').all()
     serializer_class = ConsumidorSerializer
+    
+    @action(detail=True, methods=['patch'], permission_classes=[IsAuthenticated])
+    def toggle_simulation(self, request, pk=None):
+        """
+        Activar/desactivar la simulación de datos para un consumidor.
+        Solo los administradores pueden hacerlo.
+        
+        PATCH /api/consumidores/{id}/toggle_simulation/
+        Body: {"is_simulating": true}
+        
+        Response:
+        {
+            "success": true,
+            "consumidor_id": 22,
+            "is_simulating": true,
+            "message": "Simulación activada exitosamente"
+        }
+        """
+        try:
+            # Verificar que el usuario sea administrador
+            if request.user.rol != 'administrador':
+                return Response({
+                    'error': 'Solo los administradores pueden controlar las simulaciones'
+                }, status=status.HTTP_403_FORBIDDEN)
+            
+            consumidor = self.get_object()
+            is_simulating = request.data.get('is_simulating', None)
+            
+            if is_simulating is None:
+                return Response({
+                    'error': 'El campo "is_simulating" es requerido (true/false)'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            consumidor.is_simulating = is_simulating
+            consumidor.save()
+            
+            # Registrar en logs
+            self.logger.info(
+                f"{'[Simulación ACTIVADA]' if is_simulating else '[Simulación DESACTIVADA]'} "
+                f"para consumidor {consumidor.id} por admin {request.user.id}"
+            )
+            
+            return Response({
+                'success': True,
+                'consumidor_id': consumidor.id,
+                'is_simulating': consumidor.is_simulating,
+                'message': f"Simulación {'activada' if is_simulating else 'desactivada'} exitosamente"
+            }, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            self.logger.error(f"Error al cambiar estado de simulación: {str(e)}")
+            return Response({
+                'error': 'Error al cambiar estado de simulación',
+                'detail': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class EmocionViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Emocion.objects.all()
@@ -480,12 +675,69 @@ class DeseoViewSet(LoggingMixin, ConsumerFilterMixin, viewsets.ModelViewSet):
     queryset = Deseo.objects.select_related('consumidor__usuario', 'ventana').all()
     serializer_class = DeseoSerializer
     
+    def perform_create(self, serializer):
+        """Override to send WebSocket update when desire is created"""
+        deseo = serializer.save()
+        
+        # Send WebSocket update
+        try:
+            from channels.layers import get_channel_layer
+            from asgiref.sync import async_to_sync
+            from .models import DeseoTipoChoices
+            
+            channel_layer = get_channel_layer()
+            consumidor_id = deseo.consumidor_id
+            
+            # Get human-readable tipo label
+            tipo_label = dict(DeseoTipoChoices.choices).get(deseo.tipo, deseo.tipo)
+            
+            async_to_sync(channel_layer.group_send)(
+                f'desires_{consumidor_id}',
+                {
+                    'type': 'desire_update',
+                    'data': {
+                        'action': 'created',
+                        'deseo_id': deseo.id,
+                        'tipo': tipo_label,
+                        'fecha': deseo.created_at.isoformat(),
+                    }
+                }
+            )
+            self.logger.debug(f"🚬 WebSocket desire created update sent")
+        except Exception as ws_error:
+            self.logger.warning(f"Failed to send WebSocket desire update: {ws_error}")
+        
+        return deseo
+    
     @action(detail=True, methods=['post'])
     def resolve(self, request, pk=None):
         deseo = self.get_object()
         deseo.mark_resolved()
         
         self.logger.info(f"Desire {pk} marked as resolved")
+        
+        # Send WebSocket update
+        try:
+            from channels.layers import get_channel_layer
+            from asgiref.sync import async_to_sync
+            
+            channel_layer = get_channel_layer()
+            consumidor_id = deseo.consumidor_id
+            
+            async_to_sync(channel_layer.group_send)(
+                f'desires_{consumidor_id}',
+                {
+                    'type': 'desire_update',
+                    'data': {
+                        'action': 'resolved',
+                        'deseo_id': deseo.id,
+                        'resolved': True,
+                    }
+                }
+            )
+            self.logger.debug(f"🚬 WebSocket desire resolved update sent")
+        except Exception as ws_error:
+            self.logger.warning(f"Failed to send WebSocket desire update: {ws_error}")
         
         return Response({
             'message': 'Desire marked as resolved',
@@ -500,6 +752,22 @@ class NotificacionViewSet(LoggingMixin, ConsumerFilterMixin, viewsets.ModelViewS
         'consumidor__usuario', 'deseo'
     ).all()
     serializer_class = NotificacionSerializer
+    
+    # ✅ AGREGAR ESTE MÉTODO
+    def get_queryset(self):
+        """
+        Filtra notificaciones por consumidor y opcionalmente por estado leida
+        """
+        queryset = super().get_queryset()
+        
+        # Filtrar por leida si se proporciona el parámetro
+        leida_param = self.request.query_params.get('leida', None)
+        if leida_param is not None:
+            # Convertir string 'true'/'false' a booleano
+            leida_bool = leida_param.lower() in ['true', '1', 'yes']
+            queryset = queryset.filter(leida=leida_bool)
+        
+        return queryset
     
     @action(detail=True, methods=['post'])
     def mark_read(self, request, pk=None):
@@ -711,22 +979,42 @@ class LecturaViewSet(LoggingMixin, viewsets.ModelViewSet):
                 f"Gyro=({data.get('gyro_x')}, {data.get('gyro_y')}, {data.get('gyro_z')})"
             )
             
-            # TRIGGER CELERY TASKS
-            # Check if we have enough readings to calculate statistics
-            lectura_count = Lectura.objects.filter(ventana_id=ventana_id).count()
+            # NOTE: Ventana calculations are now handled by periodic_ventana_calculation
+            # which runs every 5 minutes via Celery Beat. This ensures:
+            # 1. Windows are exactly 5 minutes long
+            # 2. ML predictions run on schedule, not on reading count
+            # 3. No race conditions or duplicate calculations
             
-            # Trigger check and calculation every 5 readings
-            # This prevents overwhelming the task queue
-            if lectura_count % 5 == 0:
-                self.logger.info(
-                    f"📊 Triggering ventana calculation check (count: {lectura_count})"
+            self.logger.debug(f"✓ Lectura saved to ventana {ventana_id}")
+            
+            # Send WebSocket update for real-time sensor data
+            try:
+                from channels.layers import get_channel_layer
+                from asgiref.sync import async_to_sync
+                
+                channel_layer = get_channel_layer()
+                consumidor_id = ventana.consumidor_id
+                
+                async_to_sync(channel_layer.group_send)(
+                    f'sensor_data_{consumidor_id}',
+                    {
+                        'type': 'sensor_update',
+                        'lectura': {
+                            'id': lectura.id,
+                            'heart_rate': float(lectura.heart_rate) if lectura.heart_rate else None,
+                            'accel_x': float(lectura.accel_x) if lectura.accel_x else None,
+                            'accel_y': float(lectura.accel_y) if lectura.accel_y else None,
+                            'accel_z': float(lectura.accel_z) if lectura.accel_z else None,
+                            'gyro_x': float(lectura.gyro_x) if lectura.gyro_x else None,
+                            'gyro_y': float(lectura.gyro_y) if lectura.gyro_y else None,
+                            'gyro_z': float(lectura.gyro_z) if lectura.gyro_z else None,
+                            'created_at': lectura.created_at.isoformat(),
+                        }
+                    }
                 )
-                check_and_calculate_ventana_stats.delay(ventana_id, min_readings=5)
-            
-            # If ventana is ending soon, force calculation
-            if ventana.window_end and timezone.now() >= ventana.window_end:
-                self.logger.info(f"⏰ Ventana {ventana_id} window ended, forcing calculation")
-                calculate_ventana_statistics.delay(ventana_id)
+                self.logger.debug(f"📡 WebSocket sensor update sent to consumidor {consumidor_id}")
+            except Exception as ws_error:
+                self.logger.warning(f"Failed to send WebSocket update: {ws_error}")
             
             headers = self.get_success_headers(serializer.data)
             return Response(
@@ -735,8 +1023,6 @@ class LecturaViewSet(LoggingMixin, viewsets.ModelViewSet):
                     'id': lectura.id,
                     'ventana_id': ventana_id,
                     'message': 'Sensor data saved successfully',
-                    'lectura_count': lectura_count,
-                    'calculation_pending': lectura_count % 5 == 0,
                     'data': serializer.data
                 },
                 status=status.HTTP_201_CREATED,
@@ -885,3 +1171,69 @@ class LecturaViewSet(LoggingMixin, viewsets.ModelViewSet):
                 'ventanas_pending': ventanas_pending,
                 'calculation_rate': f"{(ventanas_calculated/total_ventanas*100):.1f}%" if total_ventanas > 0 else "0%"
             })
+
+class SensorDataViewSet(LoggingMixin, ConsumerFilterMixin, ReadOnlyMixin, viewsets.ModelViewSet):
+    """
+    ViewSet for retrieving latest sensor readings for dashboard display.
+    
+    Provides a list endpoint that returns the most recent sensor readings (last 50)
+    for visualization purposes. Requires consumidor_id as query parameter.
+    """
+    queryset = Lectura.objects.all()
+    serializer_class = LecturaSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        """
+        Filter lecturas by consumidor_id and return the most recent 50 readings.
+        """
+        queryset = super().get_queryset()
+        consumidor_id = self.request.query_params.get('consumidor_id')
+        
+        if consumidor_id:
+            queryset = queryset.filter(
+                ventana__consumidor_id=consumidor_id
+            ).select_related('ventana').order_by('-created_at')[:50]
+        
+        return queryset
+    
+    def list(self, request, *args, **kwargs):
+        """
+        List latest sensor readings with formatted response.
+        """
+        consumidor_id = request.query_params.get('consumidor_id')
+        
+        if not consumidor_id:
+            return Response(
+                {'error': 'consumidor_id parameter is required'}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        try:
+            lecturas = self.get_queryset()
+            
+            # Format data for frontend - use created_at instead of timestamp
+            data = []
+            for lectura in lecturas:
+                data.append({
+                    'id': lectura.id,
+                    'created_at': lectura.created_at.isoformat(),  # ✓ Changed from timestamp
+                    'updated_at': lectura.updated_at.isoformat(),  # ✓ Also include updated_at
+                    'heart_rate': float(lectura.heart_rate) if lectura.heart_rate else None,
+                    'accel_x': float(lectura.accel_x) if lectura.accel_x else None,
+                    'accel_y': float(lectura.accel_y) if lectura.accel_y else None,
+                    'accel_z': float(lectura.accel_z) if lectura.accel_z else None,
+                    'gyro_x': float(lectura.gyro_x) if lectura.gyro_x else None,
+                    'gyro_y': float(lectura.gyro_y) if lectura.gyro_y else None,
+                    'gyro_z': float(lectura.gyro_z) if lectura.gyro_z else None,
+                    'ventana_id': lectura.ventana_id,
+                })
+            
+            return Response(data, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            self.logger.error(f"Error fetching sensor data: {str(e)}")
+            return Response(
+                {'error': f'Failed to fetch sensor data: {str(e)}'}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
