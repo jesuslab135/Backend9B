@@ -112,8 +112,8 @@ BEFORE UPDATE ON habitos
 FOR EACH ROW
 EXECUTE FUNCTION update_timestamp();
 
-ALTER TABLE formularios 
-ADD COLUMN habitos JSONB;
+-- ALTER TABLE formularios 
+-- ADD COLUMN habitos JSONB;
 -- ==========================================================
 -- 1.4 Permisos base table
 -- ==========================================================

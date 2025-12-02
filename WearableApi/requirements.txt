@@ -8,6 +8,7 @@ psycopg2-binary==2.9.11
 python-dotenv==1.2.1
 python-decouple==3.8
 celery==5.5.3
+flower==2.0.1
 redis==7.0.1
 django-celery-results==2.6.0
 django-celery-beat==2.8.1
