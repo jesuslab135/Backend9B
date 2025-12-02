@@ -197,6 +197,10 @@ class Consumidor(TimeStampedModel):
         blank=True,
         help_text="Gender (optional)"
     )
+    is_simulating = models.BooleanField(
+        default=False,
+        help_text="If True, synthetic data will be generated for this user"
+    )
     
     class Meta:
         db_table = 'consumidores'

@@ -8,6 +8,10 @@ from django.core.cache import cache
 from django.utils import timezone
 from api.models import Consumidor, Analisis, Ventana, Usuario, Notificacion, Deseo, Lectura
 
+import json
+from django_celery_beat.models import PeriodicTask, IntervalSchedule
+from api.models import Consumidor, Analisis, Ventana, Usuario, Notificacion, Deseo, Lectura
+
 logger = logging.getLogger(__name__)
 
 def calculate_features_from_readings(consumidor, time_window_minutes=30):
@@ -262,100 +266,160 @@ def predict_smoking_craving(self, user_id, features_dict=None):
         raise self.retry(exc=exc, countdown=60 * (2 ** self.request.retries))
 
 @shared_task(bind=True, max_retries=2)
-def simulate_wearable_cycle(self):
+def simulate_wearable_cycle(self, ventana_id=None):
+    """
+    Simulates wearable sensor data.
+    
+    Args:
+        ventana_id (int, optional): If provided, generates data for this SPECIFIC window (User Session).
+                                    If None, picks a random consumer (Legacy/Demo mode).
+    """
     import random
     from datetime import timedelta
     
     logger.info("=" * 70)
-    logger.info("[CYCLE] Iniciando ciclo de simulación automático")
+    logger.info(f"[CYCLE] Iniciando ciclo de simulación (Target Ventana: {ventana_id})")
     
     try:
-        consumidores = list(Consumidor.objects.select_related('usuario').all())
+        if ventana_id:
+            # TARGETED MODE: Generate data for specific user session
+            try:
+                ventana = Ventana.objects.get(id=ventana_id)
+                consumidor = ventana.consumidor
+                usuario = consumidor.usuario
+                logger.info(f"[TARGET] Generando datos para Usuario: {usuario.email}")
+            except Ventana.DoesNotExist:
+                logger.error(f"[ERROR] Ventana {ventana_id} no existe. Abortando.")
+                return {'success': False, 'error': 'Ventana not found'}
+        else:
+            # LEGACY MODE: Random consumer
+            consumidores = list(Consumidor.objects.select_related('usuario').all())
+            if not consumidores:
+                return {'success': False, 'error': 'No hay consumidores'}
+            consumidor = random.choice(consumidores)
+            usuario = consumidor.usuario
+            
+            now = timezone.now()
+            ventana = Ventana.objects.create(
+                consumidor=consumidor,
+                window_start=now - timedelta(minutes=1),
+                window_end=now
+            )
+            logger.info(f"[LEGACY] Ventana aleatoria creada: {ventana.id}")
+
+        # Generate realistic data patterns
+        # 10% chance of "Craving" pattern (High HR + Low Motion)
+        is_craving = random.random() < 0.10
         
-        if not consumidores:
-            logger.warning("[WARNING] No hay consumidores en la base de datos")
-            return {
-                'success': False,
-                'error': 'No hay consumidores disponibles'
-            }
-        
-        consumidor = random.choice(consumidores)
-        usuario = consumidor.usuario
-        
-        logger.info(f"[USER] Consumidor seleccionado: {consumidor.nombre} (ID: {consumidor.id})")
-        
-        now = timezone.now()
-        window_start = now - timedelta(minutes=1)
-        window_end = now
-        
-        ventana = Ventana.objects.create(
-            consumidor=consumidor,
-            window_start=window_start,
-            window_end=window_end
-        )
-        
-        logger.info(f"[WINDOW] Ventana creada: ID {ventana.id}")
-        
-        base_hr = random.uniform(65, 95)
-        
+        if is_craving:
+            base_hr = random.uniform(85, 100) # Elevated HR
+            motion_factor = 0.1 # Low motion
+            logger.info("[PATTERN] Simulating CRAVING (High HR, Low Motion)")
+        else:
+            base_hr = random.uniform(65, 80) # Normal HR
+            motion_factor = 1.0 # Normal motion
+            
         lecturas_creadas = 0
-        for i in range(60):
-            hr = base_hr + random.uniform(-5, 5)
-            hr = max(50, min(150, hr))
+        # Generate 12 readings (assuming 5-second interval call, this creates a burst)
+        # Or if called frequently, maybe just 1 reading? 
+        # Let's generate a small batch (e.g., 5 seconds worth of data at 1Hz = 5 readings)
+        
+        for i in range(5):
+            hr = base_hr + random.uniform(-3, 3)
             
-            accel_x = random.uniform(-1.5, 1.5)
-            accel_y = random.uniform(-1.5, 1.5)
-            accel_z = random.uniform(-1.5, 1.5)
+            accel_x = random.uniform(-1.0, 1.0) * motion_factor
+            accel_y = random.uniform(-1.0, 1.0) * motion_factor
+            accel_z = random.uniform(-1.0, 1.0) * motion_factor
             
-            gyro_x = random.uniform(-0.8, 0.8)
-            gyro_y = random.uniform(-0.8, 0.8)
-            gyro_z = random.uniform(-0.8, 0.8)
+            gyro_x = random.uniform(-0.5, 0.5) * motion_factor
+            gyro_y = random.uniform(-0.5, 0.5) * motion_factor
+            gyro_z = random.uniform(-0.5, 0.5) * motion_factor
             
             Lectura.objects.create(
                 ventana=ventana,
-                heart_rate=hr,
-                accel_x=accel_x,
-                accel_y=accel_y,
-                accel_z=accel_z,
-                gyro_x=gyro_x,
-                gyro_y=gyro_y,
-                gyro_z=gyro_z
+                heart_rate=max(50, min(150, hr)),
+                accel_x=accel_x, accel_y=accel_y, accel_z=accel_z,
+                gyro_x=gyro_x, gyro_y=gyro_y, gyro_z=gyro_z
             )
             lecturas_creadas += 1
         
-        logger.info(f"[OK] {lecturas_creadas} lecturas generadas (HR base: {base_hr:.1f})")
+        logger.info(f"[OK] {lecturas_creadas} lecturas generadas para Ventana {ventana.id}")
         
-        logger.info(f"[ML] Disparando predicción ML...")
-        
-        result = predict_smoking_craving.apply_async(
+        # Trigger prediction
+        predict_smoking_craving.apply_async(
             kwargs={'user_id': usuario.id, 'features_dict': None},
-            countdown=2
+            countdown=1
         )
-        
-        logger.info(f"[OK] Predicción encolada (Task ID: {result.id})")
-        logger.info("=" * 70)
         
         return {
             'success': True,
-            'consumidor_id': consumidor.id,
             'ventana_id': ventana.id,
-            'lecturas_count': lecturas_creadas,
-            'prediction_task_id': result.id,
-            'base_hr': round(base_hr, 1)
+            'lecturas': lecturas_creadas,
+            'pattern': 'craving' if is_craving else 'normal'
         }
         
     except Exception as exc:
         logger.error(f"[ERROR] Error en ciclo de simulación: {exc}")
-        logger.exception(exc)
+        return {'success': False, 'error': str(exc)}
+
+@shared_task(bind=True)
+def check_sensor_activity(self, user_id, ventana_id):
+    """
+    Checks if sensor data is being received. If not, starts synthetic generator.
+    """
+    logger.info(f"[CHECK] Verificando actividad de sensores para Ventana {ventana_id}")
+    
+    try:
+        # Check if any readings exist for this window
+        readings_count = Lectura.objects.filter(ventana_id=ventana_id).count()
         
-        if self.request.retries < self.max_retries:
-            logger.info(f"[RETRY] Reintentando en 30 segundos")
-            raise self.retry(exc=exc, countdown=30)
-        
-        return {
-            'success': False,
-            'error': str(exc)
-        }
+        if readings_count == 0:
+            logger.warning(f"[ALERT] No data received for Ventana {ventana_id}. Starting BACKUP GENERATOR.")
+            
+            # Get or create 5-second schedule
+            schedule, _ = IntervalSchedule.objects.get_or_create(
+                every=5,
+                period=IntervalSchedule.SECONDS,
+            )
+            
+            # Create dynamic periodic task
+            task_name = f"synthetic_data_user_{user_id}"
+            
+            PeriodicTask.objects.update_or_create(
+                name=task_name,
+                defaults={
+                    'interval': schedule,
+                    'task': 'api.tasks.simulate_wearable_cycle',
+                    'args': json.dumps([]),
+                    'kwargs': json.dumps({'ventana_id': ventana_id}),
+                    'enabled': True
+                }
+            )
+            logger.info(f"[SUCCESS] Backup generator started: {task_name}")
+            return "Backup generator started"
+            
+        else:
+            logger.info(f"[OK] Data detected ({readings_count} readings). No backup needed.")
+            return "Data detected"
+            
+    except Exception as e:
+        logger.error(f"[ERROR] Failed to check sensor activity: {e}")
+        return f"Error: {e}"
+
+@shared_task(bind=True)
+def stop_synthetic_generation(self, user_id):
+    """
+    Stops the synthetic data generator for a user.
+    """
+    task_name = f"synthetic_data_user_{user_id}"
+    try:
+        deleted_count, _ = PeriodicTask.objects.filter(name=task_name).delete()
+        if deleted_count > 0:
+            logger.info(f"[STOP] Backup generator stopped for User {user_id}")
+        else:
+            logger.info(f"[STOP] No active generator found for User {user_id}")
+    except Exception as e:
+        logger.error(f"[ERROR] Failed to stop generator: {e}")
 
 
 @shared_task(bind=True, max_retries=3)
