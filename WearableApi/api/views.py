@@ -979,13 +979,22 @@ class LecturaViewSet(LoggingMixin, viewsets.ModelViewSet):
                 f"Gyro=({data.get('gyro_x')}, {data.get('gyro_y')}, {data.get('gyro_z')})"
             )
             
-            # NOTE: Ventana calculations are now handled by periodic_ventana_calculation
-            # which runs every 5 minutes via Celery Beat. This ensures:
-            # 1. Windows are exactly 5 minutes long
-            # 2. ML predictions run on schedule, not on reading count
-            # 3. No race conditions or duplicate calculations
+            # Check if ventana needs calculation (Railway doesn't run Celery Beat)
+            from api.tasks import calcular_estadisticas_ventana
+            lectura_count = Lectura.objects.filter(ventana=ventana).count()
             
-            self.logger.debug(f"✓ Lectura saved to ventana {ventana_id}")
+            # Calculate every 5 readings (approximate 5-min window)
+            if lectura_count >= 5 and lectura_count % 5 == 0:
+                self.logger.info(f"🔄 Triggering ventana calculation for ventana {ventana_id} ({lectura_count} readings)")
+                try:
+                    calcular_estadisticas_ventana.delay(ventana_id)
+                except Exception as e:
+                    # Fallback: Calculate synchronously if Celery unavailable
+                    self.logger.warning(f"Celery unavailable, calculating synchronously: {e}")
+                    from api.tasks import calcular_estadisticas_ventana
+                    calcular_estadisticas_ventana(ventana_id)
+            
+            self.logger.debug(f"✓ Lectura saved to ventana {ventana_id} (total: {lectura_count})")
             
             # Send WebSocket update for real-time sensor data
             try:
