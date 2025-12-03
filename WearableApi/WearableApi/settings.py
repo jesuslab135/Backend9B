@@ -75,7 +75,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True  
+# ============================================================
+# CORS CONFIGURATION
+# ============================================================
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_HEADERS = [
@@ -90,31 +92,54 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    "http://localhost:5500",  
-    "http://127.0.0.1:5500",
-    "http://localhost:3000",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
+# Base origins for local development
+BASE_CORS_ORIGINS = [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'http://127.0.0.1:5173',
+    'http://127.0.0.1:8000',
 ]
 
-# Add Railway frontend URL from environment
-frontend_url = os.environ.get('CORS_ALLOWED_ORIGINS', '')
-if frontend_url:
-    CORS_ALLOWED_ORIGINS.extend(frontend_url.split(','))
+# Build dynamic CORS origins list
+CORS_ALLOWED_ORIGINS = BASE_CORS_ORIGINS.copy()
 
-# CSRF Trusted Origins for Railway
+# Add production frontend Railway URL
+if IS_RAILWAY or not DEBUG:
+    CORS_ALLOWED_ORIGINS.extend([
+        'https://proyecto-9b-fe-production.up.railway.app',
+        'https://*.railway.app',
+    ])
+    print(f"✅ CORS: Production frontend enabled")
+
+# Add additional origins from environment variable
+env_origins = os.environ.get('CORS_ALLOWED_ORIGINS', '')
+if env_origins:
+    additional = [o.strip() for o in env_origins.split(',') if o.strip()]
+    CORS_ALLOWED_ORIGINS.extend(additional)
+    print(f"✅ CORS: Additional origins from env: {additional}")
+
+# Only allow all origins in DEBUG mode (development)
+CORS_ALLOW_ALL_ORIGINS = DEBUG
+
+# ============================================================
+# CSRF TRUSTED ORIGINS
+# ============================================================
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',
     'http://localhost:3000',
     'http://127.0.0.1:8000',
 ]
 
+# Add Railway domains
 if railway_domain:
-    CSRF_TRUSTED_ORIGINS.append(f'https://{railway_domain}')
-    CSRF_TRUSTED_ORIGINS.append('https://*.railway.app')
+    CSRF_TRUSTED_ORIGINS.extend([
+        f'https://{railway_domain}',
+        'https://*.railway.app',
+    ])
+
+# Add production frontend
+if IS_RAILWAY or not DEBUG:
+    CSRF_TRUSTED_ORIGINS.append('https://proyecto-9b-fe-production.up.railway.app')
 
 CORS_ALLOW_METHODS = [
     'DELETE',
