@@ -12,14 +12,14 @@ DROP VIEW IF EXISTS vw_habit_tracking CASCADE;
 CREATE OR REPLACE VIEW vw_habit_tracking AS
 SELECT 
     f.consumidor_id,
-    COALESCE(f.habito->>'nombre', 'Sin hábito') AS habito_nombre,
+    COALESCE(f.habitos->>'nombre', 'Sin hábito') AS habito_nombre,
     DATE(f.fecha_envio) AS fecha,
     COUNT(f.id) AS total_cigarrillos,
     COUNT(f.id) FILTER (WHERE DATE(f.fecha_envio) = CURRENT_DATE) AS cigarrillos_hoy,
     COUNT(f.id) FILTER (WHERE DATE(f.fecha_envio) >= CURRENT_DATE - INTERVAL '7 days') AS cigarrillos_semana,
     COUNT(f.id) FILTER (WHERE DATE(f.fecha_envio) >= CURRENT_DATE - INTERVAL '30 days') AS cigarrillos_mes
 FROM formularios f
-GROUP BY f.consumidor_id, f.habito->>'nombre', DATE(f.fecha_envio)
+GROUP BY f.consumidor_id, f.habitos->>'nombre', DATE(f.fecha_envio)
 ORDER BY fecha DESC;
 
 COMMENT ON VIEW vw_habit_tracking IS 'Daily cigarette/habit tracking with totals for timeline charts';
@@ -33,7 +33,7 @@ DROP VIEW IF EXISTS vw_habit_stats CASCADE;
 CREATE OR REPLACE VIEW vw_habit_stats AS
 SELECT 
     f.consumidor_id,
-    COALESCE(f.habito->>'nombre', 'Sin hábito') AS habito_nombre,
+    COALESCE(f.habitos->>'nombre', 'Sin hábito') AS habito_nombre,
     COUNT(f.id) AS total_eventos,
     MIN(f.fecha_envio) AS primer_registro,
     MAX(f.fecha_envio) AS ultimo_registro,
@@ -45,7 +45,7 @@ SELECT
     COUNT(f.id) FILTER (WHERE DATE_TRUNC('month', f.fecha_envio) = DATE_TRUNC('month', CURRENT_DATE)) AS eventos_mes_actual,
     COUNT(f.id) FILTER (WHERE DATE_TRUNC('month', f.fecha_envio) = DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month')) AS eventos_mes_anterior
 FROM formularios f
-GROUP BY f.consumidor_id, f.habito->>'nombre';
+GROUP BY f.consumidor_id, f.habitos->>'nombre';
 
 COMMENT ON VIEW vw_habit_stats IS 'Aggregated habit statistics for KPI cards and comparison charts';
 
