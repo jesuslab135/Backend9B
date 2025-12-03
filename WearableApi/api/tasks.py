@@ -442,17 +442,10 @@ def stop_synthetic_generation(self, user_id):
         logger.error(f"[ERROR] Failed to stop generator: {e}")
 
 
-@shared_task(bind=True, max_retries=3)
-def calculate_ventana_statistics(self, ventana_id):
+def _calculate_ventana_statistics_sync(ventana_id):
     """
-    Calculate aggregated statistics for a ventana based on its lecturas
-    Called periodically or when enough readings have accumulated
-    
-    This calculates:
-    - hr_mean: Average heart rate
-    - hr_std: Heart rate standard deviation
-    - accel_energy: Total accelerometer energy (movement intensity)
-    - gyro_energy: Total gyroscope energy (rotation intensity)
+    SYNCHRONOUS calculation function (no Celery decorator)
+    This is the actual calculation logic that can be called directly
     """
     try:
         logger.info(f"[VENTANA-CALC] Starting calculation for Ventana {ventana_id}")
@@ -567,7 +560,24 @@ def calculate_ventana_statistics(self, ventana_id):
         }
         
     except Exception as exc:
-        logger.error(f"[VENTANA-CALC] Error calculating statistics: {exc}")
+        logger.error(f"[VENTANA-CALC] Error calculating statistics: {exc}", exc_info=True)
+        return {
+            'success': False,
+            'error': str(exc),
+            'ventana_id': ventana_id
+        }
+
+
+@shared_task(bind=True, max_retries=3)
+def calculate_ventana_statistics(self, ventana_id):
+    """
+    Celery task wrapper for calculate_ventana_statistics
+    Calls the synchronous version with retry logic
+    """
+    try:
+        return _calculate_ventana_statistics_sync(ventana_id)
+    except Exception as exc:
+        logger.error(f"[VENTANA-CALC-TASK] Task failed: {exc}")
         raise self.retry(exc=exc, countdown=60 * (2 ** self.request.retries))
 
 
