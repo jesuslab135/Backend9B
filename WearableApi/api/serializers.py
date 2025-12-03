@@ -14,9 +14,10 @@ class UsuarioSerializer(serializers.ModelSerializer):
         model = Usuario
         fields = [
             'id', 'nombre', 'telefono', 'email', 'password', 
-            'rol', 'created_at', 'updated_at'
+            'rol', 'is_active', 'deleted_at',
+            'created_at', 'updated_at'
         ]
-        read_only_fields = ['id', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'is_active', 'deleted_at', 'created_at', 'updated_at']
         extra_kwargs = {
             'password_hash': {'write_only': True}
         }
