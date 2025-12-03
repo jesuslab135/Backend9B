@@ -983,17 +983,33 @@ class LecturaViewSet(LoggingMixin, viewsets.ModelViewSet):
             from api.tasks import calculate_ventana_statistics
             lectura_count = Lectura.objects.filter(ventana=ventana).count()
             
+            # 🔍 DEBUG: Log every count to see what's happening
+            self.logger.info(f"📊 Ventana {ventana_id} now has {lectura_count} lecturas")
+            
             # Calculate every 5 readings (approximate 5-min window)
             if lectura_count >= 5 and lectura_count % 5 == 0:
                 self.logger.info(f"🔄 Triggering ventana calculation for ventana {ventana_id} ({lectura_count} readings)")
                 try:
-                    calculate_ventana_statistics.delay(ventana_id)
-                except Exception as e:
-                    # Fallback: Calculate synchronously if Celery unavailable
-                    self.logger.warning(f"Celery unavailable, calculating synchronously: {e}")
-                    calculate_ventana_statistics(ventana_id)
-            
-            self.logger.debug(f"✓ Lectura saved to ventana {ventana_id} (total: {lectura_count})")
+                    # Import the synchronous calculation function
+                    from api.tasks import _calculate_ventana_statistics_sync
+                    
+                    # Call directly (NO Celery, works on Railway)
+                    result = _calculate_ventana_statistics_sync(ventana_id)
+                    
+                    if result.get('success'):
+                        stats = result.get('statistics', {})
+                        self.logger.info(
+                            f"✅ Window stats calculated: "
+                            f"HR={stats.get('hr_mean', 'N/A'):.1f}±{stats.get('hr_std', 'N/A'):.1f}, "
+                            f"Accel={stats.get('accel_energy', 'N/A'):.2f}, "
+                            f"Gyro={stats.get('gyro_energy', 'N/A'):.2f}"
+                        )
+                    else:
+                        self.logger.error(f"❌ Calculation returned error: {result.get('error')}")
+                except Exception as calc_error:
+                    self.logger.error(f"❌ Calculation failed: {calc_error}", exc_info=True)
+            else:
+                self.logger.info(f"⏸️ Skipping calculation: count={lectura_count}, need multiple of 5 (>= 5)")
             
             # Send WebSocket update for real-time sensor data
             try:
