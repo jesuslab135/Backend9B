@@ -980,19 +980,18 @@ class LecturaViewSet(LoggingMixin, viewsets.ModelViewSet):
             )
             
             # Check if ventana needs calculation (Railway doesn't run Celery Beat)
-            from api.tasks import calcular_estadisticas_ventana
+            from api.tasks import calculate_ventana_statistics
             lectura_count = Lectura.objects.filter(ventana=ventana).count()
             
             # Calculate every 5 readings (approximate 5-min window)
             if lectura_count >= 5 and lectura_count % 5 == 0:
                 self.logger.info(f"🔄 Triggering ventana calculation for ventana {ventana_id} ({lectura_count} readings)")
                 try:
-                    calcular_estadisticas_ventana.delay(ventana_id)
+                    calculate_ventana_statistics.delay(ventana_id)
                 except Exception as e:
                     # Fallback: Calculate synchronously if Celery unavailable
                     self.logger.warning(f"Celery unavailable, calculating synchronously: {e}")
-                    from api.tasks import calcular_estadisticas_ventana
-                    calcular_estadisticas_ventana(ventana_id)
+                    calculate_ventana_statistics(ventana_id)
             
             self.logger.debug(f"✓ Lectura saved to ventana {ventana_id} (total: {lectura_count})")
             
