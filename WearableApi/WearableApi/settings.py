@@ -19,9 +19,28 @@ if env_path.exists():
 else:
     print(f"⚠️ .env no encontrado en: {env_path}")
 
+# Railway environment detection
+IS_RAILWAY = os.environ.get('RAILWAY_ENVIRONMENT') is not None
+
 SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 DEBUG = os.environ.get('DEBUG', 'False').lower() in ('true', '1', 'yes')
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+
+# Allowed Hosts - Railway compatible
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.railway.app',
+]
+
+# Add Railway domain if exists
+railway_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
+if railway_domain:
+    ALLOWED_HOSTS.append(railway_domain)
+
+# Add custom hosts from env
+custom_hosts = os.environ.get('ALLOWED_HOSTS', '')
+if custom_hosts:
+    ALLOWED_HOSTS.extend(custom_hosts.split(','))
 
 INSTALLED_APPS = [
     'daphne',
@@ -45,8 +64,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,6 +100,22 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
 ]
 
+# Add Railway frontend URL from environment
+frontend_url = os.environ.get('CORS_ALLOWED_ORIGINS', '')
+if frontend_url:
+    CORS_ALLOWED_ORIGINS.extend(frontend_url.split(','))
+
+# CSRF Trusted Origins for Railway
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'http://127.0.0.1:8000',
+]
+
+if railway_domain:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{railway_domain}')
+    CSRF_TRUSTED_ORIGINS.append('https://*.railway.app')
+
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
@@ -110,31 +146,45 @@ TEMPLATES = [
 WSGI_APPLICATION = 'WearableApi.wsgi.application'
 ASGI_APPLICATION = 'WearableApi.asgi.application'
 
-USE_DOCKER_DB = os.environ.get('USE_DOCKER_DB', 'false').lower() == 'true'
-
-if USE_DOCKER_DB:
-    DB_HOST = 'db'
-    DB_USER = os.environ.get('POSTGRES_USER', 'wearable')
-    print("📦 Usando PostgreSQL en Docker")
+# Database configuration - Railway compatible
+if IS_RAILWAY and os.environ.get('DATABASE_URL'):
+    # Railway provides DATABASE_URL
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL'),
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True,
+        )
+    }
+    print("☁️ Usando PostgreSQL de Railway")
 else:
-    DB_HOST = os.environ.get('POSTGRES_HOST', 'localhost')
-    DB_USER = os.environ.get('POSTGRES_USER', 'postgres')
-    print("💻 Usando PostgreSQL local")
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_DB', 'wearable'),
-        'USER': DB_USER,
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
-        'HOST': DB_HOST,
-        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
-        'CONN_MAX_AGE': 600,
-        'OPTIONS': {
-            'connect_timeout': 10,
+    # Local database
+    USE_DOCKER_DB = os.environ.get('USE_DOCKER_DB', 'false').lower() == 'true'
+    
+    if USE_DOCKER_DB:
+        DB_HOST = 'db'
+        DB_USER = os.environ.get('POSTGRES_USER', 'wearable')
+        print("📦 Usando PostgreSQL en Docker")
+    else:
+        DB_HOST = os.environ.get('POSTGRES_HOST', 'localhost')
+        DB_USER = os.environ.get('POSTGRES_USER', 'postgres')
+        print("💻 Usando PostgreSQL local")
+    
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('POSTGRES_DB', 'wearable'),
+            'USER': DB_USER,
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+            'HOST': DB_HOST,
+            'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+            'CONN_MAX_AGE': 600,
+            'OPTIONS': {
+                'connect_timeout': 10,
+            }
         }
     }
-}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -159,8 +209,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Static files configuration for Railway
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Whitenoise for efficient static file serving
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -236,6 +290,12 @@ SPECTACULAR_SETTINGS = {
     
     'SCHEMA_PATH_PREFIX': r'/api/',
     'COMPONENT_SPLIT_REQUEST': True,
+    
+    # Servers for Railway deployment
+    'SERVERS': [
+        {'url': f'https://{railway_domain}', 'description': 'Production (Railway)'} if railway_domain else None,
+        {'url': 'http://localhost:8000', 'description': 'Development'},
+    ] if railway_domain else [{'url': 'http://localhost:8000', 'description': 'Development'}],
     
     'SWAGGER_UI_SETTINGS': {
         'deepLinking': True,
@@ -422,7 +482,9 @@ CACHES = {
     }
 }
 
-if not DEBUG:
+# Security settings for Railway
+if IS_RAILWAY or not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
