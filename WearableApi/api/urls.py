@@ -45,6 +45,7 @@ router.register(r'dashboard/sensor-data', views.SensorDataViewSet, basename='das
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('health/', views.health_check, name='health-check'),
     path('predict/', views.predict_craving),
     path('task-status/<str:task_id>/', views.check_task_status),
 ]
