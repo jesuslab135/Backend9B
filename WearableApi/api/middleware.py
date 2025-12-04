@@ -1,5 +1,5 @@
 """
-Custom middleware for WebSocket JWT authentication
+Custom middleware for WebSocket JWT authentication come
 """
 from channels.db import database_sync_to_async
 from channels.middleware import BaseMiddleware
