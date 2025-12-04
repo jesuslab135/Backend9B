@@ -24,10 +24,5 @@ RUN pip install --upgrade pip && \
 # Copiar proyecto
 COPY . .
 
-# Crear directorios necesarios
-RUN mkdir -p models staticfiles media logs
-
 # Exponer puerto
 EXPOSE 8000
-
-# CMD se define en railway.toml startCommand
