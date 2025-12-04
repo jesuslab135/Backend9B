@@ -904,6 +904,17 @@ def check_task_status(request, task_id):
         return Response({'status': 'processing'})
 
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def health_check(request):
+    """Simple health check endpoint for Railway"""
+    return Response({
+        'status': 'healthy',
+        'service': 'WearableApi',
+        'timestamp': timezone.now().isoformat()
+    })
+
+
 class LecturaViewSet(LoggingMixin, viewsets.ModelViewSet):
     """
     ViewSet for managing sensor readings (Lecturas) from ESP32
