@@ -28,13 +28,22 @@ websocket_urlpatterns = [
         r'ws/heart-rate/(?P<consumidor_id>\w+)/$',
         consumers.HeartRateConsumer.as_asgi()
     ),
-    # Alias para compatibilidad con frontend
+    # Alias para compatibilidad con frontend (guiones bajos)
     re_path(
         r'ws/heart_rate_today/(?P<consumidor_id>\w+)/$',
         consumers.HeartRateConsumer.as_asgi()
     ),
     re_path(
         r'ws/heart_rate_stats/(?P<consumidor_id>\w+)/$',
+        consumers.HeartRateConsumer.as_asgi()
+    ),
+    # Alias para compatibilidad con frontend (guiones)
+    re_path(
+        r'ws/heart-rate-today/(?P<consumidor_id>\w+)/$',
+        consumers.HeartRateConsumer.as_asgi()
+    ),
+    re_path(
+        r'ws/heart-rate-stats/(?P<consumidor_id>\w+)/$',
         consumers.HeartRateConsumer.as_asgi()
     ),
     
