@@ -30,6 +30,4 @@ RUN mkdir -p models staticfiles media logs
 # Exponer puerto
 EXPOSE 8000
 
-# Comando por defecto - Usar Daphne para soporte WebSocket
-# Ejecutar collectstatic antes de iniciar el servidor
-CMD ["/bin/sh", "-c", "python manage.py collectstatic --noinput --clear && daphne -b 0.0.0.0 -p ${PORT:-8000} WearableApi.asgi:application"]
+# CMD se define en railway.toml startCommand
