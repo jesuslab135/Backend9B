@@ -64,4 +64,4 @@ RUN mkdir -p models
 EXPOSE 8000
 
 # Comando por defecto - Usar Daphne para soporte WebSocket
-CMD daphne -b 0.0.0.0 -p ${PORT:-8000} WearableApi.asgi:application
+CMD ["/bin/sh", "-c", "daphne -b 0.0.0.0 -p ${PORT:-8000} WearableApi.asgi:application"]
