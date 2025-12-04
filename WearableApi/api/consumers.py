@@ -171,11 +171,15 @@ class SensorDataConsumer(AsyncWebsocketConsumer):
         # Enviar últimas 10 lecturas al conectar
         try:
             lecturas = await self.get_recent_lecturas()
+            # Asegurar que sea un array
+            if not isinstance(lecturas, list):
+                lecturas = list(lecturas)
+            
             await self.send(text_data=json.dumps({
                 'type': 'initial_data',
-                'lecturas': lecturas
+                'data': lecturas  # Cambiar 'lecturas' a 'data' para coincidir con frontend
             }))
-            logger.info(f"📊 Sent {len(lecturas)} initial sensor readings")
+            logger.info(f"📊 Sent {len(lecturas)} initial sensor readings as array")
         except Exception as e:
             logger.error(f"Error sending initial sensor data: {e}")
 
@@ -198,9 +202,14 @@ class SensorDataConsumer(AsyncWebsocketConsumer):
     async def sensor_update(self, event):
         """Recibir actualización de sensor desde channel layer"""
         try:
+            lectura = event.get('lectura', event.get('data'))
+            # Asegurar que sea array
+            if not isinstance(lectura, list):
+                lectura = [lectura]
+            
             await self.send(text_data=json.dumps({
                 'type': 'sensor_update',
-                'lectura': event['lectura']
+                'data': lectura  # Cambiar a 'data' y asegurar que sea array
             }))
             logger.debug(f"📡 Sent sensor update to consumidor {self.consumidor_id}")
         except Exception as e:
