@@ -24,44 +24,15 @@ RUN pip install --upgrade pip && \
 # Copiar proyecto
 COPY . .
 
-# Crear directorio para modelos ML
-RUN mkdir -p models
+# Crear directorios necesarios
+RUN mkdir -p models staticfiles media logs
 
-# Exponer puerto
-EXPOSE 8000
-
-# Comando por defecto
-# Dockerfile
-FROM python:3.11-slim
-
-# Variables de entorno
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
-
-# Directorio de trabajo
-WORKDIR /app
-
-# Instalar dependencias del sistema
-RUN apt-get update && apt-get install -y \
-    gcc \
-    postgresql-client \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copiar requirements
-COPY requirements.txt .
-
-# Instalar dependencias de Python
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
-
-# Copiar proyecto
-COPY . .
-
-# Crear directorio para modelos ML
-RUN mkdir -p models
+# Recolectar archivos estáticos
+RUN python manage.py collectstatic --noinput || echo "Warning: collectstatic failed"
 
 # Exponer puerto
 EXPOSE 8000
 
 # Comando por defecto - Usar Daphne para soporte WebSocket
+# Usar shell form con /bin/sh para expansión correcta de variables
 CMD ["/bin/sh", "-c", "daphne -b 0.0.0.0 -p ${PORT:-8000} WearableApi.asgi:application"]
