@@ -26,3 +26,6 @@ COPY . .
 
 # Exponer puerto
 EXPOSE 8000
+
+# Comando que usa la variable PORT de Railway (shell form para expandir variables)
+CMD ["/bin/sh", "-c", "daphne -b 0.0.0.0 -p ${PORT:-8000} WearableApi.asgi:application"]
