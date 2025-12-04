@@ -170,63 +170,101 @@ class UsuarioViewSet(LoggingMixin, viewsets.ModelViewSet):
         Response:
         {
             "message": "Logged out successfully",
-            "session_stopped": true
+            "session_stopped": true,
+            "consumidor_id": 22,
+            "ventana_id": 455,
+            "device_id": "default",
+            "cache_cleared": true
         }
         """
         try:
             usuario = request.user
-            session_stopped = False
+            response_data = {
+                'message': 'Logged out successfully',
+                'session_stopped': False,
+                'cache_cleared': False,
+                'consumidor_id': None,
+                'ventana_id': None,
+                'device_id': None
+            }
+            
+            self.logger.info(f"🔴 LOGOUT initiated for user: {usuario.email} (ID: {usuario.id})")
             
             # If user is a consumer, stop their monitoring session
             if hasattr(usuario, 'consumidor'):
                 consumidor = usuario.consumidor
+                response_data['consumidor_id'] = consumidor.id
                 
                 # Get active session
                 session_key = f'active_session:{consumidor.id}'
                 session_data = cache.get(session_key)
                 
                 if session_data:
+                    ventana_id = session_data.get('ventana_id')
+                    device_id = session_data.get('device_id', 'default')
+                    response_data['ventana_id'] = ventana_id
+                    response_data['device_id'] = device_id
+                    
+                    self.logger.info(f"🔴 LOGOUT: Found active session - ventana_id={ventana_id}, device_id={device_id}")
+                    
                     # Remove session from cache
+                    self.logger.info(f"🔴 LOGOUT: Deleting session_key: {session_key}")
                     cache.delete(session_key)
                     
                     # Also remove device session
-                    device_id = session_data.get('device_id', 'default')
                     device_key = f'device_session:{device_id}'
+                    self.logger.info(f"🔴 LOGOUT: Deleting device_key: {device_key}")
                     cache.delete(device_key)
                     
-                    # Close the ventana window
-                    ventana_id = session_data['ventana_id']
-                    try:
-                        ventana = Ventana.objects.get(id=ventana_id)
-                        ventana.window_end = timezone.now()
-                        ventana.save()
-                        session_stopped = True
-                    except Ventana.DoesNotExist:
-                        pass
+                    # Verify deletion succeeded
+                    verify_session = cache.get(session_key)
+                    verify_device = cache.get(device_key)
+                    cache_cleared = (verify_session is None and verify_device is None)
+                    response_data['cache_cleared'] = cache_cleared
                     
                     self.logger.info(
-                        f"Monitoring session stopped on logout: Consumer {consumidor.id}"
+                        f"🔴 LOGOUT: Cache verification - session_exists={verify_session is not None}, "
+                        f"device_exists={verify_device is not None}, cache_cleared={cache_cleared}"
                     )
                     
+                    if not cache_cleared:
+                        self.logger.error(f"⚠️ LOGOUT WARNING: Cache keys were not properly deleted!")
+                    
+                    # Close the ventana window
+                    if ventana_id:
+                        try:
+                            ventana = Ventana.objects.get(id=ventana_id)
+                            ventana.window_end = timezone.now()
+                            ventana.save()
+                            response_data['session_stopped'] = True
+                            self.logger.info(f"🔴 LOGOUT: Ventana {ventana_id} closed at {ventana.window_end}")
+                        except Ventana.DoesNotExist:
+                            self.logger.warning(f"⚠️ LOGOUT: Ventana {ventana_id} not found in database")
+                    
                     # Stop any active synthetic data generator
-                    stop_synthetic_generation.delay(usuario.id)
+                    try:
+                        stop_synthetic_generation.delay(usuario.id)
+                        self.logger.info(f"🔴 LOGOUT: Stopped synthetic generation for user {usuario.id}")
+                    except Exception as e:
+                        self.logger.warning(f"⚠️ LOGOUT: Could not stop synthetic generation: {str(e)}")
+                else:
+                    self.logger.info(f"🔴 LOGOUT: No active session found for consumidor {consumidor.id}")
+            else:
+                self.logger.info(f"🔴 LOGOUT: User is not a consumidor (rol: {usuario.rol})")
             
             # Blacklist the token (if using token blacklist)
             # This depends on your JWT implementation
             
-            self.logger.info(f"User logged out: {usuario.email}")
+            self.logger.info(f"✅ LOGOUT completed successfully: {usuario.email}")
             
-            return Response({
-                'message': 'Logged out successfully',
-                'session_stopped': session_stopped
-            }, status=status.HTTP_200_OK)
+            return Response(response_data, status=status.HTTP_200_OK)
             
         except Exception as e:
-            self.logger.error(f"Error during logout: {str(e)}")
+            self.logger.error(f"❌ LOGOUT ERROR: {str(e)}", exc_info=True)
             return Response({
                 'error': 'Logout failed',
                 'detail': str(e)
-            }, status=status.HTTP_400_BAD_REQUEST)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     @action(detail=True, methods=['patch'])
     def profile(self, request, pk=None):
