@@ -17,10 +17,24 @@ websocket_urlpatterns = [
         r'ws/sensor-data/(?P<consumidor_id>\w+)/$',
         consumers.SensorDataConsumer.as_asgi()
     ),
+    # Alias con guión bajo para compatibilidad con frontend
+    re_path(
+        r'ws/sensor_data/(?P<consumidor_id>\w+)/$',
+        consumers.SensorDataConsumer.as_asgi()
+    ),
     
     # WebSocket para frecuencia cardíaca agregada
     re_path(
         r'ws/heart-rate/(?P<consumidor_id>\w+)/$',
+        consumers.HeartRateConsumer.as_asgi()
+    ),
+    # Alias para compatibilidad con frontend
+    re_path(
+        r'ws/heart_rate_today/(?P<consumidor_id>\w+)/$',
+        consumers.HeartRateConsumer.as_asgi()
+    ),
+    re_path(
+        r'ws/heart_rate_stats/(?P<consumidor_id>\w+)/$',
         consumers.HeartRateConsumer.as_asgi()
     ),
     
