@@ -27,12 +27,9 @@ COPY . .
 # Crear directorios necesarios
 RUN mkdir -p models staticfiles media logs
 
-# Recolectar archivos estáticos
-RUN python manage.py collectstatic --noinput || echo "Warning: collectstatic failed"
-
 # Exponer puerto
 EXPOSE 8000
 
 # Comando por defecto - Usar Daphne para soporte WebSocket
-# Usar shell form con /bin/sh para expansión correcta de variables
-CMD ["/bin/sh", "-c", "daphne -b 0.0.0.0 -p ${PORT:-8000} WearableApi.asgi:application"]
+# Ejecutar collectstatic antes de iniciar el servidor
+CMD ["/bin/sh", "-c", "python manage.py collectstatic --noinput --clear && daphne -b 0.0.0.0 -p ${PORT:-8000} WearableApi.asgi:application"]
